@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class dictionaryGUI extends JFrame{
+public class dictionaryGUI extends JFrame {
     private JPanel backgroundPanel;
     private JPanel westPanel;
     private JPanel navigatorPanel;
