@@ -50,8 +50,8 @@ public class ContainerController implements Initializable {
         } catch (IOException e){
             System.out.println("Load search_pane failed");
         }
-        //this.showSearchPanel();
-        this.showHomePane();
+        this.showSearchPane();
+        //this.showHomePane();
     }
 
     private void setContentPane(AnchorPane anchorPane){

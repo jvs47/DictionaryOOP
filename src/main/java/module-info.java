@@ -1,4 +1,4 @@
-module app.fxtest {
+module app.DictionaryFX {
     requires javafx.controls;
     requires javafx.fxml;
 

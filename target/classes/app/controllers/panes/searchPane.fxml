@@ -12,20 +12,20 @@
 
 <AnchorPane prefHeight="420.0" prefWidth="600.0" stylesheets="@../../../css/search.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.panes.SearchPaneController">
    <children>
-      <AnchorPane layoutX="12.0" layoutY="60.0" prefHeight="323.0" prefWidth="579.0" stylesheets="@../../../css/search.css">
+      <AnchorPane layoutX="11.0" layoutY="62.0" prefHeight="323.0" prefWidth="579.0" stylesheets="@../../../css/search.css">
          <children>
             <ListView fx:id="search_list_view" onMouseClicked="#handleSelectItemListView" prefHeight="350.0" prefWidth="275.0" styleClass="list_view_search" />
-            <AnchorPane layoutX="289.0" prefHeight="350.0" prefWidth="290.0" style="-fx-background-color: #FFF8E4;" styleClass="card" stylesheets="@../../../css/search.css" />
+            <AnchorPane layoutX="284.0" prefHeight="350.0" prefWidth="295.0" style="-fx-background-color: #FFF8E4;" styleClass="card" stylesheets="@../../../css/search.css" />
          </children>
       </AnchorPane>
-      <Pane prefHeight="60.0" prefWidth="601.0" style="-fx-background-color: #0F173B;">
+      <Pane prefHeight="55.0" prefWidth="600.0" style="-fx-background-color: #0F173B;">
          <children>
-            <TextField fx:id="input_search" layoutX="14.0" layoutY="13.0" onAction="#handleEnterInputSearch" onKeyReleased="#handleChangeInputSearch" prefHeight="35.0" prefWidth="530.0" promptText="Search word..." styleClass="input_search" stylesheets="@../../../css/search.css">
+            <TextField fx:id="input_search" layoutX="14.0" layoutY="10.0" onAction="#handleEnterInputSearch" onKeyReleased="#handleChangeInputSearch" prefHeight="35.0" prefWidth="530.0" promptText="Search word..." styleClass="input_search" stylesheets="@../../../css/search.css">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Button layoutX="552.0" layoutY="13.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="34.0" prefWidth="34.0" style="-fx-background-color: #FEC400;" styleClass="btn_search" stylesheets="@../../../css/search.css">
+            <Button fx:id="searchButton" layoutX="553.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSearchButtonEvent" prefHeight="34.0" prefWidth="34.0" style="-fx-background-color: #FEC400;" styleClass="btn_search" stylesheets="@../../../css/search.css">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

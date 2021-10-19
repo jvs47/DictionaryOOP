@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>app</groupId>
-    <artifactId>FXTest</artifactId>
+    <artifactId>DictionaryFX</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>FXTest</name>
+    <name>DictionaryFX</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,7 +25,6 @@
             <artifactId>javafx-fxml</artifactId>
             <version>17.0.0.1</version>
         </dependency>
-
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
