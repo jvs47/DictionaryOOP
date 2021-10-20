@@ -1,0 +1,6 @@
+.h_box_language {
+    -fx-border-style: solid solid hidden hidden;
+    -fx-border-color: #e5e9ec;
+    -fx-background-color: none;
+    -fx-border-radius: 4px 4px 4px 4px;
+}

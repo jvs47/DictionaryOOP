@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane prefHeight="420.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.panes.OnlineGoogleSearchController">
+    <children>
+        <AnchorPane>
+            <children>
+                <HBox prefHeight="50.0" styleClass="h_box_language" stylesheets="@../../../css/onlineSearch.css">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="55.0" prefWidth="278.0" text="Vietnamese" textFill="#3f7fe9">
+                            <font>
+                                <Font size="22.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="switchLanguageVELabel" alignment="CENTER" layoutX="11.0" layoutY="11.0" onMouseClicked="#onMouseClickSwitchVELanguage" prefHeight="48.0" prefWidth="42.0" textFill="#3f7fe9">
+                            <font>
+                                <Font size="22.0" />
+                            </font>
+                            <graphic>
+                                <FontAwesomeIconView glyphName="RETWEET" />
+                            </graphic>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="55.0" prefWidth="278.0" text="English" textFill="#3f7fe9">
+                            <font>
+                                <Font size="22.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+            </children>
+        </AnchorPane>
+        <HBox layoutY="46.0" prefHeight="366.0" prefWidth="600.0">
+            <children>
+                <TextArea prefHeight="342.0" prefWidth="300.0" promptText="Nhập văn bản" wrapText="true">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </TextArea>
+                <WebView prefHeight="236.0" prefWidth="300.0" />
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>
