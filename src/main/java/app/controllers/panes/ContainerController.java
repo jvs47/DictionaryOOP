@@ -68,7 +68,7 @@ public class ContainerController implements Initializable {
             onlineGoogleSearchVEController = fxmlLoader.getController();
             onlineGoogleSearchVEController.initData(this);
         } catch (IOException e) {
-            System.out.println("Load online_search_EV_pane failed");
+            System.out.println("Load online_search_VE_pane failed");
         }
         this.showSearchPane();
         //this.showHomePane();
