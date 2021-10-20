@@ -41,6 +41,11 @@
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.36.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>17.0.0.1</version>
+        </dependency>
 
     </dependencies>
 

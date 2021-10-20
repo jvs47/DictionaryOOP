@@ -1,0 +1,12 @@
+.pronounce_btn{
+    -fx-background-color: none;
+}
+.pronounce_btn:hover{
+    -fx-opacity: 75%;
+}
+.bookmark_btn:hover{
+    -fx-opacity: 75%;
+}
+.online_search_btn:hover{
+    -fx-opacity: 75%;
+}

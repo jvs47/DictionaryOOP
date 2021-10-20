@@ -37,8 +37,12 @@ public class ContainerController implements Initializable {
     @FXML
     private AnchorPane categoryPanel;
     private AnchorPane anchorSearchPane;
+    private AnchorPane anchorOnlineSearchEVPane;
+    private AnchorPane anchorOnlineSearchVEPane;
 
     private SearchPaneController searchPaneController;
+    private OnlineGoogleSearchController onlineGoogleSearchEVController;
+    private OnlineGoogleSearchController onlineGoogleSearchVEController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,14 +51,30 @@ public class ContainerController implements Initializable {
             anchorSearchPane = fxmlLoader.load();
             searchPaneController = fxmlLoader.getController();
             searchPaneController.initData(this);
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Load search_pane failed");
+        }
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("onlineGoogleEVPane.fxml"));
+            anchorOnlineSearchEVPane = fxmlLoader.load();
+            onlineGoogleSearchEVController = fxmlLoader.getController();
+            onlineGoogleSearchEVController.initData(this);
+        } catch (IOException e) {
+            System.out.println("Load online_search_EV_pane failed");
+        }
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("onlineGoogleVEPane.fxml"));
+            anchorOnlineSearchVEPane = fxmlLoader.load();
+            onlineGoogleSearchVEController = fxmlLoader.getController();
+            onlineGoogleSearchVEController.initData(this);
+        } catch (IOException e) {
+            System.out.println("Load online_search_VE_pane failed");
         }
         this.showSearchPane();
         //this.showHomePane();
     }
 
-    private void setContentPane(AnchorPane anchorPane){
+    private void setContentPane(AnchorPane anchorPane) {
         this.categoryPanel.getChildren().setAll(anchorPane);
         //.categoryPanel = anchorPane;
     }
@@ -72,7 +92,7 @@ public class ContainerController implements Initializable {
         } else if (event.getSource() == nav_historyButton) {
             categoryLabel.setText("HISTORY");
         } else if (event.getSource() == nav_onlineButton) {
-            categoryLabel.setText("Google Translate");
+            showOnlineEVPane();
         }
     }
 
@@ -84,7 +104,7 @@ public class ContainerController implements Initializable {
         nav_onlineButton.setStyle(null);
     }
 
-    public void showSearchPane(){
+    public void showSearchPane() {
         categoryLabel.setText("SEARCH");
         this.setContentPane(anchorSearchPane);
         searchPaneController.initData(this);
@@ -92,10 +112,26 @@ public class ContainerController implements Initializable {
         nav_searchButton.setStyle("-fx-background-color: #1D4698; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
     }
 
-    public void showHomePane(){
+    public void showHomePane() {
         categoryLabel.setText("DICTIONARY");
         this.setContentPane(anchorSearchPane);
         this.resetStyleNav();
         nav_homeButton.setStyle("-fx-background-color: #1D4698; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
+    }
+
+    public void showOnlineEVPane() {
+        categoryLabel.setText("Google Translate");
+        this.setContentPane(anchorOnlineSearchEVPane);
+        onlineGoogleSearchEVController.initData(this);
+        this.resetStyleNav();
+        nav_onlineButton.setStyle("-fx-background-color: #1D4698; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
+    }
+
+    public void showOnlineVEPane() {
+        categoryLabel.setText("Google Translate");
+        this.setContentPane(anchorOnlineSearchVEPane);
+        onlineGoogleSearchVEController.initData(this);
+        this.resetStyleNav();
+        nav_onlineButton.setStyle("-fx-background-color: #1D4698; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
     }
 }
