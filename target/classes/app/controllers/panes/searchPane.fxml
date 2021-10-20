@@ -14,8 +14,8 @@
    <children>
       <AnchorPane layoutX="11.0" layoutY="62.0" prefHeight="323.0" prefWidth="579.0" stylesheets="@../../../css/search.css">
          <children>
-            <ListView fx:id="search_list_view" onMouseClicked="#handleSelectItemListView" prefHeight="350.0" prefWidth="275.0" styleClass="list_view_search" />
-            <AnchorPane layoutX="284.0" prefHeight="350.0" prefWidth="295.0" style="-fx-background-color: #FFF8E4;" styleClass="card" stylesheets="@../../../css/search.css" />
+            <ListView fx:id="search_list_view" layoutX="-4.0" onMouseClicked="#handleSelectItemListView" prefHeight="350.0" prefWidth="226.0" styleClass="list_view_search" />
+            <AnchorPane fx:id="definitionPane" layoutX="230.0" prefHeight="350.0" prefWidth="348.0" styleClass="card" stylesheets="@../../../css/search.css" />
          </children>
       </AnchorPane>
       <Pane prefHeight="55.0" prefWidth="600.0" style="-fx-background-color: #0F173B;">
