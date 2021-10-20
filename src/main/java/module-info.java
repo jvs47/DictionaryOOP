@@ -1,6 +1,7 @@
 module app.DictionaryFX {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
     requires javafx.web;
 
 
