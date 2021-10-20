@@ -1,9 +1,9 @@
 .input_search {
     -fx-border-color: #e5e9ec;
     -fx-background-color: white;
-    -fx-background-radius: 4px 4px 4px 4px;
+    -fx-background-radius: 20;
     -fx-border-width: 1px;
-    -fx-border-radius: 4px 4px 4px 4px;
+    -fx-border-radius: 20;
 }
 
 .input_search:focused {
@@ -17,10 +17,10 @@
 }
 
 .card {
-    -fx-border-color: #e5e9ec;
-    -fx-background-color: #FFF8E4;
+    -fx-background-color: white;
+    -fx-background-radius: 6px 6px 6px 6px;
     /*-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 15, 0, 0, 0);*/
-    -fx-border-radius: 4px 4px 4px 4px;
+    /*-fx-border-radius: 4px 4px 4px 4px;*/
     /*-fx-border-width: 1px;*/
 }
 
