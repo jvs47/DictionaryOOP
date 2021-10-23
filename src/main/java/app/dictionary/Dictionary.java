@@ -1,9 +1,10 @@
 package app.dictionary;
 
+import java.util.HashMap;
 import java.util.Hashtable;
 
 public class Dictionary {
-    private Hashtable<Integer, Word> dictionary = new Hashtable<>();
+    private HashMap<String, String> dictionary = new HashMap<>();
 
     /**
      * Default constructor
@@ -16,15 +17,23 @@ public class Dictionary {
      * Constructor with parameters
      * @param dictionary
      */
-    public Dictionary(Hashtable<Integer, Word> dictionary) {
+    public Dictionary(HashMap<String, String> dictionary) {
         this.dictionary = dictionary;
     }
 
-    public Hashtable<Integer, Word> getDictionary() {
+    public HashMap<String, String> getDictionary() {
         return dictionary;
     }
 
-    public void setDictionary(Hashtable<Integer, Word> dictionary) {
+    public void setDictionary(HashMap<String, String> dictionary) {
         this.dictionary = dictionary;
+    }
+
+    public void removeWord(String removedWord) {
+        dictionary.remove(removedWord);
+    }
+
+    public void addWord(String addedWord, String addWordMeaning) {
+        dictionary.put(addedWord, addWordMeaning);
     }
 }

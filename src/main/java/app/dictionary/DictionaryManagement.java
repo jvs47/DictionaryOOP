@@ -1,13 +1,13 @@
 package app.dictionary;
 
 import java.sql.*;
-import java.util.HashMap;
+import java.util.*;
 
 public class DictionaryManagement {
 
-    private static Connection connection = null;
-    private static HashMap<String, String> dictionary = new HashMap<>();
-    public static void insertFromCommandline() {
+    private Connection connection = null;
+    public Dictionary insertFromDatabase() {
+        HashMap<String, String> dic = new HashMap<>();
         //Install jdbc
         try {
             Class.forName("org.sqlite.JDBC");
@@ -32,10 +32,13 @@ public class DictionaryManagement {
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next() == true) {
                 Word newWord = new Word(resultSet.getString(2), resultSet.getString(3));
-                dictionary.put(newWord.getWord(), newWord.getWordExplain());
+                dic.put(newWord.getWord(), newWord.getWordExplain());
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        Dictionary dictionary = new Dictionary();
+        dictionary.setDictionary(dic);
+        return dictionary;
     }
 }
