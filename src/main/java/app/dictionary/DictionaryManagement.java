@@ -4,8 +4,21 @@ import java.sql.*;
 import java.util.*;
 
 public class DictionaryManagement {
-
+    private Dictionary dictionary;
     private Connection connection = null;
+
+    public DictionaryManagement(Dictionary dictionary) {
+        this.dictionary = dictionary;
+    }
+
+    public Dictionary getDictionary() {
+        return dictionary;
+    }
+
+    public void setDictionary(Dictionary dictionary) {
+        dictionary = dictionary;
+    }
+
     public Dictionary insertFromDatabase() {
         HashMap<String, String> dic = new HashMap<>();
         //Install jdbc
@@ -37,8 +50,16 @@ public class DictionaryManagement {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        Dictionary dictionary = new Dictionary();
         dictionary.setDictionary(dic);
         return dictionary;
+    }
+
+    public void showAllWord() {
+        HashMap<String, String> dic = dictionary.getDictionary();
+        for(HashMap.Entry<String, String> entry : dic.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            System.out.println(key + "\t" + value);
+        }
     }
 }
