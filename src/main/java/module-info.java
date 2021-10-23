@@ -3,6 +3,7 @@ module app.DictionaryFX {
     requires javafx.fxml;
     requires java.sql;
     requires javafx.web;
+    requires org.xerial.sqlitejdbc;
 
 
     opens app to javafx.fxml;
