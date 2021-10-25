@@ -39,10 +39,14 @@ public class ContainerController implements Initializable {
     private AnchorPane anchorSearchPane;
     private AnchorPane anchorOnlineSearchEVPane;
     private AnchorPane anchorOnlineSearchVEPane;
+    private AnchorPane anchorFavouritePane;
+    private AnchorPane anchorHistoryPane;
 
     private SearchPaneController searchPaneController;
     private OnlineGoogleSearchController onlineGoogleSearchEVController;
     private OnlineGoogleSearchController onlineGoogleSearchVEController;
+    private FavouritePaneController favouriteController;
+    private HistoryPaneController historyController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -53,6 +57,22 @@ public class ContainerController implements Initializable {
             searchPaneController.initData(this);
         } catch (IOException e) {
             System.out.println("Load search_pane failed");
+        }
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("favouritePane.fxml"));
+            anchorFavouritePane = fxmlLoader.load();
+            favouriteController = fxmlLoader.getController();
+            favouriteController.initData(this);
+        } catch (IOException e) {
+            System.out.println("Load favourite_pane failed");
+        }
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("historyPane.fxml"));
+            anchorHistoryPane = fxmlLoader.load();
+            historyController = fxmlLoader.getController();
+            historyController.initData(this);
+        } catch (IOException e) {
+            System.out.println("Load history_pane failed");
         }
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("onlineGoogleEVPane.fxml"));
@@ -88,9 +108,9 @@ public class ContainerController implements Initializable {
         } else if (event.getSource() == nav_editButton) {
             categoryLabel.setText("EDIT");
         } else if (event.getSource() == nav_favouriteButton) {
-            categoryLabel.setText("FAVOURITE");
+            showFavouritePane();
         } else if (event.getSource() == nav_historyButton) {
-            categoryLabel.setText("HISTORY");
+            showHistoryPane();
         } else if (event.getSource() == nav_onlineButton) {
             showOnlineEVPane();
         }
@@ -101,6 +121,7 @@ public class ContainerController implements Initializable {
         nav_searchButton.setStyle(null);
         nav_editButton.setStyle(null);
         nav_favouriteButton.setStyle(null);
+        nav_historyButton.setStyle(null);
         nav_onlineButton.setStyle(null);
     }
 
@@ -110,6 +131,22 @@ public class ContainerController implements Initializable {
         searchPaneController.initData(this);
         this.resetStyleNav();
         nav_searchButton.setStyle("-fx-background-color: #1D4698; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
+    }
+
+    public void showHistoryPane() {
+        categoryLabel.setText("HISTORY");
+        this.setContentPane(anchorHistoryPane);
+        historyController.initData(this);
+        this.resetStyleNav();
+        nav_historyButton.setStyle("-fx-background-color: #1D4698; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
+    }
+
+    public void showFavouritePane() {
+        categoryLabel.setText("FAVOURITE");
+        this.setContentPane(anchorFavouritePane);
+        favouriteController.initData(this);
+        this.resetStyleNav();
+        nav_favouriteButton.setStyle("-fx-background-color: #1D4698; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
     }
 
     public void showHomePane() {

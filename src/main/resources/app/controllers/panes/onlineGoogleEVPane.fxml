@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.web.WebView?>
 
 <AnchorPane prefHeight="420.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.panes.OnlineGoogleSearchController">
    <children>
@@ -38,12 +37,12 @@
       </AnchorPane>
       <AnchorPane layoutY="68.0" prefHeight="320.0" prefWidth="593.0">
          <children>
-            <TextArea layoutX="6.0" prefHeight="342.0" prefWidth="287.0" promptText="Enter text" wrapText="true">
+            <TextArea fx:id="inputOnlineSearchTextArea" layoutX="6.0" prefHeight="342.0" prefWidth="287.0" promptText="Enter text" wrapText="true">
                <font>
                   <Font size="18.0" />
                </font>
             </TextArea>
-            <WebView layoutX="306.0" prefHeight="342.0" prefWidth="287.0" />
+            <TextArea fx:id="meaningOnlineSearchTextArea" layoutX="306.0" prefHeight="342.0" prefWidth="287.0" />
          </children>
       </AnchorPane>
    </children>
