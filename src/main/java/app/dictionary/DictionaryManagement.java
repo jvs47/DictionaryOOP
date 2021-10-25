@@ -1,13 +1,26 @@
 package app.dictionary;
 
 import java.sql.*;
-import java.util.HashMap;
+import java.util.*;
 
 public class DictionaryManagement {
+    private Dictionary dictionary;
+    private Connection connection = null;
 
-    private static Connection connection = null;
-    private static HashMap<String, String> dictionary = new HashMap<>();
-    public static void insertFromCommandline() {
+    public DictionaryManagement(Dictionary dictionary) {
+        this.dictionary = dictionary;
+    }
+
+    public Dictionary getDictionary() {
+        return dictionary;
+    }
+
+    public void setDictionary(Dictionary dictionary) {
+        dictionary = dictionary;
+    }
+
+    public Dictionary insertFromDatabase() {
+        HashMap<String, String> dic = new HashMap<>();
         //Install jdbc
         try {
             Class.forName("org.sqlite.JDBC");
@@ -32,10 +45,21 @@ public class DictionaryManagement {
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next() == true) {
                 Word newWord = new Word(resultSet.getString(2), resultSet.getString(3));
-                dictionary.put(newWord.getWord(), newWord.getWordExplain());
+                dic.put(newWord.getWord(), newWord.getWordExplain());
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        dictionary.setDictionary(dic);
+        return dictionary;
+    }
+
+    public void showAllWord() {
+        HashMap<String, String> dic = dictionary.getDictionary();
+        for(HashMap.Entry<String, String> entry : dic.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            System.out.println(key + "\t" + value);
         }
     }
 }

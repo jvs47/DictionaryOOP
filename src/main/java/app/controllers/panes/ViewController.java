@@ -68,7 +68,6 @@ public class ViewController implements Initializable {
         definitionPane.getChildren().addAll(definitionVBox);
         definitionPaneController = fxmlLoader.getController();
         definitionPaneController.initData(this.state, pronunciation, meaning);
-
     }
 
     public void initData(ContainerController state){
