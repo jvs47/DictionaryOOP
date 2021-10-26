@@ -1,11 +1,10 @@
 package app.dictionary;
 
-import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class Dictionary {
-    private HashMap<String, String> dictionary = new HashMap<>();
+    private TreeMap<String, String> dictionary = new TreeMap<>();
     Scanner scan = new Scanner(System.in);
 
     /**
@@ -19,43 +18,35 @@ public class Dictionary {
      * Constructor with parameters
      * @param dictionary
      */
-    public Dictionary(HashMap<String, String> dictionary) {
+    public Dictionary(TreeMap<String, String> dictionary) {
         this.dictionary = dictionary;
     }
 
-    public HashMap<String, String> getDictionary() {
+    public TreeMap<String, String> getDictionary() {
         return dictionary;
     }
 
-    public void setDictionary(HashMap<String, String> dictionary) {
+    public void setDictionary(TreeMap<String, String> dictionary) {
         this.dictionary = dictionary;
     }
 
-    public void removeWord() {
-        System.out.print("Enter word: ");
-        String removedWord = scan.nextLine();
+    public boolean removeWord(Word deletedWord) {
         for(String key : dictionary.keySet()) {
-            if(key.equals(removedWord)) {
-                dictionary.remove(key);
-                return;
+            if(key.equals(deletedWord.getWord())) {
+                return true;
             }
         }
         System.out.println("Word is not exist!");
-        return;
+        return false;
     }
 
-    public void addWord() {
-        System.out.print("Enter word: ");
-        String addedWord = scan.nextLine();
-        System.out.print("Enter meaning: ");
-        String addWordMeaning = scan.nextLine();
+    public boolean addWord(Word newWord) {
         for(String key : dictionary.keySet()) {
-            if(key.equals(addedWord)) {
+            if (key.equals(newWord.getWord())) {
                 System.out.println(key + " exists in the dictionary!");
-                return;
+                return false;
             }
         }
-        dictionary.put(addedWord, addWordMeaning);
-        return;
+        return true;
     }
 }
