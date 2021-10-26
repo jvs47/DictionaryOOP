@@ -54,6 +54,18 @@ public class DictionaryManagement {
         return dictionary;
     }
 
+    public void insertFromCommandline() {
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Number of Words: ");
+        int n = scan.nextInt();
+        scan.nextLine();
+        for(int i = 0; i < n; ++i) {
+            dictionary.addWord();
+        }
+        System.out.println("Finished!");
+        return;
+    }
+
     public void showAllWord() {
         HashMap<String, String> dic = dictionary.getDictionary();
         for(HashMap.Entry<String, String> entry : dic.entrySet()) {
@@ -61,5 +73,6 @@ public class DictionaryManagement {
             String value = entry.getValue();
             System.out.println(key + "\t" + value);
         }
+        return;
     }
 }
