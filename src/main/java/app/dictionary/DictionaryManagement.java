@@ -91,13 +91,14 @@ public class DictionaryManagement {
         Word removedWord = new Word();
         System.out.print("Enter word: ");
         String deletedWord = scan.nextLine();
+        removedWord.setWord(deletedWord);
         if(dictionary.removeWord(removedWord)) {
-            dictionary.getDictionary().remove(removedWord);
-            String sql = "DELETE FROM av WHERE discription = ?";
+            dictionary.getDictionary().remove(removedWord.getWord());
+            String sql = "DELETE FROM av WHERE word = ?";
             PreparedStatement preparedStatement = null;
             try {
                 preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setString(1, removedWord.getWordExplain());
+                preparedStatement.setString(1, removedWord.getWord());
                 preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -141,9 +142,7 @@ public class DictionaryManagement {
         return;
     }
 
-    public void findWord() {
-        System.out.println("Enter word: ");
-        String foundWord = scan.nextLine();
+    public void findWord(String foundWord) {
         for(Map.Entry<String, String> entry : dictionary.getDictionary().entrySet()) {
             String containedChar = String.valueOf(entry);
             if(containedChar.contains(foundWord)) {
