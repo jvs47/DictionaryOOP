@@ -38,3 +38,7 @@
 .submit_btn:hover {
     -fx-background-color: #3F7FE9;
 }
+
+.text_box_label {
+    -fx-font-family: "sans-serif";
+}
