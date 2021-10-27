@@ -1,0 +1,40 @@
+.edit_title {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #DEDEDE;
+}
+
+.add_pane {
+    -fx-border-width: 1px;
+    -fx-border-radius: 6px 6px 6px 6px;
+    -fx-border-color: #DEDEDE;
+    -fx-background-color: white;
+    -fx-background-radius: 6px 6px 6px 6px;
+}
+
+.edit_pane {
+    -fx-border-width: 1px;
+    -fx-border-radius: 6px 6px 6px 6px;
+    -fx-border-color: #DEDEDE;
+    -fx-background-color: white;
+    -fx-background-radius: 6px 6px 6px 6px;
+}
+
+.check_btn {
+    -fx-background-color: #1D4698;
+    -fx-background-radius: 6px 6px 6px 6px;
+    -fx-border-radius: 6px 6px 6px 6px;
+}
+
+.check_btn:hover {
+    -fx-background-color: #3F7FE9;
+}
+
+.submit_btn {
+    -fx-background-color: #1D4698;
+    -fx-background-radius: 6px 6px 6px 6px;
+    -fx-border-radius: 6px 6px 6px 6px;
+}
+
+.submit_btn:hover {
+    -fx-background-color: #3F7FE9;
+}
