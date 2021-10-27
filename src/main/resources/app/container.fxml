@@ -103,9 +103,9 @@
       <AnchorPane fx:id="categoryPanel" layoutX="150.0" layoutY="65.0" prefHeight="420.0" prefWidth="600.0" />
       <AnchorPane layoutX="150.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="65.0" prefWidth="600.0" style="-fx-background-color: #1D2A57;">
          <children>
-            <Label fx:id="categoryLabel" alignment="CENTER" layoutX="220.0" layoutY="19.0" prefHeight="27.0" prefWidth="161.0" text="HOME" textFill="WHITE">
+            <Label fx:id="categoryLabel" alignment="CENTER" layoutX="197.0" layoutY="12.0" prefHeight="41.0" prefWidth="207.0" text="HOME" textFill="WHITE">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="22.0" />
                </font>
             </Label>
          </children>
