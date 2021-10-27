@@ -13,19 +13,15 @@ public class DefinitionPaneController {
     private Label trueBookmarkLabel;
 
     @FXML
-    private Label ukPronounceLabel;
+    private Label pronounceLabel;
 
-    @FXML
-    private Label usPronounceLabel;
     private ContainerController state;
 
     @FXML
     void handleClickBookMark(MouseEvent event) {
 
     }
-    public void initData(ContainerController state, String pronunciation, String meaning) {
+    public void initData(ContainerController state, String word, String meaning) {
         this.state = state;
-        ukPronounceLabel.setText(pronunciation);
-        usPronounceLabel.setText(pronunciation);
     }
 }
