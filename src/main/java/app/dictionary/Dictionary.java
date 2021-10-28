@@ -1,10 +1,11 @@
 package app.dictionary;
 
-import java.util.HashMap;
-import java.util.Hashtable;
+import java.util.Scanner;
+import java.util.TreeMap;
 
 public class Dictionary {
-    private HashMap<String, String> dictionary = new HashMap<>();
+    private TreeMap<String, String> dictionary = new TreeMap<>();
+    Scanner scan = new Scanner(System.in);
 
     /**
      * Default constructor
@@ -17,23 +18,35 @@ public class Dictionary {
      * Constructor with parameters
      * @param dictionary
      */
-    public Dictionary(HashMap<String, String> dictionary) {
+    public Dictionary(TreeMap<String, String> dictionary) {
         this.dictionary = dictionary;
     }
 
-    public HashMap<String, String> getDictionary() {
+    public TreeMap<String, String> getDictionary() {
         return dictionary;
     }
 
-    public void setDictionary(HashMap<String, String> dictionary) {
+    public void setDictionary(TreeMap<String, String> dictionary) {
         this.dictionary = dictionary;
     }
 
-    public void removeWord(String removedWord) {
-        dictionary.remove(removedWord);
+    public boolean removeWord(Word deletedWord) {
+        for(String key : dictionary.keySet()) {
+            if(key.equals(deletedWord.getWord())) {
+                return true;
+            }
+        }
+        System.out.println("Word is not exist!");
+        return false;
     }
 
-    public void addWord(String addedWord, String addWordMeaning) {
-        dictionary.put(addedWord, addWordMeaning);
+    public boolean addWord(Word newWord) {
+        for(String key : dictionary.keySet()) {
+            if (key.equals(newWord.getWord())) {
+                System.out.println(key + " exists in the dictionary!");
+                return false;
+            }
+        }
+        return true;
     }
 }
