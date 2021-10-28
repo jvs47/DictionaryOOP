@@ -7,18 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public abstract class OnlineGoogleSearchManagement {
-    protected static String inputOnlineSearchText;
-    protected static String outputOnlineSearchText;
-
-    public OnlineGoogleSearchManagement() {
-    }
-
-    public String getInputOnlineSearchText() throws IOException {
-        BufferedReader inputOnlineSearchTextReader = new BufferedReader(new InputStreamReader(System.in));
-        inputOnlineSearchText = inputOnlineSearchTextReader.readLine();
-        return inputOnlineSearchText;
-    }
+public class GoogleTranslateAPI {
 
     public static String onlineTranslate(String langFrom, String langTo, String inputOnlineSearchText) throws IOException {
         String urlStr = "https://script.google.com/macros/s/AKfycbw2qKkvobro8WLNZUKi2kGwGwEO4W8cBavcKqcuCIGhGBBtVts/exec" +
@@ -37,6 +26,4 @@ public abstract class OnlineGoogleSearchManagement {
         in.close();
         return response.toString();
     }
-
-    public abstract String getOutputOnlineSearchText() throws IOException;
 }
