@@ -56,20 +56,6 @@
                   <Insets left="35.0" />
                </padding>
             </Button>
-            <Button fx:id="nav_historyButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="185.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleClick" prefHeight="70.0" prefWidth="150.0" styleClass="button_nav" stylesheets="@../css/container.css" text="History" textFill="WHITE">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="HISTORY" size="20" />
-               </graphic>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <padding>
-                  <Insets left="35.0" />
-               </padding>
-            </Button>
             <Button fx:id="nav_favouriteButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="237.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleClick" prefHeight="70.0" prefWidth="150.0" styleClass="button_nav" stylesheets="@../css/container.css" text="Favourite" textFill="WHITE">
                <font>
                   <Font size="15.0" />
@@ -90,6 +76,20 @@
                </font>
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="CLOUD" size="20" />
+               </graphic>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets left="35.0" />
+               </padding>
+            </Button>
+            <Button fx:id="nav_historyButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="185.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleClick" prefHeight="70.0" prefWidth="150.0" styleClass="button_nav" stylesheets="@../css/container.css" text="History" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="HISTORY" size="20" />
                </graphic>
                <VBox.margin>
                   <Insets />
