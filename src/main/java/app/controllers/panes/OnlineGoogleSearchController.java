@@ -57,7 +57,7 @@ public class OnlineGoogleSearchController extends ViewController {
             String input = inputOnlineVETextArea.getText();
             System.out.println(input);
             if (!modeEV) {
-                String output = GoogleTranslateAPI.onlineTranslate("en", "vi", input);
+                String output = GoogleTranslateAPI.onlineTranslate("vi", "en", input);
                 meaningOnlineVETextArea.setText(output);
             }
         }
