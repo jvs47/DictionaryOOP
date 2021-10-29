@@ -41,15 +41,27 @@ public class ContainerController implements Initializable {
     private AnchorPane anchorOnlineSearchVEPane;
     private AnchorPane anchorFavouritePane;
     private AnchorPane anchorHistoryPane;
+    private AnchorPane anchorEditPane;
+    private AnchorPane anchorHomePane;
 
     private SearchPaneController searchPaneController;
     private OnlineGoogleSearchController onlineGoogleSearchEVController;
     private OnlineGoogleSearchController onlineGoogleSearchVEController;
-    private FavouritePaneController favouriteController;
-    private HistoryPaneController historyController;
+    private FavouritePaneController favouritePaneController;
+    private HistoryPaneController historyPaneController;
+    private EditPaneController editPaneController;
+    private HomePaneController homePaneController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("homePane.fxml"));
+            anchorHomePane = fxmlLoader.load();
+            homePaneController = fxmlLoader.getController();
+            //searchPaneController.initData(this);
+        } catch (IOException e) {
+            System.out.println("Load search_pane failed");
+        }
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("searchPane.fxml"));
             anchorSearchPane = fxmlLoader.load();
@@ -61,16 +73,24 @@ public class ContainerController implements Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("favouritePane.fxml"));
             anchorFavouritePane = fxmlLoader.load();
-            favouriteController = fxmlLoader.getController();
-            favouriteController.initData(this);
+            favouritePaneController = fxmlLoader.getController();
+            favouritePaneController.initData(this);
         } catch (IOException e) {
             System.out.println("Load favourite_pane failed");
         }
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("historyPane.fxml"));
             anchorHistoryPane = fxmlLoader.load();
-            historyController = fxmlLoader.getController();
-            historyController.initData(this);
+            historyPaneController = fxmlLoader.getController();
+            historyPaneController.initData(this);
+        } catch (IOException e) {
+            System.out.println("Load history_pane failed");
+        }
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("editPane.fxml"));
+            anchorEditPane = fxmlLoader.load();
+            editPaneController = fxmlLoader.getController();
+            editPaneController.initData(this);
         } catch (IOException e) {
             System.out.println("Load history_pane failed");
         }
@@ -78,7 +98,7 @@ public class ContainerController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("onlineGoogleEVPane.fxml"));
             anchorOnlineSearchEVPane = fxmlLoader.load();
             onlineGoogleSearchEVController = fxmlLoader.getController();
-            onlineGoogleSearchEVController.initData(this);
+            onlineGoogleSearchEVController.initData(this, true);
         } catch (IOException e) {
             System.out.println("Load online_search_EV_pane failed");
         }
@@ -86,12 +106,11 @@ public class ContainerController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("onlineGoogleVEPane.fxml"));
             anchorOnlineSearchVEPane = fxmlLoader.load();
             onlineGoogleSearchVEController = fxmlLoader.getController();
-            onlineGoogleSearchVEController.initData(this);
+            onlineGoogleSearchVEController.initData(this, false);
         } catch (IOException e) {
             System.out.println("Load online_search_VE_pane failed");
         }
-        this.showSearchPane();
-        //this.showHomePane();
+        this.showHomePane();
     }
 
     private void setContentPane(AnchorPane anchorPane) {
@@ -106,7 +125,7 @@ public class ContainerController implements Initializable {
         } else if (event.getSource() == nav_searchButton) {
             showSearchPane();
         } else if (event.getSource() == nav_editButton) {
-            categoryLabel.setText("EDIT");
+            showEditPane();
         } else if (event.getSource() == nav_favouriteButton) {
             showFavouritePane();
         } else if (event.getSource() == nav_historyButton) {
@@ -126,49 +145,57 @@ public class ContainerController implements Initializable {
     }
 
     public void showSearchPane() {
-        categoryLabel.setText("SEARCH");
+        categoryLabel.setText("DICTIONARY");
         this.setContentPane(anchorSearchPane);
         searchPaneController.initData(this);
         this.resetStyleNav();
-        nav_searchButton.setStyle("-fx-background-color: #1D4698; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
+        nav_searchButton.setStyle("-fx-background-color: #191970; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
     }
 
     public void showHistoryPane() {
         categoryLabel.setText("HISTORY");
         this.setContentPane(anchorHistoryPane);
-        historyController.initData(this);
+        historyPaneController.initData(this);
         this.resetStyleNav();
-        nav_historyButton.setStyle("-fx-background-color: #1D4698; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
+        nav_historyButton.setStyle("-fx-background-color: #191970; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
     }
 
     public void showFavouritePane() {
         categoryLabel.setText("FAVOURITE");
         this.setContentPane(anchorFavouritePane);
-        favouriteController.initData(this);
+        favouritePaneController.initData(this);
         this.resetStyleNav();
-        nav_favouriteButton.setStyle("-fx-background-color: #1D4698; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
+        nav_favouriteButton.setStyle("-fx-background-color: #191970; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
+    }
+
+    public void showEditPane() {
+        categoryLabel.setText("ADJUST");
+        this.setContentPane(anchorEditPane);
+        editPaneController.initData(this);
+        this.resetStyleNav();
+        nav_editButton.setStyle("-fx-background-color: #191970; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
     }
 
     public void showHomePane() {
-        categoryLabel.setText("DICTIONARY");
-        this.setContentPane(anchorSearchPane);
+        categoryLabel.setText("HOME");
+        this.setContentPane(anchorHomePane);
         this.resetStyleNav();
-        nav_homeButton.setStyle("-fx-background-color: #1D4698; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
+        nav_homeButton.setStyle("-fx-background-color: #191970; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
     }
 
     public void showOnlineEVPane() {
         categoryLabel.setText("Google Translate");
         this.setContentPane(anchorOnlineSearchEVPane);
-        onlineGoogleSearchEVController.initData(this);
+        onlineGoogleSearchEVController.initData(this, true);
         this.resetStyleNav();
-        nav_onlineButton.setStyle("-fx-background-color: #1D4698; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
+        nav_onlineButton.setStyle("-fx-background-color: #191970; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
     }
 
     public void showOnlineVEPane() {
         categoryLabel.setText("Google Translate");
         this.setContentPane(anchorOnlineSearchVEPane);
-        onlineGoogleSearchVEController.initData(this);
+        onlineGoogleSearchVEController.initData(this, false);
         this.resetStyleNav();
-        nav_onlineButton.setStyle("-fx-background-color: #1D4698; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
+        nav_onlineButton.setStyle("-fx-background-color: #191970; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
     }
 }

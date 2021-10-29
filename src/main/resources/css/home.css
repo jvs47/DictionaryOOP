@@ -1,0 +1,11 @@
+.home_bot_btn:hover {
+    -fx-border-style: solid hidden hidden hidden;
+    -fx-border-color: transparent;
+    -fx-border-width: 2px;
+}
+
+.home_top_btn:hover {
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-color: transparent;
+    -fx-border-width: 3px;
+}

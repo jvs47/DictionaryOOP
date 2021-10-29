@@ -33,3 +33,7 @@
     -fx-background-radius: 50%;
     -fx-opacity: .85;
 }
+
+.search_pane {
+    -fx-background-color: linear-gradient(to left, #000066 25%, #0f173b 100%);
+}

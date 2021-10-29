@@ -1,6 +1,33 @@
 .h_box_language {
     -fx-border-color: #e5e9ec;
     -fx-border-width: 1px;
+    -fx-background-color: white;
+    -fx-background-radius: 6 6 6 6;
+    -fx-border-radius: 6 6 0 0;
+}
+
+.input_box {
+    -fx-border-color: #e5e9ec;
+    -fx-border-width: 1px;
     -fx-background-color: none;
-    -fx-border-radius: 4px 4px 4px 4px;
+    -fx-background-radius: 6 6 6 6;
+    -fx-border-radius: 6 6 6 6;
+}
+
+.output_box {
+    -fx-border-color: #e5e9ec;
+    -fx-border-width: 1px;
+    -fx-background-color: none;
+    -fx-background-radius: 6 6 6 6;
+    -fx-border-radius: 6 6 6 6;
+}
+
+.switch_lag_btn:hover {
+    -fx-opacity: 0.5;
+}
+
+.language_label {
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-color: #3F7FE9;
+    -fx-border-width: 3px;
 }

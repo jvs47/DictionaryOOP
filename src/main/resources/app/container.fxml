@@ -13,7 +13,10 @@
    <children>
       <VBox prefHeight="485.0" prefWidth="150.0" style="-fx-background-color: #1D2A57;" stylesheets="@../css/container.css">
          <children>
-            <Pane prefHeight="96.0" prefWidth="150.0" />
+            <Pane prefHeight="96.0" prefWidth="150.0" stylesheets="@../css/container.css">
+               <children>
+                  <Label alignment="CENTER" layoutY="2.0" prefHeight="61.0" prefWidth="150.0" />
+               </children></Pane>
             <Button fx:id="nav_homeButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleClick" prefHeight="70.0" prefWidth="150.0" styleClass="button_nav" stylesheets="@../css/container.css" text="Home" textFill="WHITE">
                <font>
                   <Font size="15.0" />
@@ -56,20 +59,6 @@
                   <Insets left="35.0" />
                </padding>
             </Button>
-            <Button fx:id="nav_historyButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="185.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleClick" prefHeight="70.0" prefWidth="150.0" styleClass="button_nav" stylesheets="@../css/container.css" text="History" textFill="WHITE">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="HISTORY" size="20" />
-               </graphic>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <padding>
-                  <Insets left="35.0" />
-               </padding>
-            </Button>
             <Button fx:id="nav_favouriteButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="237.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleClick" prefHeight="70.0" prefWidth="150.0" styleClass="button_nav" stylesheets="@../css/container.css" text="Favourite" textFill="WHITE">
                <font>
                   <Font size="15.0" />
@@ -98,14 +87,28 @@
                   <Insets left="35.0" />
                </padding>
             </Button>
+            <Button fx:id="nav_historyButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="185.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleClick" prefHeight="70.0" prefWidth="150.0" styleClass="button_nav" stylesheets="@../css/container.css" text="History" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="HISTORY" size="20" />
+               </graphic>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets left="35.0" />
+               </padding>
+            </Button>
          </children>
       </VBox>
       <AnchorPane fx:id="categoryPanel" layoutX="150.0" layoutY="65.0" prefHeight="420.0" prefWidth="600.0" />
-      <AnchorPane layoutX="150.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="65.0" prefWidth="600.0" style="-fx-background-color: #1D2A57;">
+      <AnchorPane layoutX="150.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="65.0" prefWidth="600.0" styleClass="title_pane" stylesheets="@../css/container.css">
          <children>
-            <Label fx:id="categoryLabel" alignment="CENTER" layoutX="220.0" layoutY="19.0" prefHeight="27.0" prefWidth="161.0" text="HOME" textFill="WHITE">
+            <Label fx:id="categoryLabel" alignment="CENTER" layoutX="197.0" layoutY="12.0" prefHeight="41.0" prefWidth="207.0" text="HOME" textFill="WHITE">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="22.0" />
                </font>
             </Label>
          </children>
