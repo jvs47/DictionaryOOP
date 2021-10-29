@@ -12,25 +12,25 @@
             <Image url="@../../../data/images/background.png" />
          </image>
       </ImageView>
-      <Label layoutX="146.0" layoutY="111.0" styleClass="home_btn" stylesheets="@../../../css/home.css">
+      <Label layoutX="291.0" layoutY="112.0" styleClass="home_top_btn" stylesheets="@../../../css/home.css">
          <graphic>
-            <ImageView fitHeight="139.0" fitWidth="179.0">
-               <image>
-                  <Image url="@../../../data/images/search_btn.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Label>
-      <Label layoutX="289.0" layoutY="48.0">
-         <graphic>
-            <ImageView fitHeight="245.0" fitWidth="135.0">
+            <ImageView fitHeight="177.0" fitWidth="137.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../data/images/bookmark_btn.png" />
                </image>
             </ImageView>
          </graphic>
       </Label>
-      <Label layoutX="112.0" layoutY="210.0">
+      <Label layoutX="144.0" layoutY="48.0" styleClass="home_top_btn" stylesheets="@../../../css/home.css">
+         <graphic>
+            <ImageView fitHeight="196.0" fitWidth="208.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../data/images/search_btn.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <Label layoutX="112.0" layoutY="210.0" styleClass="home_bot_btn" stylesheets="@../../../css/home.css">
          <graphic>
             <ImageView fitHeight="178.0" fitWidth="173.0">
                <image>
@@ -39,7 +39,7 @@
             </ImageView>
          </graphic>
       </Label>
-      <Label layoutX="246.0" layoutY="255.0">
+      <Label layoutX="246.0" layoutY="255.0" styleClass="home_bot_btn" stylesheets="@../../../css/home.css">
          <graphic>
             <ImageView fitHeight="134.0" fitWidth="224.0">
                <image>
