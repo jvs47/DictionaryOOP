@@ -149,7 +149,7 @@ public class ContainerController implements Initializable {
         this.setContentPane(anchorSearchPane);
         searchPaneController.initData(this);
         this.resetStyleNav();
-        nav_searchButton.setStyle("-fx-background-color: #1D4698; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
+        nav_searchButton.setStyle("-fx-background-color: #191970; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
     }
 
     public void showHistoryPane() {
@@ -157,7 +157,7 @@ public class ContainerController implements Initializable {
         this.setContentPane(anchorHistoryPane);
         historyPaneController.initData(this);
         this.resetStyleNav();
-        nav_historyButton.setStyle("-fx-background-color: #1D4698; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
+        nav_historyButton.setStyle("-fx-background-color: #191970; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
     }
 
     public void showFavouritePane() {
@@ -165,7 +165,7 @@ public class ContainerController implements Initializable {
         this.setContentPane(anchorFavouritePane);
         favouritePaneController.initData(this);
         this.resetStyleNav();
-        nav_favouriteButton.setStyle("-fx-background-color: #1D4698; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
+        nav_favouriteButton.setStyle("-fx-background-color: #191970; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
     }
 
     public void showEditPane() {
@@ -173,14 +173,14 @@ public class ContainerController implements Initializable {
         this.setContentPane(anchorEditPane);
         editPaneController.initData(this);
         this.resetStyleNav();
-        nav_editButton.setStyle("-fx-background-color: #1D4698; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
+        nav_editButton.setStyle("-fx-background-color: #191970; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
     }
 
     public void showHomePane() {
         categoryLabel.setText("HOME");
         this.setContentPane(anchorHomePane);
         this.resetStyleNav();
-        nav_homeButton.setStyle("-fx-background-color: #1D4698; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
+        nav_homeButton.setStyle("-fx-background-color: #191970; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
     }
 
     public void showOnlineEVPane() {
@@ -188,7 +188,7 @@ public class ContainerController implements Initializable {
         this.setContentPane(anchorOnlineSearchEVPane);
         onlineGoogleSearchEVController.initData(this, true);
         this.resetStyleNav();
-        nav_onlineButton.setStyle("-fx-background-color: #1D4698; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
+        nav_onlineButton.setStyle("-fx-background-color: #191970; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
     }
 
     public void showOnlineVEPane() {
@@ -196,6 +196,6 @@ public class ContainerController implements Initializable {
         this.setContentPane(anchorOnlineSearchVEPane);
         onlineGoogleSearchVEController.initData(this, false);
         this.resetStyleNav();
-        nav_onlineButton.setStyle("-fx-background-color: #1D4698; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
+        nav_onlineButton.setStyle("-fx-background-color: #191970; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px;");
     }
 }

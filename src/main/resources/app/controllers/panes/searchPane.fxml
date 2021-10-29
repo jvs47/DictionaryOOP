@@ -17,7 +17,7 @@
             <AnchorPane fx:id="definitionPane" layoutX="230.0" prefHeight="350.0" prefWidth="348.0" styleClass="card" stylesheets="@../../../css/search.css" />
          </children>
       </AnchorPane>
-      <Pane prefHeight="52.0" prefWidth="600.0" style="-fx-background-color: #0F173B;" stylesheets="@../../../css/search.css">
+      <Pane prefHeight="52.0" prefWidth="600.0" styleClass="search_pane" stylesheets="@../../../css/search.css">
          <children>
             <TextField fx:id="input_search" layoutX="7.0" layoutY="9.0" onAction="#handleEnterInputSearch" onKeyReleased="#handleChangeInputSearch" prefHeight="35.0" prefWidth="538.0" promptText="Search word..." styleClass="input_search" stylesheets="@../../../css/search.css">
                <font>
