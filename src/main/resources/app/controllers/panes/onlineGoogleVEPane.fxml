@@ -18,7 +18,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="switchLanguageVELabel" alignment="CENTER" layoutX="11.0" layoutY="11.0" onMouseClicked="#onMouseClickSwitchEVLanguage" prefHeight="43.0" prefWidth="42.0" styleClass="switch_lag_btn" stylesheets="@../../../css/onlineSearch.css" textFill="#9ca3ae">
+                  <Label fx:id="switchLanguageVELabel" alignment="CENTER" layoutX="11.0" layoutY="11.0" onMouseClicked="#onMouseClickSwitchVELanguage" prefHeight="43.0" prefWidth="42.0" styleClass="switch_lag_btn" stylesheets="@../../../css/onlineSearch.css" textFill="#9ca3ae">
                      <font>
                         <Font size="22.0" />
                      </font>
@@ -42,7 +42,7 @@
                   <Font size="16.0" />
                </font>
             </TextArea>
-            <TextArea fx:id="meaningOnlineVETextArea" layoutX="15.0" layoutY="172.0" prefHeight="167.0" prefWidth="571.0" styleClass="output_box" stylesheets="@../../../css/onlineSearch.css">
+            <TextArea fx:id="meaningOnlineVETextArea" editable="false" layoutX="15.0" layoutY="172.0" prefHeight="167.0" prefWidth="571.0" styleClass="output_box" stylesheets="@../../../css/onlineSearch.css">
                <font>
                   <Font size="16.0" />
                </font>
