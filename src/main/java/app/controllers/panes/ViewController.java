@@ -1,12 +1,10 @@
 package app.controllers.panes;
 
 import app.dictionary.*;
-import javafx.beans.binding.StringBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -16,39 +14,39 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLOutput;
-import java.util.Map;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.TreeMap;
 
 public class ViewController implements Initializable {
-    private Dictionary dictionary = new Dictionary();
-    private DictionaryManagement dictionaryManagement = new DictionaryManagement(dictionary);
-    private ContainerController state;
+    protected Dictionary dictionary = new Dictionary();
+    protected DictionaryManagement dictionaryManagement = new DictionaryManagement(dictionary);
+    protected ContainerController state;
 
     @FXML
-    private TextField input_search;
+    protected TextField input_search;
 
     @FXML
-    private ListView<?> search_list_view;
+    protected ListView<String> search_list_view;
 
     @FXML
-    private AnchorPane definitionPane;
-    private DefinitionPaneController definitionPaneController;
+    protected AnchorPane definitionPane;
+    protected DefinitionPaneController definitionPaneController;
 
     @FXML
-    void handleChangeInputSearch(KeyEvent event) {
+    public void handleChangeInputSearch(KeyEvent event) {
         if(event.getSource() == input_search) {
             String searchText = input_search.getText();
             if(!searchText.isEmpty()) {
-
+                searchAct(searchText);
+            } else {
+                search_list_view.getItems().clear();
             }
         }
         return;
     }
 
     @FXML
-    void handleEnterInputSearch(ActionEvent event) {
+    public void handleEnterInputSearch(ActionEvent event) {
         if(event.getSource() == input_search) {
             System.out.println("Enter search");
         }
@@ -56,30 +54,41 @@ public class ViewController implements Initializable {
     }
 
     @FXML
-    void handleSelectItemListView(MouseEvent event) {
+    public void handleSelectItemListView(MouseEvent event) {
         String word = (String) search_list_view.getSelectionModel().getSelectedItem();
         if(word == null) {
             return;
         }
         input_search.setText(word);
-
+        searchAct(word);
+        return;
     }
 
-    public void start() {
-        dictionaryManagement.insertFromDatabase();
+    public void searchAct(String foundWord) {
+        ArrayList<String> arrayWords = this.dictionaryManagement.getStringFoundWord(foundWord);
+        search_list_view.getItems().setAll(arrayWords);
+        Word word = dictionaryManagement.binarySearch(foundWord);
+        if(word != null) {
+            definitionPaneController.initData(this.state, word.getWord(), word.getWordExplain());
+        }
+        return;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        loadDefinitionPane("Word", "Explain");
     }
     public void reload(){
         if(state == null) return;
         String searchText = input_search.getText();
 
-        search_list_view.getItems().clear();
+        if(!searchText.isEmpty()) {
+            searchAct(searchText);
+        } else {
+            search_list_view.getItems().clear();
+        }
 
-        //controllerViewWord.reload();
+        //definitionPaneController.reload();
 
     }
 
