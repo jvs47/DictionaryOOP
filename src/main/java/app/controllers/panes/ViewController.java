@@ -76,7 +76,7 @@ public class ViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        loadDefinitionPane("Word", "Explain");
+        //loadDefinitionPane("Word", "Explain");
     }
     public void reload(){
         if(state == null) return;
