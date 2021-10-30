@@ -43,10 +43,10 @@
                   <Font name="System Bold Italic" size="14.0" />
                </font>
             </Text>
-            <Hyperlink prefHeight="27.0" prefWidth="284.0" text="University of Engineering and Technology, VNU" GridPane.rowIndex="4" />
+            <Hyperlink fx:id="uetHyperLink" onAction="#handleHyperLinkClick" prefHeight="27.0" prefWidth="284.0" text="University of Engineering and Technology, VNU" GridPane.rowIndex="4" />
             <HBox prefHeight="15.0" prefWidth="269.0" GridPane.rowIndex="1">
                <children>
-                  <Hyperlink prefHeight="30.0" prefWidth="75.0" text="\@jvs47">
+                  <Hyperlink fx:id="jvs47HyperLink" onAction="#handleHyperLinkClick" prefHeight="30.0" prefWidth="75.0" text="\@jvs47">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -59,7 +59,7 @@
             </HBox>
             <HBox prefHeight="15.0" prefWidth="269.0" GridPane.rowIndex="2">
                <children>
-                  <Hyperlink prefHeight="30.0" prefWidth="75.0" text="\@dcanh143">
+                  <Hyperlink fx:id="dcanh143HyperLink" onAction="#handleHyperLinkClick" prefHeight="30.0" prefWidth="75.0" text="\@dcanh143">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -72,7 +72,7 @@
             </HBox>
             <HBox prefHeight="15.0" prefWidth="269.0" GridPane.rowIndex="3">
                <children>
-                  <Hyperlink prefHeight="30.0" prefWidth="75.0" text="\@cuongkn">
+                  <Hyperlink fx:id="cuongknHyperLink" onAction="#handleHyperLinkClick" prefHeight="30.0" prefWidth="75.0" text="\@cuongkn">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
