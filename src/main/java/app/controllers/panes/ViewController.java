@@ -1,9 +1,12 @@
 package app.controllers.panes;
 
+import app.dictionary.*;
+import javafx.beans.binding.StringBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -13,10 +16,16 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLOutput;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 
 public class ViewController implements Initializable {
+    private Dictionary dictionary = new Dictionary();
+    private DictionaryManagement dictionaryManagement = new DictionaryManagement(dictionary);
     private ContainerController state;
+
     @FXML
     private TextField input_search;
 
@@ -29,17 +38,35 @@ public class ViewController implements Initializable {
 
     @FXML
     void handleChangeInputSearch(KeyEvent event) {
+        if(event.getSource() == input_search) {
+            String searchText = input_search.getText();
+            if(!searchText.isEmpty()) {
 
+            }
+        }
+        return;
     }
 
     @FXML
     void handleEnterInputSearch(ActionEvent event) {
-
+        if(event.getSource() == input_search) {
+            System.out.println("Enter search");
+        }
+        return;
     }
 
     @FXML
     void handleSelectItemListView(MouseEvent event) {
+        String word = (String) search_list_view.getSelectionModel().getSelectedItem();
+        if(word == null) {
+            return;
+        }
+        input_search.setText(word);
 
+    }
+
+    public void start() {
+        dictionaryManagement.insertFromDatabase();
     }
 
     @Override
