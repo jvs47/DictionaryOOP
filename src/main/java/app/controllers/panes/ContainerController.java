@@ -179,6 +179,7 @@ public class ContainerController implements Initializable {
     public void showHomePane() {
         categoryLabel.setText("HOME");
         this.setContentPane(anchorHomePane);
+        homePaneController.initData(this);
         this.resetStyleNav();
         nav_homeButton.setStyle("-fx-background-color: #191970; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px; -fx-background-radius: 10px 10px 10px 10px;");
     }
