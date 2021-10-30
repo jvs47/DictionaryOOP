@@ -9,5 +9,6 @@ public class FavouritePaneController extends ViewController {
 
     @FXML
     public void handleSearchButtonEvent(ActionEvent actionEvent) {
+
     }
 }

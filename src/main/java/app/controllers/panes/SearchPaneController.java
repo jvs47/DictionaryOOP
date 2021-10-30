@@ -1,5 +1,7 @@
 package app.controllers.panes;
 
+import app.dictionary.Dictionary;
+import app.dictionary.DictionaryManagement;
 import app.dictionary.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +20,8 @@ public class SearchPaneController extends ViewController{
         Word word = dictionaryManagement.binarySearch(foundWord);
         if(word != null) {
             definitionPaneController.initData(this.state, word.getWord(), word.getWordExplain());
+            dictionaryManagement.addToHistoryDatabase(foundWord);
+            dictionaryManagement.addToHistoryString(foundWord);
         }
     }
 

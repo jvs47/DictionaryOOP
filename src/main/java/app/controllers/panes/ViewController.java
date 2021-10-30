@@ -55,7 +55,7 @@ public class ViewController implements Initializable {
 
     @FXML
     public void handleSelectItemListView(MouseEvent event) {
-        String word = (String) search_list_view.getSelectionModel().getSelectedItem();
+        String word = search_list_view.getSelectionModel().getSelectedItem();
         if(word == null) {
             return;
         }
