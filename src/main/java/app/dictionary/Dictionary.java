@@ -1,5 +1,7 @@
 package app.dictionary;
 
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
@@ -28,6 +30,15 @@ public class Dictionary {
 
     public void setDictionary(TreeMap<String, String> dictionary) {
         this.dictionary = dictionary;
+    }
+
+    public ArrayList<Word> toArrayWord() {
+        ArrayList<Word> arrayWords = new ArrayList<>();
+        for(Map.Entry<String, String> entry : dictionary.entrySet()) {
+            Word word = new Word(entry.getKey(), entry.getValue());
+            arrayWords.add(word);
+        }
+        return arrayWords;
     }
 
     public boolean removeWord(Word deletedWord) {
