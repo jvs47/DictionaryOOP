@@ -9,3 +9,7 @@
     -fx-border-color: transparent;
     -fx-border-width: 3px;
 }
+
+.hyperlink_about{
+    -fx-border-color: transparent;
+}
