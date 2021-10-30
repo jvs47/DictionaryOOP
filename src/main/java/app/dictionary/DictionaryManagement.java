@@ -31,7 +31,7 @@ public class DictionaryManagement {
         //Connect database
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:dictionary_database.db");
-            if(connection != null) {
+            if (connection != null) {
                 System.err.println("connected");
             }
         } catch (SQLException e) {
@@ -61,7 +61,7 @@ public class DictionaryManagement {
         System.out.print("Number of Words: ");
         int n = scan.nextInt();
         scan.nextLine();
-        for(int i = 0; i < n; ++i) {
+        for (int i = 0; i < n; ++i) {
             Word newWord = new Word();
             System.out.print("Enter word: ");
             String insertWord = scan.nextLine();
@@ -69,7 +69,7 @@ public class DictionaryManagement {
             System.out.print("Enter word meaning: ");
             String insertWordMeaning = scan.nextLine();
             newWord.setWordExplain(insertWordMeaning);
-            if(dictionary.addWord(newWord)) {
+            if (dictionary.addWord(newWord)) {
                 dictionary.getDictionary().put(newWord.getWord(), newWord.getWordExplain());
                 String sql = "INSERT INTO av(word, description) VALUES(?,?)";
                 try {
@@ -92,7 +92,7 @@ public class DictionaryManagement {
         System.out.print("Enter word: ");
         String deletedWord = scan.nextLine();
         removedWord.setWord(deletedWord);
-        if(dictionary.removeWord(removedWord)) {
+        if (dictionary.removeWord(removedWord)) {
             dictionary.getDictionary().remove(removedWord.getWord());
             String sql = "DELETE FROM av WHERE word = ?";
             PreparedStatement preparedStatement = null;
@@ -109,7 +109,7 @@ public class DictionaryManagement {
     }
 
     public void showAllWord() {
-        for(Map.Entry<String, String> entry : dictionary.getDictionary().entrySet()) {
+        for (Map.Entry<String, String> entry : dictionary.getDictionary().entrySet()) {
             String value = entry.getValue();
             System.out.println("|" + entry + "\t" + "|" + value);
         }
@@ -142,13 +142,57 @@ public class DictionaryManagement {
         return;
     }
 
-    public void findWord(String foundWord) {
-        for(Map.Entry<String, String> entry : dictionary.getDictionary().entrySet()) {
-            String containedChar = String.valueOf(entry);
-            if(containedChar.contains(foundWord)) {
-                System.out.println("|" + entry.getKey() + "\t" + "|" + entry.getValue());
+    public TreeMap<String, String> findWord(String foundWord) {
+        TreeMap<String, String> searchedWord = new TreeMap<>();
+        ArrayList<Word> dictionaryArray = dictionary.toArrayWord();
+        int start = 0;
+        int end = dictionaryArray.size() - 1;
+        while(start <= end) {
+            int mid = start + (end - start)/2;
+            Word word = dictionaryArray.get(mid);
+            String currentWord = word.getWord();
+            int compare = currentWord.compareTo(foundWord);
+            if(compare == 0) {
+                searchedWord.put(word.getWord(), word.getWordExplain());
+            }
+            if(compare > 0) {
+                end = mid - 1;
+            }
+            if(compare < 0) {
+                start = mid + 1;
             }
         }
-        return;
+        return searchedWord;
+    }
+
+    public ArrayList<String> getStringFoundWord(String foundWord) {
+        ArrayList<String> results = new ArrayList<>();
+        TreeMap<String, String> found = findWord(foundWord);
+        for (Map.Entry<String, String> entry : found.entrySet()) {
+            results.add(entry.getKey());
+        }
+        return results;
+    }
+
+    public Word binarySearch(String foundWord) {
+        ArrayList<Word> arrayWords = dictionary.toArrayWord();
+        int start = 0;
+        int end = arrayWords.size() - 1;
+        while(start <= end) {
+            int mid = start + (end - start)/2;
+            Word word = arrayWords.get(mid);
+            String currentWord = word.getWord();
+            int compare = currentWord.compareTo(foundWord);
+            if(compare == 0) {
+                return word;
+            }
+            if(compare > 0) {
+                end = mid - 1;
+            }
+            if(compare < 0) {
+                start = mid + 1;
+            }
+        }
+        return null;
     }
 }
