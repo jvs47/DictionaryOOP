@@ -1,7 +1,6 @@
 package app.controllers.panes;
 
-import app.dictionary.Dictionary;
-import app.dictionary.DictionaryManagement;
+import app.dictionary.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -55,6 +54,38 @@ public class ContainerController implements Initializable {
     private HomePaneController homePaneController;
 
     private DictionaryManagement dictionaryManagement = new DictionaryManagement();
+    private HistoryAct historyAct = new HistoryAct();
+    private DictionaryAct dictionaryAct = new DictionaryAct();
+    private FavoriteAct favoriteAct = new FavoriteAct();
+
+    public void setAnchorEditPane(AnchorPane anchorEditPane) {
+        this.anchorEditPane = anchorEditPane;
+    }
+
+    public HistoryAct getHistoryAct() {
+        return historyAct;
+    }
+
+    public void setHistoryAct(HistoryAct historyAct) {
+        this.historyAct = historyAct;
+    }
+
+    public DictionaryAct getDictionaryAct() {
+        return dictionaryAct;
+    }
+
+    public void setDictionaryAct(DictionaryAct dictionaryAct) {
+        this.dictionaryAct = dictionaryAct;
+    }
+
+    public FavoriteAct getFavoriteAct() {
+        return favoriteAct;
+    }
+
+    public void setFavoriteAct(FavoriteAct favoriteAct) {
+        this.favoriteAct = favoriteAct;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {

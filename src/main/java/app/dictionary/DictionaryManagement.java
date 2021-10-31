@@ -5,12 +5,8 @@ import java.util.*;
 
 public class DictionaryManagement {
     private Dictionary dictionary;
-    private Connection connection = null;
+    protected Connection connection = null;
     private Scanner scan = new Scanner(System.in);
-
-    public DictionaryManagement(Dictionary dictionary) {
-        this.dictionary = dictionary;
-    }
 
     public DictionaryManagement() {
         dictionary = new Dictionary();
@@ -21,8 +17,8 @@ public class DictionaryManagement {
         return dictionary;
     }
 
-    public void setDictionary(Dictionary dictionary) {
-        dictionary = dictionary;
+    public TreeMap<String, String> getTreeWord() {
+        return dictionary.getDictionary();
     }
 
     public void connectDatabase() {
@@ -48,7 +44,7 @@ public class DictionaryManagement {
         connectDatabase();
         PreparedStatement preparedStatement;
         try {
-            preparedStatement = connection.prepareStatement("SELECT word, description FROM av");
+            preparedStatement = connection.prepareStatement("SELECT word, html FROM av");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Word newWord = new Word(resultSet.getString(1), resultSet.getString(2));
@@ -61,28 +57,23 @@ public class DictionaryManagement {
 
     public void insertFromCommandline() {
         connectDatabase();
-        System.out.print("Number of Words: ");
-        int n = scan.nextInt();
-        scan.nextLine();
-        for (int i = 0; i < n; ++i) {
-            Word newWord = new Word();
-            System.out.print("Enter word: ");
-            String insertWord = scan.nextLine();
-            newWord.setWord(insertWord);
-            System.out.print("Enter word meaning: ");
-            String insertWordMeaning = scan.nextLine();
-            newWord.setWordExplain(insertWordMeaning);
-            if (dictionary.addWord(newWord)) {
-                dictionary.getDictionary().put(newWord.getWord(), newWord.getWordExplain());
-                String sql = "INSERT INTO av(word, description) VALUES(?,?)";
-                try {
-                    PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                    preparedStatement.setString(1, newWord.getWord());
-                    preparedStatement.setString(2, newWord.getWordExplain());
-                    preparedStatement.executeUpdate();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+        Word newWord = new Word();
+        System.out.print("Enter word: ");
+        String insertWord = scan.nextLine();
+        newWord.setWord(insertWord);
+        System.out.print("Enter word meaning: ");
+        String insertWordMeaning = scan.nextLine();
+        newWord.setWordExplain(insertWordMeaning);
+        if (dictionary.addWord(newWord)) {
+            dictionary.getDictionary().put(newWord.getWord(), newWord.getWordExplain());
+            String sql = "INSERT INTO av(word, description) VALUES(?,?)";
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, newWord.getWord());
+                preparedStatement.setString(2, newWord.getWordExplain());
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
         System.out.println("Finished!");
@@ -108,7 +99,6 @@ public class DictionaryManagement {
             }
         }
         System.out.println("Finished!");
-        return;
     }
 
     public void showAllWord() {
@@ -137,7 +127,6 @@ public class DictionaryManagement {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-                return;
             }
         }
         System.out.println("Invalid Word!");
@@ -145,22 +134,9 @@ public class DictionaryManagement {
 
     public TreeMap<String, String> findWord(String foundWord) {
         TreeMap<String, String> searchedWord = new TreeMap<>();
-        ArrayList<Word> dictionaryArray = dictionary.toArrayWord();
-        int start = 0;
-        int end = dictionaryArray.size() - 1;
-        while(start <= end) {
-            int mid = start + (end - start)/2;
-            Word word = dictionaryArray.get(mid);
-            String currentWord = word.getWord();
-            int compare = currentWord.compareTo(foundWord);
-            if(compare == 0) {
-                searchedWord.put(word.getWord(), word.getWordExplain());
-            }
-            if(compare > 0) {
-                end = mid - 1;
-            }
-            if(compare < 0) {
-                start = mid + 1;
+        for(Map.Entry<String, String> entry : dictionary.getDictionary().entrySet()) {
+            if(entry.getKey().equals(foundWord)) {
+                searchedWord.put(entry.getKey(), entry.getValue());
             }
         }
         return searchedWord;
@@ -195,31 +171,5 @@ public class DictionaryManagement {
             }
         }
         return null;
-    }
-
-    public void addToHistoryDatabase(String foundWord) {
-        connectDatabase();
-        String sql = "INSERT INTO avHistory(word, html, description, pronounce) SELECT word, html, description, pronounce FROM av WHERE word = ?";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, foundWord);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public TreeMap<String, String> addToHistoryString(String foundWord) {
-        connectDatabase();
-        String sql = "SELECT word, description FROM av";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next() == true) {
-                dictionary.getDictionaryHistory().put(resultSet.getString(1), resultSet.getString(2));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return dictionary.getDictionaryHistory();
     }
 }
