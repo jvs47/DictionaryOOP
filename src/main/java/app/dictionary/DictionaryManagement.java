@@ -12,6 +12,10 @@ public class DictionaryManagement {
         this.dictionary = dictionary;
     }
 
+    public DictionaryManagement() {
+        dictionary = new Dictionary();
+    }
+
     public Dictionary getDictionary() {
         return dictionary;
     }
@@ -37,7 +41,6 @@ public class DictionaryManagement {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return;
     }
 
     public void insertFromDatabase() {
@@ -46,14 +49,13 @@ public class DictionaryManagement {
         try {
             preparedStatement = connection.prepareStatement("SELECT word, description FROM av");
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next() == true) {
+            while (resultSet.next()) {
                 Word newWord = new Word(resultSet.getString(1), resultSet.getString(2));
                 dictionary.getDictionary().put(newWord.getWord(), newWord.getWordExplain());
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return;
     }
 
     public void insertFromCommandline() {
@@ -109,11 +111,11 @@ public class DictionaryManagement {
     }
 
     public void showAllWord() {
+        connectDatabase();
         for (Map.Entry<String, String> entry : dictionary.getDictionary().entrySet()) {
             String value = entry.getValue();
             System.out.println("|" + entry + "\t" + "|" + value);
         }
-        return;
     }
 
     public void editWordMeaning() {
@@ -139,7 +141,6 @@ public class DictionaryManagement {
             }
         }
         System.out.println("Invalid Word!");
-        return;
     }
 
     public TreeMap<String, String> findWord(String foundWord) {

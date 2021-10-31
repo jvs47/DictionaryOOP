@@ -12,32 +12,8 @@ public class SearchPaneController extends ViewController{
 
     public Button searchButton;
 
-    public void selectAct(String foundWord) {
-        ArrayList<String> arrayWords = this.dictionaryManagement.getStringFoundWord(foundWord);
-        search_list_view.getItems().setAll(arrayWords);
-        Word word = dictionaryManagement.binarySearch(foundWord);
-        if(word != null) {
-            definitionPaneController.initData(this.state, word.getWord(), word.getWordExplain());
-        }
-    }
-
-    @Override
     @FXML
-    public void handleSelectItemListView(MouseEvent event) {
-        String foundWord = search_list_view.getSelectionModel().getSelectedItem();
-        if(foundWord == null) {
-            return;
-        }
-        input_search.setText(foundWord);
-        selectAct(foundWord);
-    }
+    void handleSearchButtonEvent(ActionEvent event) {
 
-    @FXML
-    public void handleSearchButtonEvent(ActionEvent actionEvent) {
-        if(actionEvent.getSource() == searchButton) {
-            String foundWord = input_search.getText();
-            searchAct(foundWord);
-        }
-        return;
     }
 }
