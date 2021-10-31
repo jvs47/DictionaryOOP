@@ -7,6 +7,11 @@ import javafx.scene.control.Button;
 public class FavouritePaneController extends ViewController {
     public Button searchButton;
 
+    @Override
+    public void searchAct(String foundWord) {
+
+    }
+
     @FXML
     public void handleSearchButtonEvent(ActionEvent actionEvent) {
 
