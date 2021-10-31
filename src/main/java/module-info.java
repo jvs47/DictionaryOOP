@@ -5,6 +5,7 @@ module app.DictionaryFX {
     requires javafx.web;
     requires org.xerial.sqlitejdbc;
     requires java.desktop;
+    requires json.simple;
 
 
     opens app to javafx.fxml;

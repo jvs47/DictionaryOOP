@@ -18,19 +18,19 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ViewController implements Initializable {
-    protected Dictionary dictionary = new Dictionary();
-    protected DictionaryManagement dictionaryManagement = new DictionaryManagement(dictionary);
-    protected ContainerController state;
+
+    private ContainerController state;
 
     @FXML
-    protected TextField input_search;
+    private TextField input_search;
 
     @FXML
-    protected ListView<String> search_list_view;
+    private ListView<String> search_list_view;
 
     @FXML
-    protected AnchorPane definitionPane;
-    protected DefinitionPaneController definitionPaneController;
+    private AnchorPane definitionPane;
+    private DefinitionPaneController definitionPaneController;
+    private ArrayList<String> arrayWords;
 
     @FXML
     public void handleChangeInputSearch(KeyEvent event) {
@@ -39,10 +39,9 @@ public class ViewController implements Initializable {
             if(!searchText.isEmpty()) {
                 searchAct(searchText);
             } else {
-                search_list_view.getItems().clear();
+                search_list_view.getItems().setAll(arrayWords);
             }
         }
-        return;
     }
 
     @FXML
@@ -50,7 +49,6 @@ public class ViewController implements Initializable {
         if(event.getSource() == input_search) {
             System.out.println("Enter search");
         }
-        return;
     }
 
     @FXML
@@ -61,17 +59,15 @@ public class ViewController implements Initializable {
         }
         input_search.setText(word);
         searchAct(word);
-        return;
     }
 
     public void searchAct(String foundWord) {
-        ArrayList<String> arrayWords = this.dictionaryManagement.getStringFoundWord(foundWord);
+        ArrayList<String> arrayWords = this.state.getDictionaryManagement().getStringFoundWord(foundWord);
         search_list_view.getItems().setAll(arrayWords);
-        Word word = dictionaryManagement.binarySearch(foundWord);
+        Word word = this.state.getDictionaryManagement().binarySearch(foundWord);
         if(word != null) {
             definitionPaneController.initData(this.state, word.getWord(), word.getWordExplain());
         }
-        return;
     }
 
     @Override
@@ -85,14 +81,14 @@ public class ViewController implements Initializable {
         if(!searchText.isEmpty()) {
             searchAct(searchText);
         } else {
-            search_list_view.getItems().clear();
+            search_list_view.getItems().setAll(arrayWords);
         }
 
         //definitionPaneController.reload();
 
     }
 
-    protected void loadDefinitionPane(String pronunciation, String meaning){
+    protected void loadDefinitionPane(String word, String explain){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("definitionPane.fxml"));
         VBox definitionVBox;
         try {
@@ -103,7 +99,7 @@ public class ViewController implements Initializable {
         }
         definitionPane.getChildren().addAll(definitionVBox);
         definitionPaneController = fxmlLoader.getController();
-        definitionPaneController.initData(this.state, pronunciation, meaning);
+        definitionPaneController.initData(this.state, word, explain);
     }
 
     public void initData(ContainerController state){
@@ -111,6 +107,7 @@ public class ViewController implements Initializable {
         if(definitionPaneController == null){
             loadDefinitionPane("","");
         }
+        arrayWords = this.state.getDictionaryManagement().getDictionary().toArrayWords();
         this.reload();
     }
 }

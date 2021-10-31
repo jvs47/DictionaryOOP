@@ -7,7 +7,6 @@ import java.util.TreeMap;
 
 public class Dictionary {
     private TreeMap<String, String> dictionary = new TreeMap<>();
-    private TreeMap<String, String> dictionaryHistory = new TreeMap<>();
     Scanner scan = new Scanner(System.in);
 
     /**
@@ -33,14 +32,6 @@ public class Dictionary {
         this.dictionary = dictionary;
     }
 
-    public TreeMap<String, String> getDictionaryHistory() {
-        return dictionaryHistory;
-    }
-
-    public void setDictionaryHistory(TreeMap<String, String> dictionaryHistory) {
-        this.dictionaryHistory = dictionaryHistory;
-    }
-
     public ArrayList<Word> toArrayWord() {
         ArrayList<Word> arrayWords = new ArrayList<>();
         for(Map.Entry<String, String> entry : dictionary.entrySet()) {
@@ -50,12 +41,13 @@ public class Dictionary {
         return arrayWords;
     }
 
-    public ArrayList<String> toArrayString() {
-        ArrayList<String> wordArrays = new ArrayList<>();
+    public ArrayList<String> toArrayWords(){
+        ArrayList<String> result = new ArrayList<>();
         for(Map.Entry<String, String> entry : dictionary.entrySet()) {
-            wordArrays.add(entry.getKey());
+            String word = entry.getKey();
+            result.add(word);
         }
-        return wordArrays;
+        return result;
     }
 
     public boolean removeWord(Word deletedWord) {

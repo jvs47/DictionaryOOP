@@ -1,5 +1,7 @@
 package app.controllers.panes;
 
+import app.dictionary.Dictionary;
+import app.dictionary.DictionaryManagement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,6 +54,7 @@ public class ContainerController implements Initializable {
     private EditPaneController editPaneController;
     private HomePaneController homePaneController;
 
+    private DictionaryManagement dictionaryManagement = new DictionaryManagement();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -198,5 +201,9 @@ public class ContainerController implements Initializable {
         onlineGoogleSearchVEController.initData(this, false);
         this.resetStyleNav();
         nav_onlineButton.setStyle("-fx-background-color: #191970; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px; -fx-background-radius: 5px 5px 0px 0px;");
+    }
+
+    public DictionaryManagement getDictionaryManagement() {
+        return dictionaryManagement;
     }
 }
