@@ -54,8 +54,7 @@ public class ContainerController implements Initializable {
     private EditPaneController editPaneController;
     private HomePaneController homePaneController;
 
-    private Dictionary dictionary = new Dictionary();
-    private DictionaryManagement dictionaryManagement = new DictionaryManagement(dictionary);
+    private DictionaryManagement dictionaryManagement = new DictionaryManagement();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {

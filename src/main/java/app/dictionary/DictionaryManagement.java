@@ -14,6 +14,7 @@ public class DictionaryManagement {
 
     public DictionaryManagement() {
         dictionary = new Dictionary();
+        insertFromDatabase();
     }
 
     public Dictionary getDictionary() {
@@ -111,7 +112,6 @@ public class DictionaryManagement {
     }
 
     public void showAllWord() {
-        connectDatabase();
         for (Map.Entry<String, String> entry : dictionary.getDictionary().entrySet()) {
             String value = entry.getValue();
             System.out.println("|" + entry + "\t" + "|" + value);

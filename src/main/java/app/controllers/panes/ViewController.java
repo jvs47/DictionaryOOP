@@ -30,6 +30,7 @@ public class ViewController implements Initializable {
     @FXML
     private AnchorPane definitionPane;
     private DefinitionPaneController definitionPaneController;
+    private ArrayList<String> arrayWords;
 
     @FXML
     public void handleChangeInputSearch(KeyEvent event) {
@@ -38,7 +39,7 @@ public class ViewController implements Initializable {
             if(!searchText.isEmpty()) {
                 searchAct(searchText);
             } else {
-                search_list_view.getItems().clear();
+                search_list_view.getItems().setAll(arrayWords);
             }
         }
     }
@@ -80,7 +81,7 @@ public class ViewController implements Initializable {
         if(!searchText.isEmpty()) {
             searchAct(searchText);
         } else {
-            search_list_view.getItems().clear();
+            search_list_view.getItems().setAll(arrayWords);
         }
 
         //definitionPaneController.reload();
@@ -106,6 +107,7 @@ public class ViewController implements Initializable {
         if(definitionPaneController == null){
             loadDefinitionPane("","");
         }
+        arrayWords = this.state.getDictionaryManagement().getDictionary().toArrayWords();
         this.reload();
     }
 }

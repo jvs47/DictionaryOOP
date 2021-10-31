@@ -28,7 +28,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label alignment="BASELINE_LEFT" text="word" textFill="#1d2a57">
+                  <Label fx:id="word" alignment="BASELINE_LEFT" text="word" textFill="#1d2a57">
                      <font>
                         <Font size="20.0" />
                      </font>

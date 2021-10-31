@@ -41,6 +41,15 @@ public class Dictionary {
         return arrayWords;
     }
 
+    public ArrayList<String> toArrayWords(){
+        ArrayList<String> result = new ArrayList<>();
+        for(Map.Entry<String, String> entry : dictionary.entrySet()) {
+            String word = entry.getKey();
+            result.add(word);
+        }
+        return result;
+    }
+
     public boolean removeWord(Word deletedWord) {
         for(String key : dictionary.keySet()) {
             if(key.equals(deletedWord.getWord())) {

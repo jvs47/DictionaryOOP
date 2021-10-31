@@ -15,6 +15,9 @@ public class DefinitionPaneController {
     @FXML
     private Label pronounceLabel;
 
+    @FXML
+    private Label word;
+
     private ContainerController state;
 
     @FXML
@@ -23,5 +26,6 @@ public class DefinitionPaneController {
     }
     public void initData(ContainerController state, String word, String meaning) {
         this.state = state;
+        this.word.setText(word);
     }
 }
