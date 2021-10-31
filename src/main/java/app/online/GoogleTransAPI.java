@@ -8,24 +8,24 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-public class GoogleTransAPITest {
-    public String content;
-    public String urlTest;
-    private final String googleTranslatorURL = "http://translate.google.com/translate_a/t?";
-    private LANGUAGE srcLang = LANGUAGE.AUTO;
-    private LANGUAGE destLang = LANGUAGE.VIETNAMESE;
-    private String userAgent = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16";
+public class GoogleTransAPI {
+    public static String content;
+    public static String urlTest;
+    private static final String googleTranslatorURL = "http://translate.google.com/translate_a/t?";
+    private static LANGUAGE srcLang;
+    private static LANGUAGE destLang;
+    private static String userAgent = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16";
 
-    public String translate(String query) throws IOException, org.json.simple.parser.ParseException {
-        URL url = new URL(this.buildURLRequestWith(query));
-        urlTest = this.buildURLRequestWith(query);
+    public static String translate(String query, LANGUAGE srcLang, LANGUAGE destLang) throws IOException, org.json.simple.parser.ParseException {
+        URL url = new URL(buildURLRequestWith(query, srcLang, destLang));
+        urlTest = buildURLRequestWith(query, srcLang, destLang);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
         conn.setDoOutput(true);
         conn.setRequestProperty("X-HTTP-Method-Override", "GET");
         conn.setRequestProperty("referer", "accounterlive.com");
 
-        conn.addRequestProperty("User-Agent", this.userAgent);
+        conn.addRequestProperty("User-Agent", userAgent);
         conn.setRequestMethod("GET");
         conn.setConnectTimeout(30000);
         conn.connect();
@@ -51,12 +51,12 @@ public class GoogleTransAPITest {
         return contentBuilder.toString().trim().replace(" .", ". ");
     }
 
-    public String buildURLRequestWith(String query) {
+    public static String buildURLRequestWith(String query, LANGUAGE srcLang, LANGUAGE destLang) {
         StringBuilder urlBuilder = new StringBuilder();
-        urlBuilder.append(this.googleTranslatorURL);
+        urlBuilder.append(googleTranslatorURL);
         urlBuilder.append("client=gtrans");
-        urlBuilder.append("&sl=en");
-        urlBuilder.append("&tl=").append(this.destLang);
+        urlBuilder.append("&sl=").append(srcLang);
+        urlBuilder.append("&tl=").append(destLang);
 
         urlBuilder.append("&format=html");
         urlBuilder.append("&v=2.0");
@@ -67,6 +67,14 @@ public class GoogleTransAPITest {
         }
         urlBuilder.append("&q=").append(queryEncoded);
         return urlBuilder.toString();
+    }
+
+    public GoogleTransAPI(String content, String urlTest, LANGUAGE srcLang, LANGUAGE destLang, String userAgent) {
+        this.content = content;
+        this.urlTest = urlTest;
+        this.srcLang = srcLang;
+        this.destLang = destLang;
+        this.userAgent = userAgent;
     }
 
     public LANGUAGE getSrcLang() {

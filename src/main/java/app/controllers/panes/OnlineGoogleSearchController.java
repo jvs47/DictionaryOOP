@@ -1,7 +1,6 @@
 package app.controllers.panes;
 
-import app.online.GoogleTransAPITest;
-import app.online.GoogleTranslateAPI;
+import app.online.GoogleTransAPI;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -39,26 +38,23 @@ public class OnlineGoogleSearchController extends ViewController {
         this.stage = stage;
         this.modeEV = modeEV;
     }
-    private GoogleTransAPITest googleTransAPITest = new GoogleTransAPITest();
     @FXML
     void handleOnlineEVInput(KeyEvent event) throws IOException, org.json.simple.parser.ParseException {
         if (event.getSource() == inputOnlineEVTextArea) {
             String input = inputOnlineEVTextArea.getText();
-            //System.out.println(input);
             if (modeEV) {
-                String output = googleTransAPITest.translate(input);
+                String output = GoogleTransAPI.translate(input, GoogleTransAPI.LANGUAGE.ENGLISH, GoogleTransAPI.LANGUAGE.VIETNAMESE);
                 meaningOnlineEVTextArea.setText(output);
             }
         }
     }
 
     @FXML
-    void handleOnlineVEInput(KeyEvent event) throws IOException {
+    void handleOnlineVEInput(KeyEvent event) throws IOException, org.json.simple.parser.ParseException {
         if (event.getSource() == inputOnlineVETextArea) {
             String input = inputOnlineVETextArea.getText();
-            System.out.println(input);
             if (!modeEV) {
-                String output = GoogleTranslateAPI.onlineTranslate("vi", "en", input);
+                String output = GoogleTransAPI.translate(input, GoogleTransAPI.LANGUAGE.VIETNAMESE, GoogleTransAPI.LANGUAGE.ENGLISH);
                 meaningOnlineVETextArea.setText(output);
             }
         }
