@@ -135,7 +135,7 @@ public class DictionaryManagement {
     public TreeMap<String, String> findWord(String foundWord) {
         TreeMap<String, String> searchedWord = new TreeMap<>();
         for(Map.Entry<String, String> entry : dictionary.getDictionary().entrySet()) {
-            if(entry.getKey().equals(foundWord)) {
+            if(entry.getKey().contains(foundWord)) {
                 searchedWord.put(entry.getKey(), entry.getValue());
             }
         }
