@@ -44,7 +44,7 @@ public class DictionaryManagement {
         connectDatabase();
         PreparedStatement preparedStatement;
         try {
-            preparedStatement = connection.prepareStatement("SELECT word, html FROM av");
+            preparedStatement = connection.prepareStatement("SELECT word, html FROM av group by word");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Word newWord = new Word(resultSet.getString(1), resultSet.getString(2));

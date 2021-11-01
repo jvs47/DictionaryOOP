@@ -3,11 +3,13 @@ package app.controllers.panes;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 public class DefinitionPaneController {
     @FXML
     private WebView meaningWebView;
+    private WebEngine meaningWebEngine;
 
     @FXML
     private Label trueBookmarkLabel;
@@ -27,5 +29,8 @@ public class DefinitionPaneController {
     public void initData(ContainerController state, String word, String meaning) {
         this.state = state;
         this.word.setText(word);
+        meaningWebEngine = meaningWebView.getEngine();
+        meaningWebEngine.loadContent(meaning);
+        //meaningWebEngine.setUserStyleSheetLocation(getClass().getResource("webview.css").toString());
     }
 }
