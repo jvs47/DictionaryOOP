@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
@@ -13,7 +14,11 @@
    <children>
       <AnchorPane layoutX="11.0" layoutY="59.0" prefHeight="323.0" prefWidth="579.0" stylesheets="@../../../css/search.css">
          <children>
-            <ListView fx:id="search_list_view" layoutX="-4.0" onMouseClicked="#handleSelectItemListView" prefHeight="350.0" prefWidth="226.0" styleClass="list_view_search" />
+            <ListView fx:id="search_list_view" layoutX="-4.0" onMouseClicked="#handleSelectItemListView" prefHeight="350.0" prefWidth="226.0" stylesheets="@../../../css/search.css">
+               <styleClass>
+                  <String fx:value="list_view_search" />
+                  <String fx:value="list-view" />
+               </styleClass></ListView>
             <AnchorPane fx:id="definitionPane" layoutX="230.0" prefHeight="350.0" prefWidth="348.0" styleClass="card" stylesheets="@../../../css/search.css" />
          </children>
       </AnchorPane>

@@ -17,8 +17,6 @@ public class DefinitionPaneController {
     @FXML
     private Label pronounceLabel;
 
-    @FXML
-    private Label word;
 
     private ContainerController state;
 
@@ -28,9 +26,8 @@ public class DefinitionPaneController {
     }
     public void initData(ContainerController state, String word, String meaning) {
         this.state = state;
-        this.word.setText(word);
         meaningWebEngine = meaningWebView.getEngine();
         meaningWebEngine.loadContent(meaning);
-        //meaningWebEngine.setUserStyleSheetLocation(getClass().getResource("webview.css").toString());
+        meaningWebEngine.setUserStyleSheetLocation(getClass().getResource("webview.css").toString());
     }
 }

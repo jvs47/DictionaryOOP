@@ -37,3 +37,41 @@
 .search_pane {
     -fx-background-color: linear-gradient(to left, #000066 25%, #0f173b 100%);
 }
+
+. list-view .scroll-bar:horizontal .increment-arrow,
+. list-view .scroll-bar:horizontal .decrement-arrow,
+. list-view .scroll-bar:horizontal .increment-button,
+. list-view .scroll-bar:horizontal .decrement-button {
+    -fx-padding: 0;
+}
+
+. list-view .scroll-bar:vertical {
+    -fx-background-radius: 20;
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+. list-view .decrement-button, .list-view .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+. list-view .increment-button, .list-view .increment-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+. list-view .scroll-bar:vertical .thumb {
+    -fx-background-color: #FFF8E4;
+    -fx-background-insets: 5, 5, 5;
+    -fx-background-radius: 5;
+}
+
+. list-view .scroll-bar:horizontal {
+    -fx-scale-x: 0;
+}
+
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow {
+    -fx-opacity: 0;
+}
