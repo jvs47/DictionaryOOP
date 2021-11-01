@@ -10,6 +10,7 @@ public class DictionaryManagement {
 
     public DictionaryManagement() {
         dictionary = new Dictionary();
+        connectDatabase();
         insertFromDatabase();
     }
 
@@ -41,7 +42,6 @@ public class DictionaryManagement {
     }
 
     public void insertFromDatabase() {
-        connectDatabase();
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement("SELECT word, html FROM av group by word");
@@ -77,7 +77,6 @@ public class DictionaryManagement {
             }
         }
         System.out.println("Finished!");
-        return;
     }
 
     public void deleteWord() {
@@ -171,5 +170,21 @@ public class DictionaryManagement {
             }
         }
         return null;
+    }
+
+    public ArrayList<String> getStringFoundWordsFromDatabase(String foundWord){
+        PreparedStatement preparedStatement;
+        ArrayList<String> words = new ArrayList<>();
+        try {
+            preparedStatement = connection.prepareStatement("SELECT word, html FROM av WHERE word LIKE '" + foundWord + "%';");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Word newWord = new Word(resultSet.getString(1), resultSet.getString(2));
+                words.add(newWord.getWord());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return words;
     }
 }
