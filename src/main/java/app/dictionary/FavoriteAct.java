@@ -13,7 +13,6 @@ public class FavoriteAct extends DictionaryAct {
 
     public void importFavoriteFromDatabase() {
         TreeMap<String, String> favorite = new TreeMap<>();
-        connectDatabase();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, descriptrion FROM avFavorite");
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -27,7 +26,6 @@ public class FavoriteAct extends DictionaryAct {
     }
 
     public void addToFavoriteDatabase(String foundWord) {
-        connectDatabase();
         String sql = "INSERT INTO avFavorite(word, html, description, pronounce) SELECT word, html, description, pronounce FROM av WHERE word=?";
         PreparedStatement preparedStatement;
         try {
