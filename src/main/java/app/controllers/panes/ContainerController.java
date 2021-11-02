@@ -54,9 +54,9 @@ public class ContainerController implements Initializable {
     private HomePaneController homePaneController;
 
     private DictionaryManagement dictionaryManagement = new DictionaryManagement();
-    private HistoryAct historyAct = new HistoryAct();
-    private DictionaryAct dictionaryAct = new DictionaryAct();
-    private FavoriteAct favoriteAct = new FavoriteAct();
+    private HistoryAct historyAct;
+    private DictionaryAct dictionaryAct;
+    private FavoriteAct favoriteAct;
 
     public void setAnchorEditPane(AnchorPane anchorEditPane) {
         this.anchorEditPane = anchorEditPane;
