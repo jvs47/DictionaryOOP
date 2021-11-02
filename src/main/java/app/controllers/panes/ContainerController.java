@@ -45,9 +45,9 @@ public class ContainerController implements Initializable {
     private HistoryPaneController historyPaneController;
     private EditPaneController editPaneController;
     private HomePaneController homePaneController;
-    private HistoryAct historyAct = new HistoryAct();
-    private DictionaryAct dictionaryAct = new DictionaryAct();
-    private FavoriteAct favoriteAct = new FavoriteAct();
+    private HistoryAct historyAct;
+    private DictionaryAct dictionaryAct;
+    private FavoriteAct favoriteAct;
 
     public void setAnchorEditPane(AnchorPane anchorEditPane) {
         this.anchorEditPane = anchorEditPane;
@@ -227,5 +227,9 @@ public class ContainerController implements Initializable {
 
     public DictionaryManagement getDictionaryManagement() {
         return dictionaryManagement;
+    }
+
+    public OnlineGoogleSearchController getOnlineGoogleSearchEVController() {
+        return onlineGoogleSearchEVController;
     }
 }

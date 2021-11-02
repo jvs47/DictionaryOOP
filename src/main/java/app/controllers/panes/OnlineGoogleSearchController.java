@@ -30,14 +30,18 @@ public class OnlineGoogleSearchController {
 
     @FXML
     void onMouseClickSwitchEVLanguage(MouseEvent event) {
-        stage.showOnlineVEPane();
-        modeEV = false;
+        if (event.getSource() == switchLanguageEVLabel) {
+            stage.showOnlineVEPane();
+            modeEV = false;
+        }
     }
 
     @FXML
     void onMouseClickSwitchVELanguage(MouseEvent event) {
-        stage.showOnlineEVPane();
-        modeEV = true;
+        if (event.getSource() == switchLanguageVELabel) {
+            stage.showOnlineEVPane();
+            modeEV = true;
+        }
     }
 
     @FXML
@@ -91,5 +95,9 @@ public class OnlineGoogleSearchController {
                 meaningOnlineVETextArea.setText(output);
             }
         }
+    }
+
+    public void setInputOnlineEVTextArea(String text) {
+        this.inputOnlineEVTextArea.setText(text);
     }
 }

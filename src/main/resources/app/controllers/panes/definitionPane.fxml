@@ -9,76 +9,66 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="350.0" prefWidth="349.0" xmlns="http://javafx.com/javafx/17"
-      fx:controller="app.controllers.panes.DefinitionPaneController">
+<VBox prefHeight="350.0" prefWidth="349.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.panes.DefinitionPaneController">
     <children>
         <Pane>
             <VBox.margin>
-                <Insets/>
+                <Insets />
             </VBox.margin>
             <children>
-                <WebView fx:id="meaningWebView" prefHeight="350.0" prefWidth="349.0"
-                         stylesheets="@../../../css/definition.css"/>
+                <WebView fx:id="meaningWebView" prefHeight="350.0" prefWidth="349.0" stylesheets="@../../../css/definition.css" />
                 <Pane layoutX="242.0" layoutY="8.0">
                     <children>
-                        <Label alignment="CENTER" layoutX="9.0" styleClass="online_search_btn"
-                               stylesheets="@../../../css/definition.css">
+                        <Label fx:id="onlineSearchButton" alignment="CENTER" layoutX="9.0" onMouseClicked="#handleOnlineSearchButton" styleClass="online_search_btn" stylesheets="@../../../css/definition.css">
                             <graphic>
-                                <FontAwesomeIconView fill="#77cdff" glyphName="CLOUD" size="22"
-                                                     wrappingWidth="21.85714340209961"/>
+                                <FontAwesomeIconView fill="#77cdff" glyphName="CLOUD" size="22" wrappingWidth="21.85714340209961" />
                             </graphic>
                             <font>
-                                <Font size="11.0"/>
+                                <Font size="11.0" />
                             </font>
                             <padding>
-                                <Insets top="3.0"/>
+                                <Insets top="3.0" />
                             </padding>
                         </Label>
-                        <Label fx:id="trueBookmarkLabel" alignment="CENTER" layoutX="67.0"
-                               onMouseClicked="#handleClickBookMark" styleClass="bookmark_btn"
-                               stylesheets="@../../../css/definition.css">
+                        <Label fx:id="trueBookmarkLabel" alignment="CENTER" layoutX="67.0" onMouseClicked="#handleClickBookMark" styleClass="bookmark_btn" stylesheets="@../../../css/definition.css">
                             <graphic>
-                                <FontAwesomeIconView fill="#ffc107" glyphName="STAR" size="22"/>
+                                <FontAwesomeIconView fill="#ffc107" glyphName="STAR" size="22" />
                             </graphic>
                             <font>
-                                <Font size="11.0"/>
+                                <Font size="11.0" />
                             </font>
                             <padding>
-                                <Insets left="3.0" top="3.0"/>
+                                <Insets left="3.0" top="3.0" />
                             </padding>
                         </Label>
                         <Label layoutX="70.0" layoutY="3.0">
                             <graphic>
-                                <FontAwesomeIconView fill="#ffc107" glyphName="STAR_ALT" size="22"/>
+                                <FontAwesomeIconView fill="#ffc107" glyphName="STAR_ALT" size="22" />
                             </graphic>
                         </Label>
                         <Label layoutX="43.0" layoutY="2.0">
                             <graphic>
-                                <FontAwesomeIconView fill="#d30000" glyphName="TRASH" size="22"/>
+                                <FontAwesomeIconView fill="#d30000" glyphName="TRASH" size="22" />
                             </graphic>
                         </Label>
                     </children>
                 </Pane>
                 <Pane layoutX="235.0" layoutY="33.0">
                     <children>
-                        <Button fx:id="ukPronounceButton" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="2.0"
-                                mnemonicParsing="false" onMouseClicked="#handlePronounceClick"
-                                styleClass="pronounce_btn" stylesheets="@../../../css/definition.css" text="UK">
+                        <Button fx:id="ukPronounceButton" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" onMouseClicked="#handlePronounceClick" styleClass="pronounce_btn" stylesheets="@../../../css/definition.css" text="UK">
                             <graphic>
-                                <FontAwesomeIconView fill="#0066ff" glyphName="VOLUME_UP" size="20"/>
+                                <FontAwesomeIconView fill="#0066ff" glyphName="VOLUME_UP" size="20" />
                             </graphic>
                             <font>
-                                <Font name="System Bold" size="12.0"/>
+                                <Font name="System Bold" size="12.0" />
                             </font>
                         </Button>
-                        <Button fx:id="usPronounceButton" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="2.0"
-                                layoutX="54.0" mnemonicParsing="false" onMouseClicked="#handlePronounceClick"
-                                styleClass="pronounce_btn" stylesheets="@../../../css/definition.css" text="US">
+                        <Button fx:id="usPronounceButton" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="2.0" layoutX="54.0" mnemonicParsing="false" onMouseClicked="#handlePronounceClick" styleClass="pronounce_btn" stylesheets="@../../../css/definition.css" text="US">
                             <graphic>
-                                <FontAwesomeIconView fill="#ff121a" glyphName="VOLUME_UP" size="20"/>
+                                <FontAwesomeIconView fill="#ff121a" glyphName="VOLUME_UP" size="20" />
                             </graphic>
                             <font>
-                                <Font name="System Bold" size="12.0"/>
+                                <Font name="System Bold" size="12.0" />
                             </font>
                         </Button>
                     </children>

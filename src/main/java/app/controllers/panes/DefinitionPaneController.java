@@ -29,6 +29,16 @@ public class DefinitionPaneController {
     @FXML
     private Button usPronounceButton;
 
+    @FXML
+    private Label onlineSearchButton;
+
+    @FXML
+    void handleOnlineSearchButton(MouseEvent event) {
+        if(event.getSource() == onlineSearchButton){
+            this.state.showOnlineEVPane();
+            this.state.getOnlineGoogleSearchEVController().setInputOnlineEVTextArea(word);
+        }
+    }
 
     @FXML
     void handlePronounceClick(MouseEvent event) throws JavaLayerException, IOException {
