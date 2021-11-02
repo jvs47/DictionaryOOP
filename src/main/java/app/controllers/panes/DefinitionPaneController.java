@@ -6,6 +6,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
+import javax.swing.text.View;
+
 public class DefinitionPaneController {
     @FXML
     private WebView meaningWebView;
@@ -13,6 +15,9 @@ public class DefinitionPaneController {
 
     @FXML
     private Label trueBookmarkLabel;
+
+    @FXML
+    private Label viewWord;
 
     @FXML
     private Label pronounceLabel;
@@ -24,6 +29,7 @@ public class DefinitionPaneController {
     void handleClickBookMark(MouseEvent event) {
 
     }
+
     public void initData(ContainerController state, String word, String meaning) {
         this.state = state;
         meaningWebEngine = meaningWebView.getEngine();
