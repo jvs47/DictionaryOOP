@@ -7,11 +7,14 @@ public class DictionaryManagement {
     private Dictionary dictionary;
     protected Connection connection = null;
     private Scanner scan = new Scanner(System.in);
+    private TreeMap<String, String> history = new TreeMap<>();
+    private TreeMap<String, String> favorite = new TreeMap<>();
 
     public DictionaryManagement() {
         dictionary = new Dictionary();
         connectDatabase();
         insertFromDatabase();
+        insertFromHistoryDatabase();
     }
 
     public Dictionary getDictionary() {
@@ -56,7 +59,6 @@ public class DictionaryManagement {
     }
 
     public void insertFromCommandline() {
-        connectDatabase();
         Word newWord = new Word();
         System.out.print("Enter word: ");
         String insertWord = scan.nextLine();
@@ -80,7 +82,6 @@ public class DictionaryManagement {
     }
 
     public void deleteWord() {
-        connectDatabase();
         Word removedWord = new Word();
         System.out.print("Enter word: ");
         String deletedWord = scan.nextLine();
@@ -108,7 +109,6 @@ public class DictionaryManagement {
     }
 
     public void editWordMeaning() {
-        connectDatabase();
         System.out.print("Enter word: ");
         String editedWord = scan.nextLine();
         for (Map.Entry<String, String> entry : dictionary.getDictionary().entrySet()) {
@@ -133,10 +133,15 @@ public class DictionaryManagement {
 
     public TreeMap<String, String> findWord(String foundWord) {
         TreeMap<String, String> searchedWord = new TreeMap<>();
-        for(Map.Entry<String, String> entry : dictionary.getDictionary().entrySet()) {
-            if(entry.getKey().contains(foundWord)) {
-                searchedWord.put(entry.getKey(), entry.getValue());
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = connection.prepareStatement("SELECT word, html FROM av WHERE word LIKE '" + foundWord + "%';");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next() == true) {
+                searchedWord.put(resultSet.getString(1), resultSet.getString(2));
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return searchedWord;
     }
@@ -172,11 +177,67 @@ public class DictionaryManagement {
         return null;
     }
 
-    public ArrayList<String> getStringFoundWordsFromDatabase(String foundWord){
+    // History
+
+    public void insertFromHistoryDatabase() {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, html FROM avHistory");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next() == true) {
+                history.put(resultSet.getString(1), resultSet.getString(2));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Done insert history from database!");
+    }
+
+    public void saveWordToHistoryDatabase(String foundWord) {
+        for(Map.Entry<String, String> entry : history.entrySet()) {
+            if(entry.getKey().equals(foundWord)) {
+                System.out.println(foundWord + " is exist in History List!");
+                return;
+            }
+        }
+        String sql = "INSERT INTO avHistory(word, html, description, pronounce) SELECT word, html, description, pronounce FROM av WHERE word = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, foundWord);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, html FROM avHistory WHERE word = ?");
+            preparedStatement.setString(1, foundWord);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next() == true) {
+                history.put(resultSet.getString(1), resultSet.getString(2));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<String> getHistoryString() {
+        ArrayList<String> wordArrays = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT word FROM avHistory GROUP BY word;");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next() == true) {
+                wordArrays.add(resultSet.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return wordArrays;
+    }
+
+    public ArrayList<String> foundWordFromHistoryDatabase(String foundWord){
         PreparedStatement preparedStatement;
         ArrayList<String> words = new ArrayList<>();
         try {
-            preparedStatement = connection.prepareStatement("SELECT word, html FROM av WHERE word LIKE '" + foundWord + "%';");
+            preparedStatement = connection.prepareStatement("SELECT word, html FROM avHistory WHERE word LIKE '" + foundWord + "%' GROUP BY word;");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Word newWord = new Word(resultSet.getString(1), resultSet.getString(2));
@@ -186,5 +247,130 @@ public class DictionaryManagement {
             e.printStackTrace();
         }
         return words;
+    }
+
+    public Word binarySearchHistory(String foundWord) {
+        ArrayList<Word> arrayWords = new ArrayList<>();
+        for(Map.Entry<String, String> entry : history.entrySet()) {
+            Word insertWord = new Word(entry.getKey(), entry.getValue());
+            arrayWords.add(insertWord);
+        }
+        int start = 0;
+        int end = arrayWords.size() - 1;
+        while(start <= end) {
+            int mid = start + (end - start)/2;
+            Word word = arrayWords.get(mid);
+            String wordString = word.getWord();
+            int compare = wordString.compareTo(foundWord);
+            if(compare == 0) {
+                return word;
+            }
+            if(compare > 0) {
+                end = mid - 1;
+            }
+            if(compare < 0) {
+                start = mid + 1;
+            }
+        }
+        return null;
+    }
+
+    //Favorite
+
+    public void insertFromFavoriteDatabase() {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, descriptrion FROM avFavorite");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next() == true) {
+                favorite.put(resultSet.getString(1), resultSet.getString(2));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return;
+    }
+
+    public void saveToFavoriteDatabase(String foundWord) {
+        for(Map.Entry<String, String> entry : favorite.entrySet()) {
+            if(entry.getKey().equals(foundWord)) {
+                System.out.println(foundWord + " is exist on Favorite List!");
+                return;
+            }
+        }
+        String sql = "INSERT INTO avFavorite(word, html, description, pronounce) SELECT word, html, description, pronounce FROM av WHERE word=?";
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, foundWord);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            preparedStatement = connection.prepareStatement("SELECT word, html FROM avHistory WHERE word = ?");
+            preparedStatement.setString(1, foundWord);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next() == true) {
+                history.put(resultSet.getString(1), resultSet.getString(2));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<String> foundWordFromFavoriteDatabase(String foundWord){
+        PreparedStatement preparedStatement;
+        ArrayList<String> words = new ArrayList<>();
+        try {
+            preparedStatement = connection.prepareStatement("SELECT word, html FROM avFavorite WHERE word LIKE '" + foundWord + "%' GROUP BY word;");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Word newWord = new Word(resultSet.getString(1), resultSet.getString(2));
+                words.add(newWord.getWord());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return words;
+    }
+
+    public Word binarySearchFavorite(String foundWord) {
+        ArrayList<Word> arrayWords = new ArrayList<>();
+        for(Map.Entry<String, String> entry : favorite.entrySet()) {
+            Word insertWord = new Word(entry.getKey(), entry.getValue());
+            arrayWords.add(insertWord);
+        }
+        int start = 0;
+        int end = arrayWords.size() - 1;
+        while(start <= end) {
+            int mid = start + (end - start)/2;
+            Word word = arrayWords.get(mid);
+            String wordString = word.getWord();
+            int compare = wordString.compareTo(foundWord);
+            if(compare == 0) {
+                return word;
+            }
+            if(compare > 0) {
+                end = mid - 1;
+            }
+            if(compare < 0) {
+                start = mid + 1;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<String> getFavoriteString() {
+        ArrayList<String> wordArrays = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT word FROM avFavorite GROUP BY word;");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next() == true) {
+                wordArrays.add(resultSet.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return wordArrays;
     }
 }
