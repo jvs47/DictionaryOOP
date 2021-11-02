@@ -4,9 +4,9 @@ import java.sql.*;
 import java.util.*;
 
 public class DictionaryManagement {
-    private Dictionary dictionary;
+    private final Dictionary dictionary;
+    private final Scanner scan = new Scanner(System.in);
     protected Connection connection = null;
-    private Scanner scan = new Scanner(System.in);
 
     public DictionaryManagement() {
         dictionary = new Dictionary();
@@ -133,8 +133,8 @@ public class DictionaryManagement {
 
     public TreeMap<String, String> findWord(String foundWord) {
         TreeMap<String, String> searchedWord = new TreeMap<>();
-        for(Map.Entry<String, String> entry : dictionary.getDictionary().entrySet()) {
-            if(entry.getKey().contains(foundWord)) {
+        for (Map.Entry<String, String> entry : dictionary.getDictionary().entrySet()) {
+            if (entry.getKey().contains(foundWord)) {
                 searchedWord.put(entry.getKey(), entry.getValue());
             }
         }
@@ -154,25 +154,25 @@ public class DictionaryManagement {
         ArrayList<Word> arrayWords = dictionary.toArrayWord();
         int start = 0;
         int end = arrayWords.size() - 1;
-        while(start <= end) {
-            int mid = start + (end - start)/2;
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
             Word word = arrayWords.get(mid);
             String currentWord = word.getWord();
             int compare = currentWord.compareTo(foundWord);
-            if(compare == 0) {
+            if (compare == 0) {
                 return word;
             }
-            if(compare > 0) {
+            if (compare > 0) {
                 end = mid - 1;
             }
-            if(compare < 0) {
+            if (compare < 0) {
                 start = mid + 1;
             }
         }
         return null;
     }
 
-    public ArrayList<String> getStringFoundWordsFromDatabase(String foundWord){
+    public ArrayList<String> getStringFoundWordsFromDatabase(String foundWord) {
         PreparedStatement preparedStatement;
         ArrayList<String> words = new ArrayList<>();
         try {

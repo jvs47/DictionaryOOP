@@ -9,30 +9,41 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="420.0" prefWidth="600.0" stylesheets="@../../../css/search.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.panes.HistoryPaneController">
-   <children>
-      <AnchorPane layoutX="11.0" layoutY="59.0" prefHeight="323.0" prefWidth="579.0" stylesheets="@../../../css/search.css">
-         <children>
-            <ListView fx:id="search_list_view" layoutX="-4.0" onMouseClicked="#handleSelectItemListView" prefHeight="350.0" prefWidth="226.0" styleClass="list_view_search" />
-            <AnchorPane fx:id="definitionPane" layoutX="230.0" prefHeight="350.0" prefWidth="348.0" styleClass="card" stylesheets="@../../../css/search.css" />
-         </children>
-      </AnchorPane>
-      <Pane prefHeight="52.0" prefWidth="600.0" styleClass="search_pane" stylesheets="@../../../css/search.css">
-         <children>
-            <TextField fx:id="input_search" layoutX="7.0" layoutY="9.0" onAction="#handleEnterInputSearch" onKeyReleased="#handleChangeInputSearch" prefHeight="35.0" prefWidth="538.0" promptText="Search word..." styleClass="input_search" stylesheets="@../../../css/search.css">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
-            <Button fx:id="searchButton" layoutX="552.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSearchButtonEvent" prefHeight="34.0" prefWidth="34.0" style="-fx-background-color: #FEC400;" styleClass="btn_search" stylesheets="@../../../css/search.css">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <FontAwesomeIconView glyphName="SEARCH" size="20" />
-               </graphic>
-            </Button>
-         </children>
-      </Pane>
-   </children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="420.0" prefWidth="600.0"
+            stylesheets="@../../../css/search.css" xmlns="http://javafx.com/javafx/17"
+            fx:controller="app.controllers.panes.HistoryPaneController">
+    <children>
+        <AnchorPane layoutX="11.0" layoutY="59.0" prefHeight="323.0" prefWidth="579.0"
+                    stylesheets="@../../../css/search.css">
+            <children>
+                <ListView fx:id="search_list_view" layoutX="-4.0" onMouseClicked="#handleSelectItemListView"
+                          prefHeight="350.0" prefWidth="226.0" styleClass="list_view_search"/>
+                <AnchorPane fx:id="definitionPane" layoutX="230.0" prefHeight="350.0" prefWidth="348.0"
+                            styleClass="card" stylesheets="@../../../css/search.css"/>
+            </children>
+        </AnchorPane>
+        <Pane prefHeight="52.0" prefWidth="600.0" styleClass="search_pane" stylesheets="@../../../css/search.css">
+            <children>
+                <TextField fx:id="input_search" layoutX="7.0" layoutY="9.0" onAction="#handleEnterInputSearch"
+                           onKeyReleased="#handleChangeInputSearch" prefHeight="35.0" prefWidth="538.0"
+                           promptText="Search word..." styleClass="input_search" stylesheets="@../../../css/search.css">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </TextField>
+                <Button fx:id="searchButton" layoutX="552.0" layoutY="10.0" maxHeight="1.7976931348623157E308"
+                        maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity"
+                        mnemonicParsing="false" onAction="#handleSearchButtonEvent" prefHeight="34.0" prefWidth="34.0"
+                        style="-fx-background-color: #FEC400;" styleClass="btn_search"
+                        stylesheets="@../../../css/search.css">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                    <graphic>
+                        <FontAwesomeIconView glyphName="SEARCH" size="20"/>
+                    </graphic>
+                </Button>
+            </children>
+        </Pane>
+    </children>
 </AnchorPane>

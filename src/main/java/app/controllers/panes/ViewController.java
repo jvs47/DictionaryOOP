@@ -34,9 +34,9 @@ public class ViewController implements Initializable {
 
     @FXML
     public void handleChangeInputSearch(KeyEvent event) {
-        if(event.getSource() == input_search) {
+        if (event.getSource() == input_search) {
             String searchText = input_search.getText();
-            if(!searchText.isEmpty()) {
+            if (!searchText.isEmpty()) {
                 searchAct(searchText);
             } else {
                 search_list_view.getItems().setAll(arrayWords);
@@ -46,7 +46,7 @@ public class ViewController implements Initializable {
 
     @FXML
     public void handleEnterInputSearch(ActionEvent event) {
-        if(event.getSource() == input_search) {
+        if (event.getSource() == input_search) {
             System.out.println("Enter search");
         }
     }
@@ -54,7 +54,7 @@ public class ViewController implements Initializable {
     @FXML
     public void handleSelectItemListView(MouseEvent event) {
         String word = search_list_view.getSelectionModel().getSelectedItem();
-        if(word == null) {
+        if (word == null) {
             return;
         }
         input_search.setText(word);
@@ -66,7 +66,7 @@ public class ViewController implements Initializable {
         ArrayList<String> arrayWords = this.state.getDictionaryManagement().getStringFoundWordsFromDatabase(foundWord);
         search_list_view.getItems().setAll(arrayWords);
         Word word = this.state.getDictionaryManagement().binarySearch(foundWord);
-        if(word != null) {
+        if (word != null) {
             definitionPaneController.initData(this.state, word.getWord(), word.getWordExplain());
         }
     }
@@ -75,11 +75,12 @@ public class ViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //loadDefinitionPane("Word", "Explain");
     }
-    public void reload(){
-        if(state == null) return;
+
+    public void reload() {
+        if (state == null) return;
         String searchText = input_search.getText();
 
-        if(!searchText.isEmpty()) {
+        if (!searchText.isEmpty()) {
             searchAct(searchText);
         } else {
             search_list_view.getItems().setAll(arrayWords);
@@ -89,7 +90,7 @@ public class ViewController implements Initializable {
 
     }
 
-    protected void loadDefinitionPane(String word, String explain){
+    protected void loadDefinitionPane(String word, String explain) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("definitionPane.fxml"));
         VBox definitionVBox;
         try {
@@ -103,10 +104,10 @@ public class ViewController implements Initializable {
         definitionPaneController.initData(this.state, word, explain);
     }
 
-    public void initData(ContainerController state){
+    public void initData(ContainerController state) {
         this.state = state;
-        if(definitionPaneController == null){
-            loadDefinitionPane("","");
+        if (definitionPaneController == null) {
+            loadDefinitionPane("", "");
         }
         arrayWords = this.state.getDictionaryManagement().getDictionary().toArrayWords();
         this.reload();

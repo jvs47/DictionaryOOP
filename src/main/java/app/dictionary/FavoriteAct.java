@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.TreeMap;
 
-public class FavoriteAct extends DictionaryAct{
+public class FavoriteAct extends DictionaryAct {
     public FavoriteAct() {
 
     }
@@ -17,7 +17,7 @@ public class FavoriteAct extends DictionaryAct{
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, descriptrion FROM avFavorite");
             ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next() == true) {
+            while (resultSet.next() == true) {
                 favorite.put(resultSet.getString(1), resultSet.getString(2));
             }
         } catch (SQLException e) {

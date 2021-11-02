@@ -6,8 +6,8 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 public class Dictionary {
-    private TreeMap<String, String> dictionary = new TreeMap<>();
     Scanner scan = new Scanner(System.in);
+    private TreeMap<String, String> dictionary = new TreeMap<>();
 
     /**
      * Default constructor
@@ -18,6 +18,7 @@ public class Dictionary {
 
     /**
      * Constructor with parameters
+     *
      * @param dictionary
      */
     public Dictionary(TreeMap<String, String> dictionary) {
@@ -34,16 +35,16 @@ public class Dictionary {
 
     public ArrayList<Word> toArrayWord() {
         ArrayList<Word> arrayWords = new ArrayList<>();
-        for(Map.Entry<String, String> entry : dictionary.entrySet()) {
+        for (Map.Entry<String, String> entry : dictionary.entrySet()) {
             Word word = new Word(entry.getKey(), entry.getValue());
             arrayWords.add(word);
         }
         return arrayWords;
     }
 
-    public ArrayList<String> toArrayWords(){
+    public ArrayList<String> toArrayWords() {
         ArrayList<String> result = new ArrayList<>();
-        for(Map.Entry<String, String> entry : dictionary.entrySet()) {
+        for (Map.Entry<String, String> entry : dictionary.entrySet()) {
             String word = entry.getKey();
             result.add(word);
         }
@@ -51,8 +52,8 @@ public class Dictionary {
     }
 
     public boolean removeWord(Word deletedWord) {
-        for(String key : dictionary.keySet()) {
-            if(key.equals(deletedWord.getWord())) {
+        for (String key : dictionary.keySet()) {
+            if (key.equals(deletedWord.getWord())) {
                 return true;
             }
         }
@@ -61,7 +62,7 @@ public class Dictionary {
     }
 
     public boolean addWord(Word newWord) {
-        for(String key : dictionary.keySet()) {
+        for (String key : dictionary.keySet()) {
             if (key.equals(newWord.getWord())) {
                 System.out.println(key + " exists in the dictionary!");
                 return false;

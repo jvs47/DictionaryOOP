@@ -5,48 +5,54 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="420.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.panes.HomePaneController">
-   <children>
-      <ImageView fitHeight="410.0" layoutX="20.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../data/images/background.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="favouriteHomeButton" layoutX="292.0" layoutY="111.0" onMouseClicked="#handleHomeButtonClick" styleClass="home_top_btn" stylesheets="@../../../css/home.css">
-         <graphic>
-            <ImageView fitHeight="177.0" fitWidth="137.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../data/images/bookmark_btn.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Label>
-      <Label fx:id="searchHomeButton" layoutX="144.0" layoutY="50.0" onMouseClicked="#handleHomeButtonClick" styleClass="home_top_btn" stylesheets="@../../../css/home.css">
-         <graphic>
-            <ImageView fitHeight="196.0" fitWidth="208.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../data/images/search_btn.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Label>
-      <Label fx:id="onlineSearchHomeButton" layoutX="112.0" layoutY="210.0" onMouseClicked="#handleHomeButtonClick" styleClass="home_bot_btn" stylesheets="@../../../css/home.css">
-         <graphic>
-            <ImageView fitHeight="178.0" fitWidth="173.0">
-               <image>
-                  <Image url="@../../../data/images/ggtrans_btn.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Label>
-      <Label fx:id="aboutHomeButton" layoutX="246.0" layoutY="255.0" onMouseClicked="#handleHomeButtonClick" styleClass="home_bot_btn" stylesheets="@../../../css/home.css">
-         <graphic>
-            <ImageView fitHeight="134.0" fitWidth="224.0">
-               <image>
-                  <Image url="@../../../data/images/about_btn.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Label>
-   </children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="420.0" prefWidth="600.0"
+            style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17"
+            fx:controller="app.controllers.panes.HomePaneController">
+    <children>
+        <ImageView fitHeight="410.0" layoutX="20.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../data/images/background.png"/>
+            </image>
+        </ImageView>
+        <Label fx:id="favouriteHomeButton" layoutX="292.0" layoutY="111.0" onMouseClicked="#handleHomeButtonClick"
+               styleClass="home_top_btn" stylesheets="@../../../css/home.css">
+            <graphic>
+                <ImageView fitHeight="177.0" fitWidth="137.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../data/images/bookmark_btn.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Label>
+        <Label fx:id="searchHomeButton" layoutX="144.0" layoutY="50.0" onMouseClicked="#handleHomeButtonClick"
+               styleClass="home_top_btn" stylesheets="@../../../css/home.css">
+            <graphic>
+                <ImageView fitHeight="196.0" fitWidth="208.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../data/images/search_btn.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Label>
+        <Label fx:id="onlineSearchHomeButton" layoutX="112.0" layoutY="210.0" onMouseClicked="#handleHomeButtonClick"
+               styleClass="home_bot_btn" stylesheets="@../../../css/home.css">
+            <graphic>
+                <ImageView fitHeight="178.0" fitWidth="173.0">
+                    <image>
+                        <Image url="@../../../data/images/ggtrans_btn.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Label>
+        <Label fx:id="aboutHomeButton" layoutX="246.0" layoutY="255.0" onMouseClicked="#handleHomeButtonClick"
+               styleClass="home_bot_btn" stylesheets="@../../../css/home.css">
+            <graphic>
+                <ImageView fitHeight="134.0" fitWidth="224.0">
+                    <image>
+                        <Image url="@../../../data/images/about_btn.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Label>
+    </children>
 </AnchorPane>

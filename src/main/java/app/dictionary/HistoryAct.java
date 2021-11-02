@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class HistoryAct extends DictionaryAct{
+public class HistoryAct extends DictionaryAct {
 
     public HistoryAct() {
 
@@ -55,10 +55,11 @@ public class HistoryAct extends DictionaryAct{
         }
         return history;
     }
+
     public ArrayList<String> toArrayString() {
         TreeMap<String, String> words = this.getTreeWord();
         ArrayList<String> wordArrays = new ArrayList<>();
-        for(Map.Entry<String, String> entry : words.entrySet()) {
+        for (Map.Entry<String, String> entry : words.entrySet()) {
             wordArrays.add(entry.getKey());
         }
         return wordArrays;

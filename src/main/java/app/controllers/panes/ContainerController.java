@@ -14,27 +14,21 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ContainerController implements Initializable {
+    private final DictionaryManagement dictionaryManagement = new DictionaryManagement();
     @FXML
     private Button nav_editButton;
-
     @FXML
     private Button nav_favouriteButton;
-
     @FXML
     private Button nav_historyButton;
-
     @FXML
     private Button nav_homeButton;
-
     @FXML
     private Button nav_onlineButton;
-
     @FXML
     private Button nav_searchButton;
-
     @FXML
     private Label categoryLabel;
-
     @FXML
     private AnchorPane categoryPanel;
     private AnchorPane anchorSearchPane;
@@ -44,7 +38,6 @@ public class ContainerController implements Initializable {
     private AnchorPane anchorHistoryPane;
     private AnchorPane anchorEditPane;
     private AnchorPane anchorHomePane;
-
     private SearchPaneController searchPaneController;
     private OnlineGoogleSearchController onlineGoogleSearchEVController;
     private OnlineGoogleSearchController onlineGoogleSearchVEController;
@@ -52,8 +45,6 @@ public class ContainerController implements Initializable {
     private HistoryPaneController historyPaneController;
     private EditPaneController editPaneController;
     private HomePaneController homePaneController;
-
-    private DictionaryManagement dictionaryManagement = new DictionaryManagement();
     private HistoryAct historyAct = new HistoryAct();
     private DictionaryAct dictionaryAct = new DictionaryAct();
     private FavoriteAct favoriteAct = new FavoriteAct();

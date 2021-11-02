@@ -52,22 +52,19 @@ public class HomePaneController {
             } catch (IOException | URISyntaxException e) {
                 e.printStackTrace();
             }
-        }
-        else if(event.getSource() == dcanh143HyperLink){
+        } else if (event.getSource() == dcanh143HyperLink) {
             try {
                 getDesktop().browse(new URI("https://github.com/dcanh143"));
             } catch (IOException | URISyntaxException e) {
                 e.printStackTrace();
             }
-        }
-        else if(event.getSource() == cuongknHyperLink){
+        } else if (event.getSource() == cuongknHyperLink) {
             try {
                 getDesktop().browse(new URI("https://github.com/cuongkn"));
             } catch (IOException | URISyntaxException e) {
                 e.printStackTrace();
             }
-        }
-        else if(event.getSource() == uetHyperLink){
+        } else if (event.getSource() == uetHyperLink) {
             try {
                 getDesktop().browse(new URI("https://uet.vnu.edu.vn/"));
             } catch (IOException | URISyntaxException e) {
