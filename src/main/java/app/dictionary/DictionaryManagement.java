@@ -15,6 +15,7 @@ public class DictionaryManagement {
         connectDatabase();
         insertFromDatabase();
         insertFromHistoryDatabase();
+        insertFromFavoriteDatabase();
     }
 
     public Dictionary getDictionary() {
@@ -137,7 +138,7 @@ public class DictionaryManagement {
         try {
             preparedStatement = connection.prepareStatement("SELECT word, html FROM av WHERE word LIKE '" + foundWord + "%'");
             ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next() == true) {
+            while (resultSet.next()) {
                 searchedWord.put(resultSet.getString(1), resultSet.getString(2));
             }
         } catch (SQLException e) {
@@ -159,18 +160,18 @@ public class DictionaryManagement {
         ArrayList<Word> arrayWords = dictionary.toArrayWord();
         int start = 0;
         int end = arrayWords.size() - 1;
-        while(start <= end) {
-            int mid = start + (end - start)/2;
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
             Word word = arrayWords.get(mid);
             String currentWord = word.getWord();
             int compare = currentWord.compareTo(foundWord);
-            if(compare == 0) {
+            if (compare == 0) {
                 return word;
             }
-            if(compare > 0) {
+            if (compare > 0) {
                 end = mid - 1;
             }
-            if(compare < 0) {
+            if (compare < 0) {
                 start = mid + 1;
             }
         }
@@ -183,7 +184,7 @@ public class DictionaryManagement {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, html FROM avHistory");
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next() == true) {
+            while (resultSet.next()) {
                 history.put(resultSet.getString(1), resultSet.getString(2));
             }
         } catch (SQLException e) {
@@ -193,8 +194,8 @@ public class DictionaryManagement {
     }
 
     public void saveWordToHistoryDatabase(String foundWord) {
-        for(Map.Entry<String, String> entry : history.entrySet()) {
-            if(entry.getKey().equals(foundWord)) {
+        for (Map.Entry<String, String> entry : history.entrySet()) {
+            if (entry.getKey().equals(foundWord)) {
                 System.out.println(foundWord + " is exist in History List!");
                 return;
             }
@@ -211,7 +212,7 @@ public class DictionaryManagement {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, html FROM avHistory WHERE word = ?");
             preparedStatement.setString(1, foundWord);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next() == true) {
+            while (resultSet.next()) {
                 history.put(resultSet.getString(1), resultSet.getString(2));
             }
         } catch (SQLException e) {
@@ -224,7 +225,7 @@ public class DictionaryManagement {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT word FROM avHistory GROUP BY word;");
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next() == true) {
+            while (resultSet.next()) {
                 wordArrays.add(resultSet.getString(1));
             }
         } catch (SQLException e) {
@@ -233,7 +234,7 @@ public class DictionaryManagement {
         return wordArrays;
     }
 
-    public ArrayList<String> foundWordFromHistoryDatabase(String foundWord){
+    public ArrayList<String> foundWordFromHistoryDatabase(String foundWord) {
         PreparedStatement preparedStatement;
         ArrayList<String> words = new ArrayList<>();
         try {
@@ -251,24 +252,24 @@ public class DictionaryManagement {
 
     public Word binarySearchHistory(String foundWord) {
         ArrayList<Word> arrayWords = new ArrayList<>();
-        for(Map.Entry<String, String> entry : history.entrySet()) {
+        for (Map.Entry<String, String> entry : history.entrySet()) {
             Word insertWord = new Word(entry.getKey(), entry.getValue());
             arrayWords.add(insertWord);
         }
         int start = 0;
         int end = arrayWords.size() - 1;
-        while(start <= end) {
-            int mid = start + (end - start)/2;
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
             Word word = arrayWords.get(mid);
             String wordString = word.getWord();
             int compare = wordString.compareTo(foundWord);
-            if(compare == 0) {
+            if (compare == 0) {
                 return word;
             }
-            if(compare > 0) {
+            if (compare > 0) {
                 end = mid - 1;
             }
-            if(compare < 0) {
+            if (compare < 0) {
                 start = mid + 1;
             }
         }
@@ -279,20 +280,19 @@ public class DictionaryManagement {
 
     public void insertFromFavoriteDatabase() {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, descriptrion FROM avFavorite");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, html FROM avFavorite");
             ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next() == true) {
+            while (resultSet.next()) {
                 favorite.put(resultSet.getString(1), resultSet.getString(2));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return;
     }
 
     public void saveToFavoriteDatabase(String foundWord) {
-        for(Map.Entry<String, String> entry : favorite.entrySet()) {
-            if(entry.getKey().equals(foundWord)) {
+        for (Map.Entry<String, String> entry : favorite.entrySet()) {
+            if (entry.getKey().equals(foundWord)) {
                 System.out.println(foundWord + " is exist on Favorite List!");
                 return;
             }
@@ -310,15 +310,16 @@ public class DictionaryManagement {
             preparedStatement = connection.prepareStatement("SELECT word, html FROM avHistory WHERE word = ?");
             preparedStatement.setString(1, foundWord);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next() == true) {
+            while (resultSet.next()) {
                 history.put(resultSet.getString(1), resultSet.getString(2));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        reloadFavouriteTree();
     }
 
-    public ArrayList<String> foundWordFromFavoriteDatabase(String foundWord){
+    public ArrayList<String> listWordFromFavoriteDatabase(String foundWord) {
         PreparedStatement preparedStatement;
         ArrayList<String> words = new ArrayList<>();
         try {
@@ -336,24 +337,24 @@ public class DictionaryManagement {
 
     public Word binarySearchFavorite(String foundWord) {
         ArrayList<Word> arrayWords = new ArrayList<>();
-        for(Map.Entry<String, String> entry : favorite.entrySet()) {
+        for (Map.Entry<String, String> entry : favorite.entrySet()) {
             Word insertWord = new Word(entry.getKey(), entry.getValue());
             arrayWords.add(insertWord);
         }
         int start = 0;
         int end = arrayWords.size() - 1;
-        while(start <= end) {
-            int mid = start + (end - start)/2;
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
             Word word = arrayWords.get(mid);
             String wordString = word.getWord();
             int compare = wordString.compareTo(foundWord);
-            if(compare == 0) {
+            if (compare == 0) {
                 return word;
             }
-            if(compare > 0) {
+            if (compare > 0) {
                 end = mid - 1;
             }
-            if(compare < 0) {
+            if (compare < 0) {
                 start = mid + 1;
             }
         }
@@ -366,12 +367,32 @@ public class DictionaryManagement {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT word FROM avFavorite GROUP BY word;");
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next() == true) {
+            while (resultSet.next()) {
                 wordArrays.add(resultSet.getString(1));
             }
+            resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return wordArrays;
+    }
+
+    public void removeFavouriteWordFromDatabase(String word) {
+        String sql = "DELETE FROM avFavorite WHERE word = ?";
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, word);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        reloadFavouriteTree();
+    }
+
+    private void reloadFavouriteTree(){
+        favorite = new TreeMap<>();
+        insertFromFavoriteDatabase();
     }
 }

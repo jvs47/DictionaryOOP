@@ -1,5 +1,6 @@
 package app.controllers.panes;
 
+import app.dictionary.Word;
 import app.helper.AudioFreeTSSAPI;
 import app.helper.AudioGoogleAPI;
 import javafx.fxml.FXML;
@@ -22,6 +23,8 @@ public class DefinitionPaneController {
 
     @FXML
     private Label trueBookmarkLabel;
+    @FXML
+    private Label falseBookmarkLable;
 
     @FXML
     private Button ukPronounceButton;
@@ -34,7 +37,7 @@ public class DefinitionPaneController {
 
     @FXML
     void handleOnlineSearchButton(MouseEvent event) {
-        if(event.getSource() == onlineSearchButton){
+        if (event.getSource() == onlineSearchButton) {
             this.state.showOnlineEVPane();
             this.state.getOnlineGoogleSearchEVController().setInputOnlineEVTextArea(word);
         }
@@ -56,7 +59,34 @@ public class DefinitionPaneController {
 
     @FXML
     void handleClickBookMark(MouseEvent event) {
+        Word foundWord = this.state.getDictionaryManagement().binarySearchFavorite(word);
+        if (foundWord != null) {
+            this.removeBookmark();
+            System.out.println("Remove Fav word!");
+        } else {
+            this.addBookmark();
+            System.out.println("Save Fav word!");
+        }
+        this.loadBookmark();
+        this.state.reloadBookmark();
+    }
 
+    public void addBookmark() {
+        this.state.getDictionaryManagement().saveToFavoriteDatabase(word);
+    }
+
+    public void removeBookmark() {
+        this.state.getDictionaryManagement().removeFavouriteWordFromDatabase(word);
+        this.state.resetBookmark();
+    }
+
+    public void loadBookmark() {
+        Word foundWord = this.state.getDictionaryManagement().binarySearchFavorite(word);
+        trueBookmarkLabel.setVisible(foundWord != null);
+    }
+
+    public void reload() {
+        this.loadBookmark();
     }
 
     public void initData(ContainerController state, String word, String meaning) {
@@ -65,5 +95,6 @@ public class DefinitionPaneController {
         meaningWebEngine = meaningWebView.getEngine();
         meaningWebEngine.loadContent(meaning);
         meaningWebEngine.setUserStyleSheetLocation(getClass().getResource("webview.css").toString());
+        //this.loadBookmark();
     }
 }

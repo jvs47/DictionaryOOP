@@ -91,6 +91,12 @@ public class ViewController implements Initializable {
 
     }
 
+    public void reset() {
+        input_search.setText("");
+        search_list_view.getItems().clear();
+        definitionPaneController.initData(this.state, "", "");
+    }
+
     protected void loadDefinitionPane(String word, String explain) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("definitionPane.fxml"));
         VBox definitionVBox;

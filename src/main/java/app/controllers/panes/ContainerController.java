@@ -45,37 +45,6 @@ public class ContainerController implements Initializable {
     private HistoryPaneController historyPaneController;
     private EditPaneController editPaneController;
     private HomePaneController homePaneController;
-    private HistoryAct historyAct;
-    private DictionaryAct dictionaryAct;
-    private FavoriteAct favoriteAct;
-
-    public void setAnchorEditPane(AnchorPane anchorEditPane) {
-        this.anchorEditPane = anchorEditPane;
-    }
-
-    public HistoryAct getHistoryAct() {
-        return historyAct;
-    }
-
-    public void setHistoryAct(HistoryAct historyAct) {
-        this.historyAct = historyAct;
-    }
-
-    public DictionaryAct getDictionaryAct() {
-        return dictionaryAct;
-    }
-
-    public void setDictionaryAct(DictionaryAct dictionaryAct) {
-        this.dictionaryAct = dictionaryAct;
-    }
-
-    public FavoriteAct getFavoriteAct() {
-        return favoriteAct;
-    }
-
-    public void setFavoriteAct(FavoriteAct favoriteAct) {
-        this.favoriteAct = favoriteAct;
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -167,6 +136,14 @@ public class ContainerController implements Initializable {
         nav_favouriteButton.setStyle(null);
         nav_historyButton.setStyle(null);
         nav_onlineButton.setStyle(null);
+    }
+
+    public void reloadBookmark() {
+        favouritePaneController.reload();
+    }
+
+    public void resetBookmark() {
+        favouritePaneController.reset();
     }
 
     public void showSearchPane() {

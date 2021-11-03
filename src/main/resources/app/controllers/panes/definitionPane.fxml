@@ -30,6 +30,11 @@
                                 <Insets top="3.0" />
                             </padding>
                         </Label>
+                        <Label layoutX="70.0" layoutY="3.0" onMouseClicked="#handleClickBookMark">
+                            <graphic>
+                                <FontAwesomeIconView fill="#ffc107" glyphName="STAR_ALT" size="22" />
+                            </graphic>
+                        </Label>
                         <Label fx:id="trueBookmarkLabel" alignment="CENTER" layoutX="67.0" onMouseClicked="#handleClickBookMark" styleClass="bookmark_btn" stylesheets="@../../../css/definition.css">
                             <graphic>
                                 <FontAwesomeIconView fill="#ffc107" glyphName="STAR" size="22" />
@@ -40,11 +45,6 @@
                             <padding>
                                 <Insets left="3.0" top="3.0" />
                             </padding>
-                        </Label>
-                        <Label layoutX="70.0" layoutY="3.0">
-                            <graphic>
-                                <FontAwesomeIconView fill="#ffc107" glyphName="STAR_ALT" size="22" />
-                            </graphic>
                         </Label>
                         <Label layoutX="43.0" layoutY="2.0">
                             <graphic>
