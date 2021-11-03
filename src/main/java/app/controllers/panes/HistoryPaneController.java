@@ -22,7 +22,7 @@ public class HistoryPaneController extends ViewController {
     public void searchAct(String foundWord) {
         ArrayList<String> wordArrays = this.state.getHistoryAct().foundWordFromHistoryDatabase(foundWord);
         search_list_view.getItems().setAll(wordArrays);
-        Word word = this.state.getHistoryAct().binarySearchHistory(foundWord);
+        Word word = this.state.getHistoryAct().searchUseQueryHistory(foundWord);
         if(word != null) {
             definitionPaneController.initData(this.state, word.getWord(), word.getWordExplain());
         }

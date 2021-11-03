@@ -63,10 +63,9 @@ public class ViewController implements Initializable {
     }
 
     public void searchAct(String foundWord) {
-        //ArrayList<String> arrayWords = this.state.getDictionaryManagement().getStringFoundWord(foundWord);
         ArrayList<String> arrayWords = this.state.getDictionaryAct().getStringFoundWord(foundWord);
         search_list_view.getItems().setAll(arrayWords);
-        Word word = this.state.getDictionaryAct().binarySearch(foundWord);
+        Word word = this.state.getDictionaryAct().searchUseQuery(foundWord);
         if (word != null) {
             definitionPaneController.initData(this.state, word.getWord(), word.getWordExplain());
         }

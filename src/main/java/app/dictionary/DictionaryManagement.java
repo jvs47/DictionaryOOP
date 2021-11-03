@@ -144,4 +144,19 @@ public class DictionaryManagement {
         }
         return null;
     }
+
+    public Word searchUseQuery(String foundWord) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, html FROM av WHERE word = ? GROUP BY word ");
+            preparedStatement.setString(1, foundWord);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next() == true) {
+                Word word = new Word(resultSet.getString(1), resultSet.getString(2));
+                return word;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

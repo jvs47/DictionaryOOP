@@ -21,7 +21,7 @@ public class FavouritePaneController extends ViewController {
     public void searchAct(String foundWord) {
         //ArrayList<String> wordArrays = this.state.getDictionaryManagement().listWordFromFavoriteDatabase(foundWord);
         search_list_view.getItems().setAll(arrayWords);
-        Word word = this.state.getFavoriteAct().binarySearchFavorite(foundWord);
+        Word word = this.state.getFavoriteAct().searchUseQueryFavorite(foundWord);
         if(word != null) {
             definitionPaneController.initData(this.state, word.getWord(), word.getWordExplain());
         }
