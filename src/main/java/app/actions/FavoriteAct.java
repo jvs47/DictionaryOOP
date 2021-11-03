@@ -11,10 +11,10 @@ import java.util.TreeMap;
 
 public class FavoriteAct extends DictionaryAct {
     private TreeMap<String, String> favorite = new TreeMap<>();
-//Favorite
 
     public FavoriteAct() {
         insertFromFavoriteDatabase();
+        System.out.println("Done insert from favorite database!");
     }
 
     public void insertFromFavoriteDatabase() {

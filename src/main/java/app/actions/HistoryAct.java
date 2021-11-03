@@ -42,16 +42,7 @@ public class HistoryAct extends DictionaryAct {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, html FROM avHistory WHERE word = ?");
-            preparedStatement.setString(1, foundWord);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                history.put(resultSet.getString(1), resultSet.getString(2));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        reloadHistoryTree();
     }
 
     public ArrayList<String> getHistoryString() {
@@ -108,6 +99,11 @@ public class HistoryAct extends DictionaryAct {
             }
         }
         return null;
+    }
+
+    public void reloadHistoryTree() {
+        history = new TreeMap<>();
+        insertFromHistoryDatabase();
     }
 
 }
