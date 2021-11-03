@@ -12,5 +12,6 @@ public class SearchPaneController extends ViewController {
 
     @FXML
     public void handleSearchButtonEvent(ActionEvent actionEvent) {
+        System.out.println("Click Search!");
     }
 }

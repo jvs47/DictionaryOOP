@@ -90,6 +90,20 @@ public class FavoriteAct extends DictionaryAct {
         return null;
     }
 
+    public Word searchUseQueryFavorite(String foundWord) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, html FROM avFavorite WHERE word = ? GROUP BY word ");
+            preparedStatement.setString(1, foundWord);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next() == true) {
+                Word word = new Word(resultSet.getString(1), resultSet.getString(2));
+                return word;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public ArrayList<String> getFavoriteString() {
         ArrayList<String> wordArrays = new ArrayList<>();
