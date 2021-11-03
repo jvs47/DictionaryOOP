@@ -22,15 +22,15 @@ public class ViewController implements Initializable {
     private ContainerController state;
 
     @FXML
-    private TextField input_search;
+    protected TextField input_search;
 
     @FXML
-    private ListView<String> search_list_view;
+    protected ListView<String> search_list_view;
 
     @FXML
-    private AnchorPane definitionPane;
-    private DefinitionPaneController definitionPaneController;
-    private ArrayList<String> arrayWords;
+    protected AnchorPane definitionPane;
+    protected DefinitionPaneController definitionPaneController;
+    protected ArrayList<String> arrayWords;
 
     @FXML
     public void handleChangeInputSearch(KeyEvent event) {
@@ -59,11 +59,12 @@ public class ViewController implements Initializable {
         }
         input_search.setText(word);
         searchAct(word);
+        this.state.getDictionaryManagement().saveWordToHistoryDatabase(word);
     }
 
     public void searchAct(String foundWord) {
         //ArrayList<String> arrayWords = this.state.getDictionaryManagement().getStringFoundWord(foundWord);
-        ArrayList<String> arrayWords = this.state.getDictionaryManagement().getStringFoundWordsFromDatabase(foundWord);
+        ArrayList<String> arrayWords = this.state.getDictionaryManagement().getStringFoundWord(foundWord);
         search_list_view.getItems().setAll(arrayWords);
         Word word = this.state.getDictionaryManagement().binarySearch(foundWord);
         if (word != null) {
