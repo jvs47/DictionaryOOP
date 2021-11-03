@@ -20,9 +20,9 @@ public class HistoryPaneController extends ViewController {
 
     @Override
     public void searchAct(String foundWord) {
-        ArrayList<String> wordArrays = this.state.getDictionaryManagement().foundWordFromHistoryDatabase(foundWord);
+        ArrayList<String> wordArrays = this.state.getHistoryAct().foundWordFromHistoryDatabase(foundWord);
         search_list_view.getItems().setAll(wordArrays);
-        Word word = this.state.getDictionaryManagement().binarySearchHistory(foundWord);
+        Word word = this.state.getHistoryAct().binarySearchHistory(foundWord);
         if(word != null) {
             definitionPaneController.initData(this.state, word.getWord(), word.getWordExplain());
         }
@@ -42,7 +42,7 @@ public class HistoryPaneController extends ViewController {
         if(definitionPaneController == null){
             loadDefinitionPane("","");
         }
-        arrayWords = this.state.getDictionaryManagement().getHistoryString();
+        arrayWords = this.state.getHistoryAct().getHistoryString();
         this.reload();
     }
 
@@ -55,7 +55,7 @@ public class HistoryPaneController extends ViewController {
         if(!searchText.isEmpty()) {
             searchAct(searchText);
         } else {
-            arrayWords = this.state.getDictionaryManagement().getHistoryString();
+            arrayWords = this.state.getHistoryAct().getHistoryString();
             search_list_view.getItems().setAll(arrayWords);
         }
     }

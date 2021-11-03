@@ -19,9 +19,9 @@ public class FavouritePaneController extends ViewController {
 
     @Override
     public void searchAct(String foundWord) {
-        ArrayList<String> wordArrays = this.state.getDictionaryManagement().listWordFromFavoriteDatabase(foundWord);
-        search_list_view.getItems().setAll(wordArrays);
-        Word word = this.state.getDictionaryManagement().binarySearchFavorite(foundWord);
+        //ArrayList<String> wordArrays = this.state.getDictionaryManagement().listWordFromFavoriteDatabase(foundWord);
+        search_list_view.getItems().setAll(arrayWords);
+        Word word = this.state.getFavoriteAct().binarySearchFavorite(foundWord);
         if(word != null) {
             definitionPaneController.initData(this.state, word.getWord(), word.getWordExplain());
         }
@@ -41,7 +41,7 @@ public class FavouritePaneController extends ViewController {
         if(definitionPaneController == null){
             loadDefinitionPane("","");
         }
-        arrayWords = this.state.getDictionaryManagement().getFavoriteString();
+        arrayWords = this.state.getFavoriteAct().getFavoriteString();
         this.reload();
     }
 
@@ -54,7 +54,7 @@ public class FavouritePaneController extends ViewController {
         if(!searchText.isEmpty()) {
             searchAct(searchText);
         } else {
-            arrayWords = this.state.getDictionaryManagement().getFavoriteString();
+            arrayWords = this.state.getFavoriteAct().getFavoriteString();
             search_list_view.getItems().setAll(arrayWords);
         }
     }

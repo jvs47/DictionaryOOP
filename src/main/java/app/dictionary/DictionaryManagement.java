@@ -1,21 +1,16 @@
 package app.dictionary;
 
+import app.helper.IODatabase;
+
 import java.sql.*;
 import java.util.*;
 
 public class DictionaryManagement {
-    private Dictionary dictionary;
-    protected Connection connection = null;
+    protected Dictionary dictionary = new Dictionary();
     private Scanner scan = new Scanner(System.in);
-    private TreeMap<String, String> history = new TreeMap<>();
-    private TreeMap<String, String> favorite = new TreeMap<>();
-
+    protected Connection connection = IODatabase.connection;
     public DictionaryManagement() {
-        dictionary = new Dictionary();
-        connectDatabase();
         insertFromDatabase();
-        insertFromHistoryDatabase();
-        insertFromFavoriteDatabase();
     }
 
     public Dictionary getDictionary() {
@@ -24,25 +19,6 @@ public class DictionaryManagement {
 
     public TreeMap<String, String> getTreeWord() {
         return dictionary.getDictionary();
-    }
-
-    public void connectDatabase() {
-        //Install jdbc
-        try {
-            Class.forName("org.sqlite.JDBC");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        //Connect database
-        try {
-            connection = DriverManager.getConnection("jdbc:sqlite:dictionary_database.db");
-            if (connection != null) {
-                System.err.println("connected");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     public void insertFromDatabase() {
@@ -147,15 +123,6 @@ public class DictionaryManagement {
         return searchedWord;
     }
 
-    public ArrayList<String> getStringFoundWord(String foundWord) {
-        ArrayList<String> results = new ArrayList<>();
-        TreeMap<String, String> found = findWord(foundWord);
-        for (Map.Entry<String, String> entry : found.entrySet()) {
-            results.add(entry.getKey());
-        }
-        return results;
-    }
-
     public Word binarySearch(String foundWord) {
         ArrayList<Word> arrayWords = dictionary.toArrayWord();
         int start = 0;
@@ -176,223 +143,5 @@ public class DictionaryManagement {
             }
         }
         return null;
-    }
-
-    // History
-
-    public void insertFromHistoryDatabase() {
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, html FROM avHistory");
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                history.put(resultSet.getString(1), resultSet.getString(2));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        System.out.println("Done insert history from database!");
-    }
-
-    public void saveWordToHistoryDatabase(String foundWord) {
-        for (Map.Entry<String, String> entry : history.entrySet()) {
-            if (entry.getKey().equals(foundWord)) {
-                System.out.println(foundWord + " is exist in History List!");
-                return;
-            }
-        }
-        String sql = "INSERT INTO avHistory(word, html, description, pronounce) SELECT word, html, description, pronounce FROM av WHERE word = ?";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, foundWord);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, html FROM avHistory WHERE word = ?");
-            preparedStatement.setString(1, foundWord);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                history.put(resultSet.getString(1), resultSet.getString(2));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public ArrayList<String> getHistoryString() {
-        ArrayList<String> wordArrays = new ArrayList<>();
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT word FROM avHistory GROUP BY word;");
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                wordArrays.add(resultSet.getString(1));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return wordArrays;
-    }
-
-    public ArrayList<String> foundWordFromHistoryDatabase(String foundWord) {
-        PreparedStatement preparedStatement;
-        ArrayList<String> words = new ArrayList<>();
-        try {
-            preparedStatement = connection.prepareStatement("SELECT word, html FROM avHistory WHERE word LIKE '" + foundWord + "%' GROUP BY word;");
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Word newWord = new Word(resultSet.getString(1), resultSet.getString(2));
-                words.add(newWord.getWord());
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return words;
-    }
-
-    public Word binarySearchHistory(String foundWord) {
-        ArrayList<Word> arrayWords = new ArrayList<>();
-        for (Map.Entry<String, String> entry : history.entrySet()) {
-            Word insertWord = new Word(entry.getKey(), entry.getValue());
-            arrayWords.add(insertWord);
-        }
-        int start = 0;
-        int end = arrayWords.size() - 1;
-        while (start <= end) {
-            int mid = start + (end - start) / 2;
-            Word word = arrayWords.get(mid);
-            String wordString = word.getWord();
-            int compare = wordString.compareTo(foundWord);
-            if (compare == 0) {
-                return word;
-            }
-            if (compare > 0) {
-                end = mid - 1;
-            }
-            if (compare < 0) {
-                start = mid + 1;
-            }
-        }
-        return null;
-    }
-
-    //Favorite
-
-    public void insertFromFavoriteDatabase() {
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, html FROM avFavorite");
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                favorite.put(resultSet.getString(1), resultSet.getString(2));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void saveToFavoriteDatabase(String foundWord) {
-        for (Map.Entry<String, String> entry : favorite.entrySet()) {
-            if (entry.getKey().equals(foundWord)) {
-                System.out.println(foundWord + " is exist on Favorite List!");
-                return;
-            }
-        }
-        String sql = "INSERT INTO avFavorite(word, html, description, pronounce) SELECT word, html, description, pronounce FROM av WHERE word=?";
-        PreparedStatement preparedStatement;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, foundWord);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
-            preparedStatement = connection.prepareStatement("SELECT word, html FROM avHistory WHERE word = ?");
-            preparedStatement.setString(1, foundWord);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                history.put(resultSet.getString(1), resultSet.getString(2));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        reloadFavouriteTree();
-    }
-
-    public ArrayList<String> listWordFromFavoriteDatabase(String foundWord) {
-        PreparedStatement preparedStatement;
-        ArrayList<String> words = new ArrayList<>();
-        try {
-            preparedStatement = connection.prepareStatement("SELECT word, html FROM avFavorite WHERE word LIKE '" + foundWord + "%' GROUP BY word;");
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Word newWord = new Word(resultSet.getString(1), resultSet.getString(2));
-                words.add(newWord.getWord());
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return words;
-    }
-
-    public Word binarySearchFavorite(String foundWord) {
-        ArrayList<Word> arrayWords = new ArrayList<>();
-        for (Map.Entry<String, String> entry : favorite.entrySet()) {
-            Word insertWord = new Word(entry.getKey(), entry.getValue());
-            arrayWords.add(insertWord);
-        }
-        int start = 0;
-        int end = arrayWords.size() - 1;
-        while (start <= end) {
-            int mid = start + (end - start) / 2;
-            Word word = arrayWords.get(mid);
-            String wordString = word.getWord();
-            int compare = wordString.compareTo(foundWord);
-            if (compare == 0) {
-                return word;
-            }
-            if (compare > 0) {
-                end = mid - 1;
-            }
-            if (compare < 0) {
-                start = mid + 1;
-            }
-        }
-        return null;
-    }
-
-
-    public ArrayList<String> getFavoriteString() {
-        ArrayList<String> wordArrays = new ArrayList<>();
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT word FROM avFavorite GROUP BY word;");
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                wordArrays.add(resultSet.getString(1));
-            }
-            resultSet.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return wordArrays;
-    }
-
-    public void removeFavouriteWordFromDatabase(String word) {
-        String sql = "DELETE FROM avFavorite WHERE word = ?";
-        PreparedStatement preparedStatement = null;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, word);
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        reloadFavouriteTree();
-    }
-
-    private void reloadFavouriteTree(){
-        favorite = new TreeMap<>();
-        insertFromFavoriteDatabase();
     }
 }

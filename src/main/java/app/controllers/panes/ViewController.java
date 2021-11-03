@@ -59,14 +59,14 @@ public class ViewController implements Initializable {
         }
         input_search.setText(word);
         searchAct(word);
-        this.state.getDictionaryManagement().saveWordToHistoryDatabase(word);
+        this.state.getHistoryAct().saveWordToHistoryDatabase(word);
     }
 
     public void searchAct(String foundWord) {
         //ArrayList<String> arrayWords = this.state.getDictionaryManagement().getStringFoundWord(foundWord);
-        ArrayList<String> arrayWords = this.state.getDictionaryManagement().getStringFoundWord(foundWord);
+        ArrayList<String> arrayWords = this.state.getDictionaryAct().getStringFoundWord(foundWord);
         search_list_view.getItems().setAll(arrayWords);
-        Word word = this.state.getDictionaryManagement().binarySearch(foundWord);
+        Word word = this.state.getDictionaryAct().binarySearch(foundWord);
         if (word != null) {
             definitionPaneController.initData(this.state, word.getWord(), word.getWordExplain());
         }
@@ -116,7 +116,7 @@ public class ViewController implements Initializable {
         if (definitionPaneController == null) {
             loadDefinitionPane("", "");
         }
-        arrayWords = this.state.getDictionaryManagement().getDictionary().toArrayWords();
+        arrayWords = this.state.getDictionaryAct().getDictionary().toArrayWords();
         this.reload();
     }
 }

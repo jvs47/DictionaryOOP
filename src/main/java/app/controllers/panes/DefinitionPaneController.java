@@ -59,7 +59,7 @@ public class DefinitionPaneController {
 
     @FXML
     void handleClickBookMark(MouseEvent event) {
-        Word foundWord = this.state.getDictionaryManagement().binarySearchFavorite(word);
+        Word foundWord = this.state.getFavoriteAct().binarySearchFavorite(word);
         if (foundWord != null) {
             this.removeBookmark();
             System.out.println("Remove Fav word!");
@@ -72,16 +72,16 @@ public class DefinitionPaneController {
     }
 
     public void addBookmark() {
-        this.state.getDictionaryManagement().saveToFavoriteDatabase(word);
+        this.state.getFavoriteAct().saveToFavoriteDatabase(word);
     }
 
     public void removeBookmark() {
-        this.state.getDictionaryManagement().removeFavouriteWordFromDatabase(word);
+        this.state.getFavoriteAct().removeFavouriteWordFromDatabase(word);
         this.state.resetBookmark();
     }
 
     public void loadBookmark() {
-        Word foundWord = this.state.getDictionaryManagement().binarySearchFavorite(word);
+        Word foundWord = this.state.getFavoriteAct().binarySearchFavorite(word);
         trueBookmarkLabel.setVisible(foundWord != null);
     }
 

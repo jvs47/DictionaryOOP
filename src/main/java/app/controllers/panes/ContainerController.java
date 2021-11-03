@@ -1,6 +1,9 @@
 package app.controllers.panes;
 
-import app.dictionary.*;
+import app.actions.DictionaryAct;
+import app.actions.FavoriteAct;
+import app.actions.HistoryAct;
+import app.helper.IODatabase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +17,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ContainerController implements Initializable {
-    private final DictionaryManagement dictionaryManagement = new DictionaryManagement();
+    private IODatabase IODatabase = new IODatabase();
+    private DictionaryAct dictionaryAct = new DictionaryAct();
+    private FavoriteAct favoriteAct = new FavoriteAct();
+    private HistoryAct historyAct = new HistoryAct();
     @FXML
     private Button nav_editButton;
     @FXML
@@ -202,11 +208,19 @@ public class ContainerController implements Initializable {
         nav_onlineButton.setStyle("-fx-background-color: #191970; -fx-border-style: hidden hidden solid hidden;-fx-border-width: 2px;-fx-border-color: #FEC400; -fx-border-radius: 5px 5px 0px 0px; -fx-background-radius: 5px 5px 0px 0px;");
     }
 
-    public DictionaryManagement getDictionaryManagement() {
-        return dictionaryManagement;
-    }
-
     public OnlineGoogleSearchController getOnlineGoogleSearchEVController() {
         return onlineGoogleSearchEVController;
+    }
+
+    public DictionaryAct getDictionaryAct() {
+        return dictionaryAct;
+    }
+
+    public FavoriteAct getFavoriteAct() {
+        return favoriteAct;
+    }
+
+    public HistoryAct getHistoryAct() {
+        return historyAct;
     }
 }
