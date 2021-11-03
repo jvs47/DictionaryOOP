@@ -9,11 +9,11 @@ public class DictionaryAct extends DictionaryManagement {
 
     }
 
-    public void showSearch(String foundWord) {
-        TreeMap<String, String> wordArrays = this.findWord(foundWord);
-        for (Map.Entry<String, String> entry : wordArrays.entrySet()) {
-            System.out.println(entry.getKey());
-        }
-        return;
-    }
+//    public void showSearch(String foundWord) {
+//        TreeMap<String, String> wordArrays = this.findWord(foundWord);
+//        for (Map.Entry<String, String> entry : wordArrays.entrySet()) {
+//            System.out.println(entry.getKey());
+//        }
+//        return;
+//    }
 }
