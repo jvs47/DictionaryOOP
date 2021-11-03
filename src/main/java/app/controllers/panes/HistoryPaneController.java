@@ -7,8 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class HistoryPaneController extends ViewController {
     public Button searchButton;
@@ -24,7 +22,7 @@ public class HistoryPaneController extends ViewController {
     public void searchAct(String foundWord) {
         ArrayList<String> wordArrays = this.state.getDictionaryManagement().foundWordFromHistoryDatabase(foundWord);
         search_list_view.getItems().setAll(wordArrays);
-        Word word = this.state.getDictionaryManagement().binarySearchFavorite(foundWord);
+        Word word = this.state.getDictionaryManagement().binarySearchHistory(foundWord);
         if(word != null) {
             definitionPaneController.initData(this.state, word.getWord(), word.getWordExplain());
         }
