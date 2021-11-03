@@ -360,6 +360,7 @@ public class DictionaryManagement {
         return null;
     }
 
+
     public ArrayList<String> getFavoriteString() {
         ArrayList<String> wordArrays = new ArrayList<>();
         try {
