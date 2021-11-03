@@ -16,7 +16,6 @@ public class HistoryAct extends DictionaryAct {
 
     public void importFromDatabase() {
         TreeMap<String, String> history = new TreeMap<>();
-        connectDatabase();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, description FROM avHistory");
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -29,8 +28,7 @@ public class HistoryAct extends DictionaryAct {
         System.out.println("Done insert history from database!");
     }
 
-    public void addToHistoryDatabase(String foundWord) {
-        connectDatabase();
+    public void addToHistoryDatabase(String foundWord) {;
         String sql = "INSERT INTO avHistory(word, html, description, pronounce) SELECT word, html, description, pronounce FROM av WHERE word = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -42,7 +40,6 @@ public class HistoryAct extends DictionaryAct {
 
     public TreeMap<String, String> addToHistoryString(String foundWord) {
         TreeMap<String, String> history = new TreeMap<>();
-        connectDatabase();
         String sql = "SELECT word, description FROM av";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);

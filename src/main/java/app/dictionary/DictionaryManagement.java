@@ -56,7 +56,6 @@ public class DictionaryManagement {
     }
 
     public void insertFromCommandline() {
-        connectDatabase();
         Word newWord = new Word();
         System.out.print("Enter word: ");
         String insertWord = scan.nextLine();
@@ -80,7 +79,6 @@ public class DictionaryManagement {
     }
 
     public void deleteWord() {
-        connectDatabase();
         Word removedWord = new Word();
         System.out.print("Enter word: ");
         String deletedWord = scan.nextLine();
@@ -108,7 +106,6 @@ public class DictionaryManagement {
     }
 
     public void editWordMeaning() {
-        connectDatabase();
         System.out.print("Enter word: ");
         String editedWord = scan.nextLine();
         for (Map.Entry<String, String> entry : dictionary.getDictionary().entrySet()) {
