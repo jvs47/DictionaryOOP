@@ -13,6 +13,7 @@ public class Word {
 
     /**
      * Constructor with parameters
+     *
      * @param word
      * @param wordExplain
      */

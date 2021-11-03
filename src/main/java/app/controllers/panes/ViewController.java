@@ -19,24 +19,24 @@ import java.util.ResourceBundle;
 
 public class ViewController implements Initializable {
 
-    private ContainerController state;
+    protected ContainerController state;
 
     @FXML
-    private TextField input_search;
+    protected TextField input_search;
 
     @FXML
-    private ListView<String> search_list_view;
+    protected ListView<String> search_list_view;
 
     @FXML
-    private AnchorPane definitionPane;
-    private DefinitionPaneController definitionPaneController;
-    private ArrayList<String> arrayWords;
+    protected AnchorPane definitionPane;
+    protected DefinitionPaneController definitionPaneController;
+    protected ArrayList<String> arrayWords;
 
     @FXML
     public void handleChangeInputSearch(KeyEvent event) {
-        if(event.getSource() == input_search) {
+        if (event.getSource() == input_search) {
             String searchText = input_search.getText();
-            if(!searchText.isEmpty()) {
+            if (!searchText.isEmpty()) {
                 searchAct(searchText);
             } else {
                 search_list_view.getItems().setAll(arrayWords);
@@ -46,7 +46,7 @@ public class ViewController implements Initializable {
 
     @FXML
     public void handleEnterInputSearch(ActionEvent event) {
-        if(event.getSource() == input_search) {
+        if (event.getSource() == input_search) {
             System.out.println("Enter search");
         }
     }
@@ -54,19 +54,19 @@ public class ViewController implements Initializable {
     @FXML
     public void handleSelectItemListView(MouseEvent event) {
         String word = search_list_view.getSelectionModel().getSelectedItem();
-        if(word == null) {
+        if (word == null) {
             return;
         }
-        input_search.setText(word);
         searchAct(word);
+        this.state.getDictionaryManagement().saveWordToHistoryDatabase(word);
     }
 
     public void searchAct(String foundWord) {
         //ArrayList<String> arrayWords = this.state.getDictionaryManagement().getStringFoundWord(foundWord);
-        ArrayList<String> arrayWords = this.state.getDictionaryManagement().getStringFoundWordsFromDatabase(foundWord);
+        ArrayList<String> arrayWords = this.state.getDictionaryManagement().getStringFoundWord(foundWord);
         search_list_view.getItems().setAll(arrayWords);
         Word word = this.state.getDictionaryManagement().binarySearch(foundWord);
-        if(word != null) {
+        if (word != null) {
             definitionPaneController.initData(this.state, word.getWord(), word.getWordExplain());
         }
     }
@@ -75,21 +75,20 @@ public class ViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //loadDefinitionPane("Word", "Explain");
     }
-    public void reload(){
-        if(state == null) return;
+
+    public void reload() {
+        if (state == null) return;
         String searchText = input_search.getText();
 
-        if(!searchText.isEmpty()) {
+        if (!searchText.isEmpty()) {
             searchAct(searchText);
         } else {
             search_list_view.getItems().setAll(arrayWords);
         }
-
         //definitionPaneController.reload();
-
     }
 
-    protected void loadDefinitionPane(String word, String explain){
+    protected void loadDefinitionPane(String word, String explain) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("definitionPane.fxml"));
         VBox definitionVBox;
         try {
@@ -103,12 +102,12 @@ public class ViewController implements Initializable {
         definitionPaneController.initData(this.state, word, explain);
     }
 
-    public void initData(ContainerController state){
+    public void initData(ContainerController state) {
         this.state = state;
-        if(definitionPaneController == null){
-            loadDefinitionPane("","");
+        if (definitionPaneController == null) {
+            loadDefinitionPane("", "");
         }
-        arrayWords = this.state.getDictionaryManagement().getDictionary().toArrayWords();
+        arrayWords = this.state.getDictionaryManagement().getDictionary().toArrayString();
         this.reload();
     }
 }

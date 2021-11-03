@@ -4,17 +4,27 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class GoogleTransAPI {
+    private static final String googleTranslatorURL = "http://translate.google.com/translate_a/t?";
     public static String content;
     public static String urlTest;
-    private static final String googleTranslatorURL = "http://translate.google.com/translate_a/t?";
     private static LANGUAGE srcLang;
     private static LANGUAGE destLang;
     private static String userAgent = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16";
+
+    public GoogleTransAPI(String content, String urlTest, LANGUAGE srcLang, LANGUAGE destLang, String userAgent) {
+        GoogleTransAPI.content = content;
+        GoogleTransAPI.urlTest = urlTest;
+        GoogleTransAPI.srcLang = srcLang;
+        GoogleTransAPI.destLang = destLang;
+        GoogleTransAPI.userAgent = userAgent;
+    }
 
     public static String translate(String query, LANGUAGE srcLang, LANGUAGE destLang) throws IOException, org.json.simple.parser.ParseException {
         URL url = new URL(buildURLRequestWith(query, srcLang, destLang));
@@ -31,7 +41,7 @@ public class GoogleTransAPI {
         conn.connect();
 
         InputStream inputStream = conn.getInputStream();
-        BufferedReader bis = new BufferedReader(new InputStreamReader(inputStream, "UTF8"));
+        BufferedReader bis = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
         content = bis.readLine();
 
         inputStream.close();
@@ -62,19 +72,11 @@ public class GoogleTransAPI {
         urlBuilder.append("&v=2.0");
         String queryEncoded = "";
         try {
-            queryEncoded = URLEncoder.encode(query, "UTF-8");
+            queryEncoded = URLEncoder.encode(query, StandardCharsets.UTF_8);
         } catch (Exception e) {
         }
         urlBuilder.append("&q=").append(queryEncoded);
         return urlBuilder.toString();
-    }
-
-    public GoogleTransAPI(String content, String urlTest, LANGUAGE srcLang, LANGUAGE destLang, String userAgent) {
-        this.content = content;
-        this.urlTest = urlTest;
-        this.srcLang = srcLang;
-        this.destLang = destLang;
-        this.userAgent = userAgent;
     }
 
     public LANGUAGE getSrcLang() {
@@ -82,7 +84,7 @@ public class GoogleTransAPI {
     }
 
     public void setSrcLang(LANGUAGE srcLang) {
-        this.srcLang = srcLang;
+        GoogleTransAPI.srcLang = srcLang;
     }
 
     public LANGUAGE getDestLang() {
@@ -90,7 +92,7 @@ public class GoogleTransAPI {
     }
 
     public void setDestLang(LANGUAGE destLang) {
-        this.destLang = destLang;
+        GoogleTransAPI.destLang = destLang;
     }
 
     public String getUserAgent() {
@@ -98,7 +100,7 @@ public class GoogleTransAPI {
     }
 
     public void setUserAgent(String userAgent) {
-        this.userAgent = userAgent;
+        GoogleTransAPI.userAgent = userAgent;
     }
 
     public enum LANGUAGE {
@@ -106,7 +108,7 @@ public class GoogleTransAPI {
 
         private String lang = "";
 
-        private LANGUAGE(String lang) {
+        LANGUAGE(String lang) {
             this.lang = lang;
         }
 

@@ -18,6 +18,6 @@
     -fx-border-radius: 5px 5px 5px 5px;
 }
 
-.title_pane{
+.title_pane {
     -fx-background-color: linear-gradient(to left, #000080 25%, #1d2a57 100%);
 }

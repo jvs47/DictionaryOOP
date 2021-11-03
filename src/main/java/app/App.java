@@ -9,6 +9,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class App extends Application {
+    public static void main(String[] args) {
+        launch();
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         System.setProperty("prism.lcdtext", "false"); // smooth font
@@ -19,9 +23,5 @@ public class App extends Application {
         stage.setTitle("UET Dict Box");
         stage.setScene(scene);
         stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch();
     }
 }

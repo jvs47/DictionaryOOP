@@ -9,7 +9,7 @@ import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 
 
-public class HistoryPaneController extends ViewController{
+public class HistoryPaneController extends ViewController {
     public Button searchButton;
 
     @FXML

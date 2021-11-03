@@ -17,7 +17,7 @@
 .output_box {
     -fx-border-color: #e5e9ec;
     -fx-border-width: 1px;
-    -fx-background-color: none;
+    -fx-background-color: #F5F5F5;
     -fx-background-radius: 6 6 6 6;
     -fx-border-radius: 6 6 6 6;
 }
