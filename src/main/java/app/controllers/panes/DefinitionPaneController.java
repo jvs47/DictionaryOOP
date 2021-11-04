@@ -36,6 +36,18 @@ public class DefinitionPaneController {
     private Label onlineSearchButton;
 
     @FXML
+    private Label deleteWordButton;
+
+    @FXML
+    void handleDeleteWordClick(MouseEvent event) {
+        if (event.getSource() == deleteWordButton){
+            this.state.getDictionaryAct().deleteWordFromGUI(word);
+            System.out.println("Word deleted!");
+            this.reset();
+        }
+    }
+
+    @FXML
     void handleOnlineSearchButton(MouseEvent event) {
         if (event.getSource() == onlineSearchButton) {
             this.state.showOnlineEVPane();
@@ -87,6 +99,10 @@ public class DefinitionPaneController {
 
     public void reload() {
         this.loadBookmark();
+    }
+
+    public void reset(){
+        this.initData(this.state, "", "");
     }
 
     public void initData(ContainerController state, String word, String meaning) {
