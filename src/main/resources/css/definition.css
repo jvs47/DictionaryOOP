@@ -15,6 +15,10 @@
     -fx-opacity: 75%;
 }
 
+.delete_word_btn:hover {
+    -fx-opacity: 75%;
+}
+
 . web-view .scroll-bar:horizontal .increment-arrow,
 . web-view .scroll-bar:horizontal .decrement-arrow,
 . web-view .scroll-bar:horizontal .increment-button,

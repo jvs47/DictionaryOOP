@@ -9,6 +9,7 @@ public class DictionaryManagement {
     protected Dictionary dictionary = new Dictionary();
     private Scanner scan = new Scanner(System.in);
     private final Connection connection = IODatabase.connection;
+
     public DictionaryManagement() {
         insertFromDatabase();
         System.out.println("Done insert from language database");
@@ -109,7 +110,7 @@ public class DictionaryManagement {
         TreeMap<String, String> searchedWord = new TreeMap<>();
         PreparedStatement preparedStatement;
         try {
-            preparedStatement = connection.prepareStatement("SELECT word, html FROM av WHERE word LIKE '" + foundWord + "%'");
+            preparedStatement = connection.prepareStatement("SELECT word, html FROM av WHERE word LIKE '" + foundWord + "%' group by word");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 searchedWord.put(resultSet.getString(1), resultSet.getString(2));
@@ -147,13 +148,24 @@ public class DictionaryManagement {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, html FROM av WHERE word = ? GROUP BY word ");
             preparedStatement.setString(1, foundWord);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next() == true) {
-                Word word = new Word(resultSet.getString(1), resultSet.getString(2));
-                return word;
+            while (resultSet.next()) {
+                return new Word(resultSet.getString(1), resultSet.getString(2));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void deleteWordFromGUI(String removedWord) {
+        String sql = "DELETE FROM av WHERE word = ?";
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, removedWord);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
