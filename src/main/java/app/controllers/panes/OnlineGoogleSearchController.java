@@ -76,7 +76,7 @@ public class OnlineGoogleSearchController {
     }
 
     @FXML
-    void handleOnlineEVInput(KeyEvent event) throws IOException, org.json.simple.parser.ParseException {
+    void handleOnlineEVInput(KeyEvent event) throws IOException {
         if (event.getSource() == inputOnlineEVTextArea) {
             String input = inputOnlineEVTextArea.getText();
             if (modeEV) {
@@ -87,7 +87,7 @@ public class OnlineGoogleSearchController {
     }
 
     @FXML
-    void handleOnlineVEInput(KeyEvent event) throws IOException, org.json.simple.parser.ParseException {
+    void handleOnlineVEInput(KeyEvent event) throws IOException {
         if (event.getSource() == inputOnlineVETextArea) {
             String input = inputOnlineVETextArea.getText();
             if (!modeEV) {

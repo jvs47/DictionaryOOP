@@ -30,7 +30,7 @@ public class AudioGoogleAPI {
         return audio;
     }
 
-    public static String generateNewToken() {
+    private static String generateNewToken() {
         byte[] randomBytes = new byte[24];
         secureRandom.nextBytes(randomBytes);
         return base64Encoder.encodeToString(randomBytes);
