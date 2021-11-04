@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 
 public class ViewController implements Initializable {
 
-    private ContainerController state;
+    protected ContainerController state;
 
     @FXML
     protected TextField input_search;
@@ -86,7 +86,7 @@ public class ViewController implements Initializable {
             search_list_view.getItems().setAll(arrayWords);
         }
 
-        //definitionPaneController.reload();
+        definitionPaneController.reload();
 
     }
 

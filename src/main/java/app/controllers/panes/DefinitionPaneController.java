@@ -68,7 +68,7 @@ public class DefinitionPaneController {
             System.out.println("Save Fav word!");
         }
         this.loadBookmark();
-        this.state.reloadBookmark();
+        this.state.reloadFavourite();
     }
 
     public void addBookmark() {
@@ -77,7 +77,7 @@ public class DefinitionPaneController {
 
     public void removeBookmark() {
         this.state.getFavoriteAct().removeFavouriteWordFromDatabase(word);
-        this.state.resetBookmark();
+        this.state.resetFavourite();
     }
 
     public void loadBookmark() {
@@ -95,6 +95,6 @@ public class DefinitionPaneController {
         meaningWebEngine = meaningWebView.getEngine();
         meaningWebEngine.loadContent(meaning);
         meaningWebEngine.setUserStyleSheetLocation(getClass().getResource("webview.css").toString());
-        //this.loadBookmark();
+        this.loadBookmark();
     }
 }
