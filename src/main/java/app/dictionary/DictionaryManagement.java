@@ -147,7 +147,9 @@ public class DictionaryManagement {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, html FROM av WHERE word = ? GROUP BY word ");
             preparedStatement.setString(1, foundWord);
             ResultSet resultSet = preparedStatement.executeQuery();
-            return new Word(resultSet.getString(1), resultSet.getString(2));
+            while(resultSet.next()) {
+                return new Word(resultSet.getString(1), resultSet.getString(2));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
