@@ -9,13 +9,6 @@ import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 
 public class HistoryPaneController extends ViewController {
-    public Button searchButton;
-
-    private ContainerController state;
-    @FXML
-    public void handleSearchButtonEvent(ActionEvent actionEvent) {
-        System.out.println("Click search!");
-    }
 
 
     @Override
@@ -37,16 +30,6 @@ public class HistoryPaneController extends ViewController {
     }
 
     @Override
-    public void initData(ContainerController state){
-        this.state = state;
-        if(definitionPaneController == null){
-            loadDefinitionPane("","");
-        }
-        arrayWords = this.state.getHistoryAct().getHistoryString();
-        this.reload();
-    }
-
-    @Override
     public void reload() {
         if(this.state == null) {
             return;
@@ -58,5 +41,6 @@ public class HistoryPaneController extends ViewController {
             arrayWords = this.state.getHistoryAct().getHistoryString();
             search_list_view.getItems().setAll(arrayWords);
         }
+        definitionPaneController.reload();
     }
 }
