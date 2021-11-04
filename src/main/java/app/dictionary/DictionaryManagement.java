@@ -8,17 +8,14 @@ import java.util.*;
 public class DictionaryManagement {
     protected Dictionary dictionary = new Dictionary();
     private Scanner scan = new Scanner(System.in);
-    protected Connection connection = IODatabase.connection;
+    private final Connection connection = IODatabase.connection;
     public DictionaryManagement() {
         insertFromDatabase();
+        System.out.println("Done insert from language database");
     }
 
     public Dictionary getDictionary() {
         return dictionary;
-    }
-
-    public TreeMap<String, String> getTreeWord() {
-        return dictionary.getDictionary();
     }
 
     public void insertFromDatabase() {

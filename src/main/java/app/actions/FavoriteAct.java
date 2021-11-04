@@ -1,7 +1,9 @@
 package app.actions;
 
 import app.dictionary.Word;
+import app.helper.IODatabase;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +11,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class FavoriteAct extends DictionaryAct {
+public class FavoriteAct {
+    private final Connection connection = IODatabase.connection;
     private TreeMap<String, String> favorite = new TreeMap<>();
 
     public FavoriteAct() {
@@ -95,10 +98,7 @@ public class FavoriteAct extends DictionaryAct {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, html FROM avFavorite WHERE word = ? GROUP BY word ");
             preparedStatement.setString(1, foundWord);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next() == true) {
-                Word word = new Word(resultSet.getString(1), resultSet.getString(2));
-                return word;
-            }
+            return new Word(resultSet.getString(1), resultSet.getString(2));
         } catch (SQLException e) {
             e.printStackTrace();
         }

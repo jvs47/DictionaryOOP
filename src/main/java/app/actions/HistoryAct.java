@@ -1,7 +1,9 @@
 package app.actions;
 
 import app.dictionary.Word;
+import app.helper.IODatabase;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,8 +11,9 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class HistoryAct extends DictionaryAct {
+public class HistoryAct {
     private TreeMap<String, String> history = new TreeMap<>();
+    private final Connection connection = IODatabase.connection;
     public HistoryAct(){
         insertFromHistoryDatabase();
         System.out.println("Done insert history from database!");
