@@ -12,7 +12,7 @@ public class DictionaryManagement {
 
     public DictionaryManagement() {
         insertFromDatabase();
-        System.out.println("Done insert from language database");
+        System.out.println("Done insert from language database!");
     }
 
     public Dictionary getDictionary() {
@@ -52,8 +52,8 @@ public class DictionaryManagement {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            System.out.println("Finished!");
         }
-        System.out.println("Finished!");
     }
 
     public void deleteWord() {
@@ -72,14 +72,23 @@ public class DictionaryManagement {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            System.out.println("Finished!");
         }
-        System.out.println("Finished!");
     }
 
     public void showAllWord() {
-        for (Map.Entry<String, String> entry : dictionary.getDictionary().entrySet()) {
-            String value = entry.getValue();
-            System.out.println("|" + entry + "\t" + "|" + value);
+        TreeMap<String, String> dic = new TreeMap<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, description FROM av GROUP BY word");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next() == true) {
+                dic.put(resultSet.getString(1), resultSet.getString(2));
+            }
+            for(Map.Entry<String, String> entry : dic.entrySet()) {
+                System.out.println("|" + entry.getKey() + "    " + "|" + entry.getValue());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -98,6 +107,7 @@ public class DictionaryManagement {
                     preparedStatement.setString(1, editedWordMeaning);
                     preparedStatement.setString(2, editedWord);
                     preparedStatement.executeUpdate();
+                    return;
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

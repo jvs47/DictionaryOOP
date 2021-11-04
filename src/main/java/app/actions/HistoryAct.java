@@ -30,6 +30,22 @@ public class HistoryAct {
         }
     }
 
+    public void showHistoryWord() {
+        TreeMap<String, String> his = new TreeMap<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, description FROM avHistory");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                his.put(resultSet.getString(1), resultSet.getString(2));
+            }
+            for(Map.Entry<String, String> entry : his.entrySet()) {
+                System.out.println("|" + entry.getKey() + "    " + "|" + entry.getValue());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void saveWordToHistoryDatabase(String foundWord) {
         for (Map.Entry<String, String> entry : history.entrySet()) {
             if (entry.getKey().equals(foundWord)) {
@@ -80,7 +96,17 @@ public class HistoryAct {
 
     public Word binarySearchHistory(String foundWord) {
         ArrayList<Word> arrayWords = new ArrayList<>();
-        for (Map.Entry<String, String> entry : history.entrySet()) {
+        TreeMap<String, String> his = new TreeMap<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, description FROM avHistory");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                his.put(resultSet.getString(1), resultSet.getString(2));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        for (Map.Entry<String, String> entry : his.entrySet()) {
             Word insertWord = new Word(entry.getKey(), entry.getValue());
             arrayWords.add(insertWord);
         }
@@ -102,6 +128,17 @@ public class HistoryAct {
             }
         }
         return null;
+    }
+
+    public void deleteAllHistory() {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM avHistory");
+            preparedStatement.executeUpdate();
+            System.out.println("History is empty!");
+            reloadHistoryTree();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public Word searchUseQueryHistory(String foundWord) {
