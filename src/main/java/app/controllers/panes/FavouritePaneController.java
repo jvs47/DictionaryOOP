@@ -9,18 +9,11 @@ import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 
 public class FavouritePaneController extends ViewController {
-    public Button searchButton;
-    private ContainerController state;
-    @FXML
-    public void handleSearchButtonEvent(ActionEvent actionEvent) {
-        System.out.println("Click search!");
-    }
-
 
     @Override
     public void searchAct(String foundWord) {
-        //ArrayList<String> wordArrays = this.state.getDictionaryManagement().listWordFromFavoriteDatabase(foundWord);
-        search_list_view.getItems().setAll(arrayWords);
+        ArrayList<String> wordArrays = this.state.getFavoriteAct().listWordFromFavoriteDatabase(foundWord);
+        search_list_view.getItems().setAll(wordArrays);
         Word word = this.state.getFavoriteAct().searchUseQueryFavorite(foundWord);
         if(word != null) {
             definitionPaneController.initData(this.state, word.getWord(), word.getWordExplain());
@@ -35,15 +28,6 @@ public class FavouritePaneController extends ViewController {
         searchAct(word);
     }
 
-    @Override
-    public void initData(ContainerController state){
-        this.state = state;
-        if(definitionPaneController == null){
-            loadDefinitionPane("","");
-        }
-        arrayWords = this.state.getFavoriteAct().getFavoriteString();
-        this.reload();
-    }
 
     @Override
     public void reload() {
@@ -57,5 +41,6 @@ public class FavouritePaneController extends ViewController {
             arrayWords = this.state.getFavoriteAct().getFavoriteString();
             search_list_view.getItems().setAll(arrayWords);
         }
+        definitionPaneController.reload();
     }
 }

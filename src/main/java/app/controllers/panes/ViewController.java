@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -19,8 +20,10 @@ import java.util.ResourceBundle;
 
 public class ViewController implements Initializable {
 
-    private ContainerController state;
+    protected ContainerController state;
 
+    @FXML
+    private Button searchButton;
     @FXML
     protected TextField input_search;
 
@@ -45,9 +48,38 @@ public class ViewController implements Initializable {
     }
 
     @FXML
+    void handleSearchButtonEvent(ActionEvent event) {
+        if (event.getSource() == searchButton) {
+            String searchText = input_search.getText();
+            if (!searchText.isEmpty()) {
+                searchAct(searchText);
+                if (arrayWords.isEmpty()) {
+                    this.state.showOnlineEVPane();
+                    this.state.getOnlineGoogleSearchEVController().setInputOnlineEVTextArea(searchText);
+                } else {
+                    this.state.getHistoryAct().saveWordToHistoryDatabase(searchText);
+                }
+            } else {
+                search_list_view.getItems().setAll(arrayWords);
+            }
+        }
+    }
+
+    @FXML
     public void handleEnterInputSearch(ActionEvent event) {
         if (event.getSource() == input_search) {
-            System.out.println("Enter search");
+            String searchText = input_search.getText();
+            if (!searchText.isEmpty()) {
+                searchAct(searchText);
+                if (arrayWords.isEmpty()) {
+                    this.state.showOnlineEVPane();
+                    this.state.getOnlineGoogleSearchEVController().setInputOnlineEVTextArea(searchText);
+                } else {
+                    this.state.getHistoryAct().saveWordToHistoryDatabase(searchText);
+                }
+            } else {
+                search_list_view.getItems().setAll(arrayWords);
+            }
         }
     }
 
@@ -63,7 +95,7 @@ public class ViewController implements Initializable {
     }
 
     public void searchAct(String foundWord) {
-        ArrayList<String> arrayWords = this.state.getDictionaryAct().getStringFoundWord(foundWord);
+        arrayWords = this.state.getDictionaryAct().getStringFoundWord(foundWord);
         search_list_view.getItems().setAll(arrayWords);
         Word word = this.state.getDictionaryAct().searchUseQuery(foundWord);
         if (word != null) {
@@ -86,7 +118,7 @@ public class ViewController implements Initializable {
             search_list_view.getItems().setAll(arrayWords);
         }
 
-        //definitionPaneController.reload();
+        definitionPaneController.reload();
 
     }
 

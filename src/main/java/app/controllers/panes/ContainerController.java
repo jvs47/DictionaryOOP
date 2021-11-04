@@ -17,10 +17,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ContainerController implements Initializable {
-    private IODatabase IODatabase = new IODatabase();
-    private DictionaryAct dictionaryAct = new DictionaryAct();
-    private FavoriteAct favoriteAct = new FavoriteAct();
-    private HistoryAct historyAct = new HistoryAct();
+    private final IODatabase IODatabase = new IODatabase();
+    private final DictionaryAct dictionaryAct = new DictionaryAct();
+    private final FavoriteAct favoriteAct = new FavoriteAct();
+    private final HistoryAct historyAct = new HistoryAct();
     @FXML
     private Button nav_editButton;
     @FXML
@@ -111,6 +111,7 @@ public class ContainerController implements Initializable {
             System.out.println("Load online_search_VE_pane failed");
         }
         this.showHomePane();
+        this.reloadFavourite();
     }
 
     private void setContentPane(AnchorPane anchorPane) {
@@ -144,11 +145,11 @@ public class ContainerController implements Initializable {
         nav_onlineButton.setStyle(null);
     }
 
-    public void reloadBookmark() {
+    public void reloadFavourite() {
         favouritePaneController.reload();
     }
 
-    public void resetBookmark() {
+    public void resetFavourite() {
         favouritePaneController.reset();
     }
 
