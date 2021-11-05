@@ -1,6 +1,5 @@
 package app.actions;
 
-import app.dictionary.DictionaryManagement;
 import app.helper.IODatabase;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +12,7 @@ class AddActTest {
     @Test
     void convertToHTML() {
         assertAll(
-                () -> assertEquals("<h1>abortifacient</h1><h3><i>/ə'bɔ:ti'feiʃənt/</i></h3><ul>phá thai, làm sẩy thai</ul>", addAct.convertToHTML("abortifacient", "ə'bɔ:ti'feiʃənt", "phá thai, làm sẩy thai"))
+                () -> assertEquals("<h1>abortifacient</h1><h3><i>/ə'bɔ:ti'feiʃənt/</i></h3><h2>phá thai, làm sẩy thai</h2>", addAct.convertToHTML("abortifacient", "ə'bɔ:ti'feiʃənt", "phá thai, làm sẩy thai"))
         );
     }
 
