@@ -49,6 +49,7 @@ public class FavoriteAct {
             e.printStackTrace();
         }
         reloadFavouriteTree();
+        System.out.println(foundWord + " is added to favorite!");
     }
 
     public ArrayList<String> listWordFromFavoriteDatabase(String foundWord) {
@@ -69,7 +70,17 @@ public class FavoriteAct {
 
     public Word binarySearchFavorite(String foundWord) {
         ArrayList<Word> arrayWords = new ArrayList<>();
-        for (Map.Entry<String, String> entry : favorite.entrySet()) {
+        TreeMap<String, String> fav = new TreeMap<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, description FROM avFavorite");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                fav.put(resultSet.getString(1), resultSet.getString(2));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        for (Map.Entry<String, String> entry : fav.entrySet()) {
             Word insertWord = new Word(entry.getKey(), entry.getValue());
             arrayWords.add(insertWord);
         }
@@ -132,6 +143,25 @@ public class FavoriteAct {
             e.printStackTrace();
         }
         reloadFavouriteTree();
+    }
+
+    public void showAllFavorite() {
+        TreeMap<String, String> fav = new TreeMap<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, description FROM avFavorite");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                fav.put(resultSet.getString(1), resultSet.getString(2));
+            }
+            for(Map.Entry<String, String> entry : fav.entrySet()) {
+                System.out.println("|" + entry.getKey() + "    " + "|" + entry.getValue());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(fav.isEmpty()) {
+            System.out.println("Favorite is empty!");
+        }
     }
 
     private void reloadFavouriteTree() {
