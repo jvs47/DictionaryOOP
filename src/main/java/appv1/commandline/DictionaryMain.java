@@ -90,8 +90,12 @@ public class DictionaryMain {
         System.out.print("Enter Word: ");
         String foundWord = scan.nextLine();
         Word word = dictionaryManagement.binarySearch(foundWord);
-        System.out.println("|" + word.getWord() + "    " + "|" + word.getWordExplain());
-        historyAct.saveWordToHistoryDatabase(foundWord);
+        if(word == null) {
+            System.out.println("Word is not exist!");
+        } else {
+            System.out.println("|" + word.getWord() + "    " + "|" + word.getWordExplain());
+            historyAct.saveWordToHistoryDatabase(foundWord);
+        }
 
         System.out.println("1. Add To Favorite");
         System.out.println("2. Back to menu");
@@ -107,7 +111,11 @@ public class DictionaryMain {
             }
         } while (choice != 1 && choice != 2);
         if(choice == 1) {
-            favoriteAct.saveToFavoriteDatabase(foundWord);
+            if(word == null) {
+                System.out.println("Add to favorite failed");
+            } else {
+                favoriteAct.saveToFavoriteDatabase(foundWord);
+            }
             finishAddFav();
         } else {
             clearScreen();

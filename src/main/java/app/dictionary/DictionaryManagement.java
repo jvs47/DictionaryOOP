@@ -107,6 +107,7 @@ public class DictionaryManagement {
                     preparedStatement.setString(1, editedWordMeaning);
                     preparedStatement.setString(2, editedWord);
                     preparedStatement.executeUpdate();
+                    System.out.println("Edit word meaning succeed");
                     return;
                 } catch (SQLException e) {
                     e.printStackTrace();
