@@ -33,6 +33,7 @@ public class FavoriteAct {
     }
 
     public void saveToFavoriteDatabase(String foundWord) {
+        foundWord = foundWord.trim();
         for (Map.Entry<String, String> entry : favorite.entrySet()) {
             if (entry.getKey().equals(foundWord)) {
                 System.out.println(foundWord + " is exist on Favorite List!");
@@ -53,6 +54,7 @@ public class FavoriteAct {
     }
 
     public ArrayList<String> listWordFromFavoriteDatabase(String foundWord) {
+        foundWord = foundWord.trim();
         PreparedStatement preparedStatement;
         ArrayList<String> words = new ArrayList<>();
         try {
@@ -69,6 +71,7 @@ public class FavoriteAct {
     }
 
     public Word binarySearchFavorite(String foundWord) {
+        foundWord = foundWord.trim();
         ArrayList<Word> arrayWords = new ArrayList<>();
         TreeMap<String, String> fav = new TreeMap<>();
         try {
@@ -105,6 +108,7 @@ public class FavoriteAct {
     }
 
     public Word searchUseQueryFavorite(String foundWord) {
+        foundWord = foundWord.trim();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, html FROM avFavorite WHERE word = ? GROUP BY word ");
             preparedStatement.setString(1, foundWord);
@@ -132,6 +136,7 @@ public class FavoriteAct {
     }
 
     public void removeFavouriteWordFromDatabase(String word) {
+        word = word.trim();
         String sql = "DELETE FROM avFavorite WHERE word = ?";
         PreparedStatement preparedStatement = null;
         try {

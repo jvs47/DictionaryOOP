@@ -9,6 +9,7 @@ import java.util.TreeMap;
 public class DictionaryAct extends DictionaryManagement {
 
     public ArrayList<String> getStringFoundWord(String foundWord) {
+        foundWord = foundWord.trim();
         ArrayList<String> results = new ArrayList<>();
         TreeMap<String, String> found = findWord(foundWord);
         for (Map.Entry<String, String> entry : found.entrySet()) {

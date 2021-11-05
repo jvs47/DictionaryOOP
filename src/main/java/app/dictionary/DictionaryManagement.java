@@ -118,6 +118,7 @@ public class DictionaryManagement {
     }
 
     public TreeMap<String, String> findWord(String foundWord) {
+        foundWord = foundWord.trim();
         TreeMap<String, String> searchedWord = new TreeMap<>();
         PreparedStatement preparedStatement;
         try {
@@ -133,6 +134,7 @@ public class DictionaryManagement {
     }
 
     public Word binarySearch(String foundWord) {
+        foundWord = foundWord.trim();
         ArrayList<Word> arrayWords = new ArrayList<>();
         PreparedStatement preparedStatement;
         try {
@@ -166,6 +168,7 @@ public class DictionaryManagement {
     }
 
     public Word searchUseQuery(String foundWord) {
+        foundWord = foundWord.trim();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, html FROM av WHERE word = ? GROUP BY word ");
             preparedStatement.setString(1, foundWord);
@@ -180,6 +183,7 @@ public class DictionaryManagement {
     }
 
     public void deleteWordFromGUI(String removedWord) {
+        removedWord = removedWord.trim();
         String sql = "DELETE FROM av WHERE word = ?";
         PreparedStatement preparedStatement = null;
         try {

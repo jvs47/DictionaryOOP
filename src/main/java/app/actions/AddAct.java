@@ -38,6 +38,7 @@ public class AddAct {
     }
 
     public boolean checkValidWord(String word){
+        word = word.trim();
         if (dictionary.containsKey(word)) {
             System.out.println(word + " is exist in Database!");
             return false;

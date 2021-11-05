@@ -47,6 +47,7 @@ public class HistoryAct {
     }
 
     public void checkWordInHistoryDatabase(String foundWord) {
+        foundWord = foundWord.trim();
         for (Map.Entry<String, String> entry : history.entrySet()) {
             if (entry.getKey().equals(foundWord)) {
                 System.out.println(foundWord + " is exist in History List!");
@@ -55,6 +56,7 @@ public class HistoryAct {
         }
     }
     public void saveWordToHistoryDatabase(String foundWord) {
+        foundWord = foundWord.trim();
         String sql = "INSERT INTO avHistory(word, html, description, pronounce) SELECT word, html, description, pronounce FROM av WHERE word = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -81,6 +83,7 @@ public class HistoryAct {
     }
 
     public ArrayList<String> foundWordFromHistoryDatabase(String foundWord) {
+        foundWord = foundWord.trim();
         PreparedStatement preparedStatement;
         ArrayList<String> words = new ArrayList<>();
         try {
@@ -97,6 +100,7 @@ public class HistoryAct {
     }
 
     public Word binarySearchHistory(String foundWord) {
+        foundWord = foundWord.trim();
         ArrayList<Word> arrayWords = new ArrayList<>();
         TreeMap<String, String> his = new TreeMap<>();
         try {

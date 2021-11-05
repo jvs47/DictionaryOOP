@@ -25,6 +25,7 @@ public class EditAct extends AddAct {
 
     @Override
     public boolean checkValidWord(String word) {
+        word = word.trim();
         if (!dictionary.containsKey(word)) {
             System.out.println(word + " is not exist in Database!");
             return false;
