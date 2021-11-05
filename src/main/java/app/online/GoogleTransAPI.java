@@ -1,17 +1,15 @@
 package app.online;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.Base64;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 public class GoogleTransAPI {
     public static final String GOOGLE_TRANSLATE_URL = "http://translate.google.com/translate_a/t?";
@@ -36,21 +34,6 @@ public class GoogleTransAPI {
         return response.toString().trim().replace("\"", "");
     }
 
-    public enum LANGUAGE {
-        ENGLISH("en"), VIETNAMESE("vi"), AUTO("auto");
-
-        private String lang = "";
-
-        LANGUAGE(String lang) {
-            this.lang = lang;
-        }
-
-        @Override
-        public String toString() {
-            return this.lang;
-        }
-    }
-
     private static String generateTranslateURL(String sourceLanguage, String targetLanguage, String text) throws UnsupportedEncodingException {
         return GOOGLE_TRANSLATE_URL + "client=gtrans" +
                 "&sl=" + sourceLanguage +
@@ -64,5 +47,20 @@ public class GoogleTransAPI {
         byte[] randomBytes = new byte[24];
         secureRandom.nextBytes(randomBytes);
         return base64Encoder.encodeToString(randomBytes);
+    }
+
+    public enum LANGUAGE {
+        ENGLISH("en"), VIETNAMESE("vi"), AUTO("auto");
+
+        private String lang = "";
+
+        LANGUAGE(String lang) {
+            this.lang = lang;
+        }
+
+        @Override
+        public String toString() {
+            return this.lang;
+        }
     }
 }

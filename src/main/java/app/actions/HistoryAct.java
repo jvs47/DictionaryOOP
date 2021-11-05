@@ -12,12 +12,14 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class HistoryAct {
-    private TreeMap<String, String> history = new TreeMap<>();
     private final Connection connection = IODatabase.connection;
-    public HistoryAct(){
+    private TreeMap<String, String> history = new TreeMap<>();
+
+    public HistoryAct() {
         insertFromHistoryDatabase();
         System.out.println("Done insert history from database!");
     }
+
     public void insertFromHistoryDatabase() {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, html FROM avHistory");
@@ -38,7 +40,7 @@ public class HistoryAct {
             while (resultSet.next()) {
                 his.put(resultSet.getString(1), resultSet.getString(2));
             }
-            for(Map.Entry<String, String> entry : his.entrySet()) {
+            for (Map.Entry<String, String> entry : his.entrySet()) {
                 System.out.println("|" + entry.getKey() + "    " + "|" + entry.getValue());
             }
         } catch (SQLException e) {
@@ -55,6 +57,7 @@ public class HistoryAct {
             }
         }
     }
+
     public void saveWordToHistoryDatabase(String foundWord) {
         foundWord = foundWord.trim();
         String sql = "INSERT INTO avHistory(word, html, description, pronounce) SELECT word, html, description, pronounce FROM av WHERE word = ?";

@@ -39,7 +39,7 @@ public class DefinitionPaneController {
 
     @FXML
     void handleDeleteWordClick(MouseEvent event) {
-        if (event.getSource() == deleteWordButton){
+        if (event.getSource() == deleteWordButton) {
             this.state.getDictionaryAct().deleteWordFromGUI(word);
             System.out.println("Word deleted!");
             this.state.reset();
@@ -100,7 +100,7 @@ public class DefinitionPaneController {
         this.loadBookmark();
     }
 
-    public void reset(){
+    public void reset() {
         this.initData(this.state, "", "");
     }
 

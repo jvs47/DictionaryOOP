@@ -158,13 +158,13 @@ public class FavoriteAct {
             while (resultSet.next()) {
                 fav.put(resultSet.getString(1), resultSet.getString(2));
             }
-            for(Map.Entry<String, String> entry : fav.entrySet()) {
+            for (Map.Entry<String, String> entry : fav.entrySet()) {
                 System.out.println("|" + entry.getKey() + "    " + "|" + entry.getValue());
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        if(fav.isEmpty()) {
+        if (fav.isEmpty()) {
             System.out.println("Favorite is empty!");
         }
     }

@@ -1,5 +1,8 @@
 package app.online;
 
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,9 +12,6 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.Base64;
-
-import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.Player;
 
 public class AudioGoogleAPI {
     public static final String GOOGLE_TRANSLATE_AUDIO = "http://translate.google.com/translate_tts?";
@@ -37,6 +37,14 @@ public class AudioGoogleAPI {
         return base64Encoder.encodeToString(randomBytes);
     }
 
+    private static String generateSpeakURL(String language, String text) {
+        return GOOGLE_TRANSLATE_AUDIO + "?ie=UTF-8" +
+                "&q=" + URLEncoder.encode(text, StandardCharsets.UTF_8) +
+                "&tl=" + language +
+                "&tk=" + generateNewToken() +
+                "&client=tw-ob";
+    }
+
     public InputStream getAudio(String text, String languageOutput)
             throws IOException {
 
@@ -47,14 +55,6 @@ public class AudioGoogleAPI {
         urlConn.setRequestProperty("User-Agent", userAgent);
         InputStream audioSrc = urlConn.getInputStream();
         return new BufferedInputStream(audioSrc);
-    }
-
-    private static String generateSpeakURL(String language, String text) {
-        return GOOGLE_TRANSLATE_AUDIO + "?ie=UTF-8" +
-                "&q=" + URLEncoder.encode(text, StandardCharsets.UTF_8) +
-                "&tl=" + language +
-                "&tk=" + generateNewToken() +
-                "&client=tw-ob";
     }
 
     public void play(InputStream sound) throws JavaLayerException {

@@ -9,8 +9,8 @@ import java.sql.SQLException;
 import java.util.TreeMap;
 
 public class AddAct {
-    protected TreeMap<String, String> dictionary = new TreeMap<>();
     protected final Connection connection = IODatabase.connection;
+    protected TreeMap<String, String> dictionary = new TreeMap<>();
 
     public String convertToHTML(String addWord, String addPron, String addDescription) {
         StringBuilder convertHTML = new StringBuilder();
@@ -37,7 +37,7 @@ public class AddAct {
         System.out.println("Add word success!");
     }
 
-    public boolean checkValidWord(String word){
+    public boolean checkValidWord(String word) {
         word = word.trim();
         if (dictionary.containsKey(word)) {
             System.out.println(word + " is exist in Database!");

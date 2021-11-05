@@ -1,6 +1,6 @@
 package app.controllers.panes;
 
-import app.dictionary.*;
+import app.dictionary.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,19 +21,16 @@ import java.util.ResourceBundle;
 public class ViewController implements Initializable {
 
     protected ContainerController state;
-
-    @FXML
-    private Button searchButton;
     @FXML
     protected TextField input_search;
-
     @FXML
     protected ListView<String> search_list_view;
-
     @FXML
     protected AnchorPane definitionPane;
     protected DefinitionPaneController definitionPaneController;
     protected ArrayList<String> arrayWords;
+    @FXML
+    private Button searchButton;
 
     @FXML
     public void handleChangeInputSearch(KeyEvent event) {

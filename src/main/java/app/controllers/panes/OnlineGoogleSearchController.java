@@ -46,7 +46,7 @@ public class OnlineGoogleSearchController {
     }
 
     @FXML
-    void handleListenEVClick(MouseEvent event) throws IOException, JavaLayerException {
+    void handleListenEVClick(MouseEvent event) {
         if (event.getSource() == listenEN) {
             Runnable r = new SpeakTask(inputOnlineEVTextArea.getText(), "en");
             Thread speak = new Thread(r);
@@ -66,7 +66,7 @@ public class OnlineGoogleSearchController {
     }
 
     @FXML
-    void handleListenVEClick(MouseEvent event) throws IOException, JavaLayerException {
+    void handleListenVEClick(MouseEvent event) {
         if (event.getSource() == listenEN) {
             Runnable r = new SpeakTask(inputOnlineVETextArea.getText(), "vi");
             Thread speak = new Thread(r);

@@ -10,10 +10,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class EditPaneController {
-    private ContainerController stage;
     private final AddAct addAct = new AddAct();
     private final EditAct editAct = new EditAct();
-
+    private ContainerController stage;
     @FXML
     private Button addCheckButton;
 

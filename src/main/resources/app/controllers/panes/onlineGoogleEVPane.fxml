@@ -1,34 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
-
-<AnchorPane prefHeight="420.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.panes.OnlineGoogleSearchController">
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="420.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17"
+            fx:controller="app.controllers.panes.OnlineGoogleSearchController">
     <children>
-        <AnchorPane layoutX="28.0" layoutY="12.0" prefHeight="45.0" prefWidth="526.0" style="-fx-background-color: transparent;" stylesheets="@../../../css/onlineSearch.css">
+        <AnchorPane layoutX="28.0" layoutY="12.0" prefHeight="45.0" prefWidth="526.0"
+                    style="-fx-background-color: transparent;" stylesheets="@../../../css/onlineSearch.css">
             <children>
                 <HBox prefHeight="45.0" styleClass="h_box_language" stylesheets="@../../../css/onlineSearch.css">
                     <children>
-                        <Label alignment="CENTER" prefHeight="45.0" prefWidth="250.0" styleClass="language_label" stylesheets="@../../../css/onlineSearch.css" text="English" textFill="#3f7fe9">
+                        <Label alignment="CENTER" prefHeight="45.0" prefWidth="250.0" styleClass="language_label"
+                               stylesheets="@../../../css/onlineSearch.css" text="English" textFill="#3f7fe9">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Label>
-                        <Label fx:id="switchLanguageEVLabel" alignment="CENTER" layoutX="11.0" layoutY="11.0" onMouseClicked="#onMouseClickSwitchEVLanguage" prefHeight="43.0" prefWidth="42.0" styleClass="switch_lag_btn" stylesheets="@../../../css/onlineSearch.css" textFill="#9ca3ae">
+                        <Label fx:id="switchLanguageEVLabel" alignment="CENTER" layoutX="11.0" layoutY="11.0"
+                               onMouseClicked="#onMouseClickSwitchEVLanguage" prefHeight="43.0" prefWidth="42.0"
+                               styleClass="switch_lag_btn" stylesheets="@../../../css/onlineSearch.css"
+                               textFill="#9ca3ae">
                             <font>
-                                <Font size="22.0" />
+                                <Font size="22.0"/>
                             </font>
                             <graphic>
-                                <FontAwesomeIconView glyphName="RETWEET" />
+                                <FontAwesomeIconView glyphName="RETWEET"/>
                             </graphic>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="45.0" prefWidth="250.0" styleClass="language_label" stylesheets="@../../../css/onlineSearch.css" text="Vietnamese" textFill="#3f7fe9">
+                        <Label alignment="CENTER" prefHeight="45.0" prefWidth="250.0" styleClass="language_label"
+                               stylesheets="@../../../css/onlineSearch.css" text="Vietnamese" textFill="#3f7fe9">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Label>
                     </children>
@@ -37,24 +42,28 @@
         </AnchorPane>
         <AnchorPane layoutY="68.0" prefHeight="344.0" prefWidth="600.0">
             <children>
-                <TextArea fx:id="inputOnlineEVTextArea" layoutX="14.0" onKeyReleased="#handleOnlineEVInput" prefHeight="167.0" prefWidth="571.0" promptText="Enter text" styleClass="input_box" stylesheets="@../../../css/onlineSearch.css" wrapText="true">
+                <TextArea fx:id="inputOnlineEVTextArea" layoutX="14.0" onKeyReleased="#handleOnlineEVInput"
+                          prefHeight="167.0" prefWidth="571.0" promptText="Enter text" styleClass="input_box"
+                          stylesheets="@../../../css/onlineSearch.css" wrapText="true">
                     <font>
-                        <Font size="16.0" />
+                        <Font size="16.0"/>
                     </font>
                 </TextArea>
-                <TextArea fx:id="meaningOnlineEVTextArea" editable="false" layoutX="15.0" layoutY="172.0" prefHeight="167.0" prefWidth="571.0" styleClass="output_box" stylesheets="@../../../css/onlineSearch.css" wrapText="true">
+                <TextArea fx:id="meaningOnlineEVTextArea" editable="false" layoutX="15.0" layoutY="172.0"
+                          prefHeight="167.0" prefWidth="571.0" styleClass="output_box"
+                          stylesheets="@../../../css/onlineSearch.css" wrapText="true">
                     <font>
-                        <Font size="16.0" />
+                        <Font size="16.0"/>
                     </font>
                 </TextArea>
                 <Label fx:id="listenEN" layoutX="556.0" layoutY="136.0" onMouseClicked="#handleListenEVClick">
                     <graphic>
-                        <FontAwesomeIconView fill="#5f6368" glyphName="VOLUME_UP" size="20" />
+                        <FontAwesomeIconView fill="#5f6368" glyphName="VOLUME_UP" size="20"/>
                     </graphic>
                 </Label>
                 <Label fx:id="listenVN" layoutX="556.0" layoutY="309.0" onMouseClicked="#handleListenEVClick">
                     <graphic>
-                        <FontAwesomeIconView fill="#5f6368" glyphName="VOLUME_UP" size="20" />
+                        <FontAwesomeIconView fill="#5f6368" glyphName="VOLUME_UP" size="20"/>
                     </graphic>
                 </Label>
             </children>

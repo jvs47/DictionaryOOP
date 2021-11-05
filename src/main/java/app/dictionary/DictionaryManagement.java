@@ -2,13 +2,19 @@ package app.dictionary;
 
 import app.helper.IODatabase;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.TreeMap;
 
 public class DictionaryManagement {
-    protected Dictionary dictionary = new Dictionary();
-    private Scanner scan = new Scanner(System.in);
     private final Connection connection = IODatabase.connection;
+    private final Scanner scan = new Scanner(System.in);
+    protected Dictionary dictionary = new Dictionary();
 
     public DictionaryManagement() {
         insertFromDatabase();
@@ -84,7 +90,7 @@ public class DictionaryManagement {
             while (resultSet.next()) {
                 dic.put(resultSet.getString(1), resultSet.getString(2));
             }
-            for(Map.Entry<String, String> entry : dic.entrySet()) {
+            for (Map.Entry<String, String> entry : dic.entrySet()) {
                 System.out.println("|" + entry.getKey() + "    " + "|" + entry.getValue());
             }
         } catch (SQLException e) {

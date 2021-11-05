@@ -6,9 +6,11 @@ import java.sql.SQLException;
 
 public class IODatabase {
     public static Connection connection;
-    public IODatabase(){
+
+    public IODatabase() {
         connectDatabase();
     }
+
     public void connectDatabase() {
         //Install jdbc
         try {
