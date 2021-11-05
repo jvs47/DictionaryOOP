@@ -147,7 +147,7 @@ public class ViewController implements Initializable {
         if (definitionPaneController == null) {
             loadDefinitionPane("", "");
         }
-        arrayWords = this.state.getDictionaryAct().getDictionary().toArrayWords();
+        arrayWords = this.state.getDictionaryAct().getDictionary().toArrayStringWord();
         this.reload();
     }
 }

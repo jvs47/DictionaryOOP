@@ -33,7 +33,7 @@ public class Dictionary {
         this.dictionary = dictionary;
     }
 
-    public ArrayList<String> toArrayWords() {
+    public ArrayList<String> toArrayStringWord() {
         ArrayList<String> result = new ArrayList<>();
         for (Map.Entry<String, String> entry : dictionary.entrySet()) {
             String word = entry.getKey();
