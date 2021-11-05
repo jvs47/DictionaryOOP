@@ -153,6 +153,13 @@ public class ContainerController implements Initializable {
         favouritePaneController.reset();
     }
 
+    public void reset() {
+        // TODO: reload all pane.
+        searchPaneController.reset();
+        favouritePaneController.reset();
+        historyPaneController.reset();
+    }
+
     public void showSearchPane() {
         categoryLabel.setText("DICTIONARY");
         this.setContentPane(anchorSearchPane);

@@ -42,7 +42,7 @@ public class DefinitionPaneController {
         if (event.getSource() == deleteWordButton){
             this.state.getDictionaryAct().deleteWordFromGUI(word);
             System.out.println("Word deleted!");
-            this.reset();
+            this.state.reset();
         }
     }
 
