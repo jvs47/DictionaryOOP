@@ -113,7 +113,9 @@ public class FavoriteAct {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, html FROM avFavorite WHERE word = ? GROUP BY word ");
             preparedStatement.setString(1, foundWord);
             ResultSet resultSet = preparedStatement.executeQuery();
-            return new Word(resultSet.getString(1), resultSet.getString(2));
+            while(resultSet.next() == true) {
+                return new Word(resultSet.getString(1), resultSet.getString(2));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
