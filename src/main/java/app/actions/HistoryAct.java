@@ -46,13 +46,15 @@ public class HistoryAct {
         }
     }
 
-    public void saveWordToHistoryDatabase(String foundWord) {
+    public void checkWordInHistoryDatabase(String foundWord) {
         for (Map.Entry<String, String> entry : history.entrySet()) {
             if (entry.getKey().equals(foundWord)) {
                 System.out.println(foundWord + " is exist in History List!");
                 return;
             }
         }
+    }
+    public void saveWordToHistoryDatabase(String foundWord) {
         String sql = "INSERT INTO avHistory(word, html, description, pronounce) SELECT word, html, description, pronounce FROM av WHERE word = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
