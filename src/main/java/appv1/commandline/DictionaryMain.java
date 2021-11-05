@@ -6,16 +6,8 @@ import app.dictionary.Dictionary;
 import app.dictionary.DictionaryManagement;
 import app.dictionary.Word;
 import app.helper.IODatabase;
-
-import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Map;
+import java.sql.*;
 import java.util.Scanner;
-import java.util.TreeMap;
-
-import static app.helper.IODatabase.connection;
 
 public class DictionaryMain {
     static Scanner scan = new Scanner(System.in);
@@ -125,7 +117,7 @@ public class DictionaryMain {
                 dictionary.getDictionary().put(newWord.getWord(), newWord.getWordExplain());
                 String sql = "INSERT INTO av(word, description) VALUES(?,?)";
                 try {
-                    PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                    PreparedStatement preparedStatement = ioDatabase.connection.prepareStatement(sql);
                     preparedStatement.setString(1, newWord.getWord());
                     preparedStatement.setString(2, newWord.getWordExplain());
                     preparedStatement.executeUpdate();

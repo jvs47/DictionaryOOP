@@ -8,6 +8,7 @@ module app.DictionaryFX {
     requires json.simple;
     requires freetts;
     requires jlayer;
+    requires org.junit.jupiter.api;
 
 
     opens app to javafx.fxml;
