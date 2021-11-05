@@ -21,7 +21,7 @@ class HistoryActTest {
     @Test
     void binarySearchHistory() {
         assertAll(
-                () -> assertEquals("hello", historyAct.binarySearchHistory("hello"))
+                () -> assertEquals("hello", historyAct.binarySearchHistory("hello").getWord())
         );
     }
 
