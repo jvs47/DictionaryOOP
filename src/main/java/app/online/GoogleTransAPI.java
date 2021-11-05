@@ -25,6 +25,7 @@ public class GoogleTransAPI {
         URL url = new URL(urlStr);
         StringBuilder response = new StringBuilder();
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
         con.setRequestProperty("User-Agent", userAgent);
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;

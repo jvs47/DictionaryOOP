@@ -1,7 +1,8 @@
 package app.controllers.panes;
 
-import app.helper.AudioGoogleAPI;
+import app.online.AudioGoogleAPI;
 import app.online.GoogleTransAPI;
+import app.threads.SpeakTask;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -47,26 +48,33 @@ public class OnlineGoogleSearchController {
     @FXML
     void handleListenEVClick(MouseEvent event) throws IOException, JavaLayerException {
         if (event.getSource() == listenEN) {
-            AudioGoogleAPI audio = AudioGoogleAPI.getInstance();
-            InputStream sound = audio.getAudio(inputOnlineEVTextArea.getText(), "en");
-            audio.play(sound);
+            Runnable r = new SpeakTask(inputOnlineEVTextArea.getText(), "en");
+            Thread speak = new Thread(r);
+            speak.start();
+
         } else if (event.getSource() == listenVN) {
-            AudioGoogleAPI audio = AudioGoogleAPI.getInstance();
-            InputStream sound = audio.getAudio(meaningOnlineEVTextArea.getText(), "vi");
-            audio.play(sound);
+            Runnable r = new SpeakTask(meaningOnlineEVTextArea.getText(), "vi");
+            Thread speak = new Thread(r);
+            speak.start();
         }
+    }
+
+    public void playAudio(String text, String lang) throws JavaLayerException, IOException {
+        AudioGoogleAPI audio = AudioGoogleAPI.getInstance();
+        InputStream sound = audio.getAudio(text, lang);
+        audio.play(sound);
     }
 
     @FXML
     void handleListenVEClick(MouseEvent event) throws IOException, JavaLayerException {
         if (event.getSource() == listenEN) {
-            AudioGoogleAPI audio = AudioGoogleAPI.getInstance();
-            InputStream sound = audio.getAudio(inputOnlineVETextArea.getText(), "vi");
-            audio.play(sound);
+            Runnable r = new SpeakTask(inputOnlineVETextArea.getText(), "vi");
+            Thread speak = new Thread(r);
+            speak.start();
         } else if (event.getSource() == listenVN) {
-            AudioGoogleAPI audio = AudioGoogleAPI.getInstance();
-            InputStream sound = audio.getAudio(meaningOnlineVETextArea.getText(), "en");
-            audio.play(sound);
+            Runnable r = new SpeakTask(meaningOnlineVETextArea.getText(), "en");
+            Thread speak = new Thread(r);
+            speak.start();
         }
     }
 

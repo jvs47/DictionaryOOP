@@ -1,8 +1,7 @@
 package app.controllers.panes;
 
 import app.dictionary.Word;
-import app.helper.AudioFreeTSSAPI;
-import app.helper.AudioGoogleAPI;
+import app.online.AudioGoogleAPI;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -58,12 +57,12 @@ public class DefinitionPaneController {
     @FXML
     void handlePronounceClick(MouseEvent event) throws JavaLayerException, IOException {
         if (event.getSource() == ukPronounceButton) {
-            System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
-            AudioFreeTSSAPI textToSpeak = new AudioFreeTSSAPI(word);
-            textToSpeak.play();
+            AudioGoogleAPI audio = AudioGoogleAPI.getInstance();
+            InputStream sound = audio.getAudio(word, "en-UK");
+            audio.play(sound);
         } else if (event.getSource() == usPronounceButton) {
             AudioGoogleAPI audio = AudioGoogleAPI.getInstance();
-            InputStream sound = audio.getAudio(word, "en");
+            InputStream sound = audio.getAudio(word, "en-US");
             audio.play(sound);
         }
     }
