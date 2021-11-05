@@ -89,21 +89,10 @@ public class DictionaryMain {
     public static void search() {
         System.out.print("Enter Word: ");
         String foundWord = scan.nextLine();
-        TreeMap<String, String> searchedWord = new TreeMap<>();
+        Word word = dictionaryManagement.binarySearch(foundWord);
+        System.out.println("|" + word.getWord() + "    " + "|" + word.getWordExplain());
         historyAct.saveWordToHistoryDatabase(foundWord);
-        PreparedStatement preparedStatement;
-        try {
-            preparedStatement = ioDatabase.connection.prepareStatement("SELECT word, description FROM av WHERE word LIKE '" + foundWord + "%'");
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                searchedWord.put(resultSet.getString(1), resultSet.getString(2));
-            }
-            for(Map.Entry<String, String> entry : searchedWord.entrySet()) {
-                System.out.println("|" + entry.getKey() + "    " + "|" + entry.getValue());
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
         System.out.println("1. Add To Favorite");
         System.out.println("2. Back to menu");
         String yourChoice;

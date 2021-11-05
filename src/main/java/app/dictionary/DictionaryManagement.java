@@ -132,7 +132,18 @@ public class DictionaryManagement {
     }
 
     public Word binarySearch(String foundWord) {
-        ArrayList<Word> arrayWords = dictionary.toArrayWord();
+        ArrayList<Word> arrayWords = new ArrayList<>();
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = connection.prepareStatement("SELECT word, description FROM av group by word");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Word newWord = new Word(resultSet.getString(1), resultSet.getString(2));
+                arrayWords.add(newWord);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int start = 0;
         int end = arrayWords.size() - 1;
         while (start <= end) {
