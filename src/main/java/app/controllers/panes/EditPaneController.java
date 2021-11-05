@@ -65,12 +65,7 @@ public class EditPaneController {
             String pronounce = addPronounceTextField.getText();
             String description = addDescriptionTextField.getText();
             addAct.addNewWordToDatabase(word, pronounce, description);
-            wordTextField.clear();
-            addPronounceTextField.clear();
-            addDescriptionTextField.clear();
-            falseAddCheckLabel.setVisible(false);
-            trueAddCheckLabel.setVisible(false);
-            addSummitButton.setDisable(false);
+            reload();
         }
     }
 
@@ -97,13 +92,7 @@ public class EditPaneController {
             String pronounce = editPronounceTextField.getText();
             String description = editDescriptionTextField.getText();
             editAct.editWordInDatabase(oldWord, newWord, pronounce, description);
-            oldWordTextField.clear();
-            newWordTextField.clear();
-            editPronounceTextField.clear();
-            editDescriptionTextField.clear();
-            falseEditCheckLabel.setVisible(false);
-            trueEditCheckLabel.setVisible(false);
-            editSummitButton.setDisable(false);
+            reload();
         }
     }
 
@@ -122,10 +111,35 @@ public class EditPaneController {
         }
     }
 
+    private void reload() {
+        reloadAdd();
+        reloadEdit();
+    }
+
+    private void reloadAdd() {
+        addAct.reloadDictionaryTree();
+
+        addPronounceTextField.clear();
+        addDescriptionTextField.clear();
+        falseAddCheckLabel.setVisible(false);
+        trueAddCheckLabel.setVisible(false);
+        addSummitButton.setDisable(true);
+    }
+
+    private void reloadEdit() {
+        editAct.reloadDictionaryTree();
+
+        oldWordTextField.clear();
+        newWordTextField.clear();
+        editPronounceTextField.clear();
+        editDescriptionTextField.clear();
+        falseEditCheckLabel.setVisible(false);
+        trueEditCheckLabel.setVisible(false);
+        editSummitButton.setDisable(true);
+    }
 
     public void initData(ContainerController stage) {
         this.stage = stage;
-        addAct.loadWordsFromDatabase();
-        editAct.loadWordsFromDatabase();
+        this.reload();
     }
 }
