@@ -81,7 +81,7 @@ public class DictionaryManagement {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, description FROM av GROUP BY word");
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next() == true) {
+            while (resultSet.next()) {
                 dic.put(resultSet.getString(1), resultSet.getString(2));
             }
             for(Map.Entry<String, String> entry : dic.entrySet()) {
