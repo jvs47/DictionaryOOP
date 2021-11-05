@@ -1,45 +1,11 @@
 package app.actions;
 
-import app.helper.IODatabase;
-
-import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
-import java.util.TreeMap;
 
-public class EditAct {
-    private TreeMap<String, String> dictionary = new TreeMap<>();
-    private final Connection connection = IODatabase.connection;
+public class EditAct extends AddAct {
 
-    public void insertFromDictionaryDatabase() {
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT word, html FROM av");
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                dictionary.put(resultSet.getString(1), resultSet.getString(2));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public String convertToHTML (String addWord, String addPron, String addDescription) {
-        StringBuilder convertHTML = new StringBuilder();
-        convertHTML.append("<h1>" + addWord + "</h1");
-        convertHTML.append("<h3><i>" + addPron + "</i></h3>");
-        convertHTML.append("<ul>" + addDescription + "</ul>");
-        return convertHTML.toString();
-    }
-
-    public void editWordInDatabase (String oldWord, String newWord, String addPron, String addDescription) {
-        for (Map.Entry<String, String> entry : dictionary.entrySet()) {
-            if (!entry.getKey().equals(oldWord)) {
-                System.out.println(oldWord + " is not exist in the Dictionary!");
-                return;
-            }
-        }
+    public void editWordInDatabase(String oldWord, String newWord, String addPron, String addDescription) {
         String html = convertToHTML(newWord, addPron, addDescription);
         String sql = "UPDATE av SET description = ?, html = ?, pronounce = ? WHERE word = ?;";
         try {
@@ -53,10 +19,15 @@ public class EditAct {
             e.printStackTrace();
         }
         reloadDictionaryTree();
+        System.out.println("Edit word success!");
     }
 
-    public void reloadDictionaryTree() {
-        dictionary = new TreeMap<>();
-        insertFromDictionaryDatabase();
+    @Override
+    public boolean checkValidWord(String word) {
+        if (!dictionary.containsKey(word)) {
+            System.out.println(word + " is not exist in Database!");
+            return false;
+        }
+        return true;
     }
 }

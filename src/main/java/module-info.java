@@ -15,5 +15,6 @@ module app.DictionaryFX {
     exports app;
     exports app.controllers.panes;
     exports app.actions;
+    exports app.dictionary;
     opens app.controllers.panes to javafx.fxml;
 }

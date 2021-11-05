@@ -18,7 +18,7 @@ class DictionaryManagementTest {
     void binarySearch() {
         assertAll(() -> assertEquals("hello", dictionaryManagement.binarySearch("hello").getWord()),
                 () -> assertEquals("abstract", dictionaryManagement.binarySearch("abstract").getWord()),
-                () -> assertEquals(null, dictionaryManagement.binarySearch("jdfshajdafjafh")),
+                () -> assertNull(dictionaryManagement.binarySearch("jdfshajdafjafh")),
                 () -> assertEquals("go", dictionaryManagement.binarySearch("go").getWord())
                 );
     }
@@ -27,7 +27,7 @@ class DictionaryManagementTest {
     void searchUseQuery() {
         assertAll(() -> assertEquals("hello", dictionaryManagement.searchUseQuery("hello").getWord()),
                 () -> assertEquals("abstract", dictionaryManagement.searchUseQuery("abstract").getWord()),
-                () -> assertEquals(null, dictionaryManagement.searchUseQuery("jdfshajdafjafh")),
+                () -> assertNull(dictionaryManagement.searchUseQuery("jdfshajdafjafh")),
                 () -> assertEquals("go", dictionaryManagement.searchUseQuery("go").getWord())
         );
     }

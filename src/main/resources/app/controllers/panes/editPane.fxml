@@ -8,136 +8,126 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="420.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17"
-            fx:controller="app.controllers.panes.EditPaneController">
+<AnchorPane prefHeight="420.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.panes.EditPaneController">
     <children>
-        <AnchorPane layoutX="305.0" layoutY="5.0" prefHeight="410.0" prefWidth="290.0" styleClass="edit_pane"
-                    stylesheets="@../../../css/edit.css">
+        <AnchorPane layoutX="305.0" layoutY="5.0" prefHeight="410.0" prefWidth="290.0" styleClass="edit_pane" stylesheets="@../../../css/edit.css">
             <children>
-                <Label alignment="CENTER" layoutX="53.0" layoutY="7.0" prefHeight="35.0" prefWidth="185.0"
-                       styleClass="edit_title" stylesheets="@../../../css/edit.css" text="Edit exsiting word"
-                       textFill="#1d2a57">
+                <Label alignment="CENTER" layoutX="53.0" layoutY="7.0" prefHeight="35.0" prefWidth="185.0" styleClass="edit_title" stylesheets="@../../../css/edit.css" text="Edit exsiting word" textFill="#1d2a57">
                     <font>
-                        <Font name="System Bold" size="20.0"/>
+                        <Font name="System Bold" size="20.0" />
                     </font>
                 </Label>
-                <Label layoutX="16.0" layoutY="57.0" styleClass="text_box_label" stylesheets="@../../../css/edit.css"
-                       text="Old" textFill="#1d2a57">
+                <Label layoutX="16.0" layoutY="57.0" styleClass="text_box_label" stylesheets="@../../../css/edit.css" text="Old" textFill="#1d2a57">
                     <font>
-                        <Font name="SansSerif Regular" size="14.0"/>
+                        <Font name="SansSerif Regular" size="14.0" />
                     </font>
                 </Label>
-                <Label layoutX="150.0" layoutY="57.0" styleClass="text_box_label" stylesheets="@../../../css/edit.css"
-                       text="New" textFill="#1d2a57">
+                <Label layoutX="150.0" layoutY="57.0" styleClass="text_box_label" stylesheets="@../../../css/edit.css" text="New" textFill="#1d2a57">
                     <font>
-                        <Font name="SansSerif Regular" size="14.0"/>
+                        <Font name="SansSerif Regular" size="14.0" />
                     </font>
                 </Label>
-                <TextField layoutX="16.0" layoutY="77.0" prefHeight="30.0" prefWidth="123.0">
+                <TextField fx:id="oldWordTextField" layoutX="16.0" layoutY="77.0" prefHeight="30.0" prefWidth="123.0">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </TextField>
-                <TextField layoutX="150.0" layoutY="77.0" prefHeight="30.0" prefWidth="123.0">
+                <TextField fx:id="newWordTextField" layoutX="150.0" layoutY="77.0" prefHeight="30.0" prefWidth="123.0">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </TextField>
-                <Label layoutX="14.0" layoutY="115.0" styleClass="text_box_label" stylesheets="@../../../css/edit.css"
-                       text="Pronounce" textFill="#1d2a57">
+                <Label layoutX="14.0" layoutY="115.0" styleClass="text_box_label" stylesheets="@../../../css/edit.css" text="Pronounce" textFill="#1d2a57">
                     <font>
-                        <Font name="SansSerif Regular" size="14.0"/>
+                        <Font name="SansSerif Regular" size="14.0" />
                     </font>
                 </Label>
-                <TextField layoutX="16.0" layoutY="135.0" prefHeight="30.0" prefWidth="258.0">
+                <TextField fx:id="editPronounceTextField" layoutX="16.0" layoutY="135.0" prefHeight="30.0" prefWidth="258.0">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </TextField>
-                <Label layoutX="13.0" layoutY="185.0" styleClass="text_box_label" stylesheets="@../../../css/edit.css"
-                       text="Description" textFill="#1d2a57">
+                <Label layoutX="13.0" layoutY="185.0" styleClass="text_box_label" stylesheets="@../../../css/edit.css" text="Description" textFill="#1d2a57">
                     <font>
-                        <Font name="SansSerif Regular" size="14.0"/>
+                        <Font name="SansSerif Regular" size="14.0" />
                     </font>
                 </Label>
-                <TextArea layoutX="16.0" layoutY="205.0" prefHeight="131.0" prefWidth="258.0">
+                <TextArea fx:id="editDescriptionTextField" layoutX="16.0" layoutY="205.0" prefHeight="131.0" prefWidth="258.0">
                     <font>
-                        <Font size="13.0"/>
+                        <Font size="13.0" />
                     </font>
                 </TextArea>
-                <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="45.0" layoutY="360.0" mnemonicParsing="false"
-                        prefWidth="70.0" styleClass="check_btn" stylesheets="@../../../css/edit.css" text="Check"
-                        textFill="WHITE">
+                <Button fx:id="editCheckButton" alignment="CENTER" contentDisplay="RIGHT" layoutX="38.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleEditCheckButton" prefWidth="70.0" styleClass="check_btn" stylesheets="@../../../css/edit.css" text="Check" textFill="WHITE" />
+                <Button fx:id="editSummitButton" alignment="CENTER" contentDisplay="RIGHT" disable="true" layoutX="175.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleEditButtonAction" styleClass="submit_btn" stylesheets="@../../../css/edit.css" text="Submit" textFill="WHITE">
                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="16"/>
+                        <FontAwesomeIconView fill="WHITE" glyphName="SEND" size="14" />
                     </graphic>
                 </Button>
-                <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="175.0" layoutY="360.0"
-                        mnemonicParsing="false" styleClass="submit_btn" stylesheets="@../../../css/edit.css"
-                        text="Submit" textFill="WHITE">
-                    <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="SEND" size="14"/>
-                    </graphic>
-                </Button>
+            <Label fx:id="trueEditCheckLabel" layoutX="112.0" layoutY="365.0" visible="false">
+               <graphic>
+                  <FontAwesomeIconView fill="#00a400" glyphName="CHECK" size="18" />
+               </graphic>
+            </Label>
+            <Label fx:id="falseEditCheckLabel" layoutX="112.0" layoutY="365.0" visible="false">
+               <graphic>
+                  <FontAwesomeIconView fill="RED" glyphName="BAN" size="18" />
+               </graphic>
+            </Label>
             </children>
         </AnchorPane>
-        <AnchorPane layoutX="5.0" layoutY="5.0" prefHeight="410.0" prefWidth="290.0" styleClass="add_pane"
-                    stylesheets="@../../../css/edit.css">
+        <AnchorPane layoutX="5.0" layoutY="5.0" prefHeight="410.0" prefWidth="290.0" styleClass="add_pane" stylesheets="@../../../css/edit.css">
             <children>
-                <Label alignment="CENTER" layoutX="51.0" layoutY="7.0" prefHeight="35.0" prefWidth="185.0"
-                       styleClass="edit_title" stylesheets="@../../../css/edit.css" text="Add a new word"
-                       textFill="#1d2a57">
+                <Label alignment="CENTER" layoutX="51.0" layoutY="7.0" prefHeight="35.0" prefWidth="185.0" styleClass="edit_title" stylesheets="@../../../css/edit.css" text="Add a new word" textFill="#1d2a57">
                     <font>
-                        <Font name="System Bold" size="20.0"/>
+                        <Font name="System Bold" size="20.0" />
                     </font>
                 </Label>
-                <Label layoutX="16.0" layoutY="57.0" styleClass="text_box_label" stylesheets="@../../../css/edit.css"
-                       text="Word" textFill="#1d2a57">
+                <Label layoutX="16.0" layoutY="57.0" styleClass="text_box_label" stylesheets="@../../../css/edit.css" text="Word" textFill="#1d2a57">
                     <font>
-                        <Font name="SansSerif Regular" size="14.0"/>
+                        <Font name="SansSerif Regular" size="14.0" />
                     </font>
                 </Label>
-                <TextField layoutX="17.0" layoutY="77.0" prefHeight="30.0" prefWidth="258.0">
+                <TextField fx:id="wordTextField" layoutX="17.0" layoutY="77.0" prefHeight="30.0" prefWidth="258.0">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </TextField>
-                <Label layoutX="15.0" layoutY="115.0" styleClass="text_box_label" stylesheets="@../../../css/edit.css"
-                       text="Pronounce" textFill="#1d2a57">
+                <Label layoutX="15.0" layoutY="115.0" styleClass="text_box_label" stylesheets="@../../../css/edit.css" text="Pronounce" textFill="#1d2a57">
                     <font>
-                        <Font name="SansSerif Regular" size="14.0"/>
+                        <Font name="SansSerif Regular" size="14.0" />
                     </font>
                 </Label>
-                <TextField layoutX="17.0" layoutY="135.0" prefHeight="30.0" prefWidth="258.0">
+                <TextField fx:id="addPronounceTextField" layoutX="17.0" layoutY="135.0" prefHeight="30.0" prefWidth="258.0">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </TextField>
-                <Label layoutX="14.0" layoutY="185.0" styleClass="text_box_label" stylesheets="@../../../css/edit.css"
-                       text="Description" textFill="#1d2a57">
+                <Label layoutX="14.0" layoutY="185.0" styleClass="text_box_label" stylesheets="@../../../css/edit.css" text="Description" textFill="#1d2a57">
                     <font>
-                        <Font name="SansSerif Regular" size="14.0"/>
+                        <Font name="SansSerif Regular" size="14.0" />
                     </font>
                 </Label>
-                <TextArea layoutX="16.0" layoutY="205.0" prefHeight="131.0" prefWidth="258.0">
+                <TextArea fx:id="addDescriptionTextField" layoutX="16.0" layoutY="205.0" prefHeight="131.0" prefWidth="258.0">
                     <font>
-                        <Font size="13.0"/>
+                        <Font size="13.0" />
                     </font>
                 </TextArea>
-                <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="45.0" layoutY="360.0" mnemonicParsing="false"
-                        prefWidth="70.0" styleClass="check_btn" stylesheets="@../../../css/edit.css" text="Check"
-                        textFill="WHITE">
+                <Button fx:id="addCheckButton" alignment="CENTER" contentDisplay="RIGHT" layoutX="33.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleAddCheckButton" prefWidth="70.0" styleClass="check_btn" stylesheets="@../../../css/edit.css" text="Check" textFill="WHITE" />
+                <Button fx:id="addSummitButton" alignment="CENTER" contentDisplay="RIGHT" disable="true" layoutX="175.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleAddButtonAction" styleClass="submit_btn" stylesheets="@../../../css/edit.css" text="Submit" textFill="WHITE">
                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="16"/>
+                        <FontAwesomeIconView fill="WHITE" glyphName="SEND" size="14" />
                     </graphic>
                 </Button>
-                <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="175.0" layoutY="360.0"
-                        mnemonicParsing="false" styleClass="submit_btn" stylesheets="@../../../css/edit.css"
-                        text="Submit" textFill="WHITE">
-                    <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="SEND" size="14"/>
-                    </graphic>
-                </Button>
+            <Label fx:id="trueAddCheckLabel" layoutX="107.0" layoutY="365.0" visible="false">
+               <graphic>
+                  <FontAwesomeIconView fill="#00a400" glyphName="CHECK" size="18" />
+               </graphic>
+            </Label>
+            <Label fx:id="falseAddCheckLabel" layoutX="107.0" layoutY="365.0" visible="false">
+               <graphic>
+                  <FontAwesomeIconView fill="RED" glyphName="BAN" size="18" />
+               </graphic>
+            </Label>
             </children>
         </AnchorPane>
     </children>
