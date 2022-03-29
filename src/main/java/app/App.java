@@ -20,7 +20,7 @@ public class App extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 750, 485);
         scene.getStylesheets().add(App.class.getResource("application.css").toExternalForm()); // load global font
         stage.getIcons().add(new Image(App.class.getResourceAsStream("logo.jpg"))); // set icon
-        stage.setTitle("UET Dict Box");
+        stage.setTitle("EE Dict Box");
         stage.setScene(scene);
         stage.show();
     }
